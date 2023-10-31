@@ -3,5 +3,9 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  enum role: [:user, :host]
+  # enum role: { guest: 0, host: 10 }
+  enum role: {guest: 0, host: 10}
+
+  validates :name, :role, presence: true
+  # validates_uniqueness_of :role
 end

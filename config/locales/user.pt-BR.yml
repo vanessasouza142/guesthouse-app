@@ -5,3 +5,7 @@ pt-BR:
     attributes:
       user:
         name: 'Nome'
+        role: 'Perfil de Cadastro'
+        roles:
+          guest: 'Hóspede'
+          host: 'Anfitrião'

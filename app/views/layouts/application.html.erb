@@ -15,7 +15,12 @@
         <h1>Pousadaria</h1>
       <% end %>
       <nav>
-        
+        <% if user_signed_in? %>
+          <%= current_user.name %>
+          <%= button_to 'Sair', destroy_user_session_path, method: :delete %>
+        <% else %>
+          <%= link_to 'Entrar na Conta', new_user_session_path %>
+        <% end %>
       </nav>
     </header>
     <main>
