@@ -1,0 +1,22 @@
+<h2><%= @guesthouse.brand_name %></h2>
+<p>Razão Social: <%= @guesthouse.corporate_name %></p>
+<p>CNPJ: <%= @guesthouse.registration_number %></p>
+<p>Telefone para contato: <%= @guesthouse.phone_number %></p>
+<p>E-mail para contato: <%= @guesthouse.email %></p>
+<p>Endereço Completo: <%= @guesthouse.full_address %></p>
+<p>Descrição: <%= @guesthouse.description %></p>
+<p>Métodos de Pagamento: <%= @guesthouse.payment_method %></p>
+<p>Aceita animais de estimação? <%= @guesthouse.pet_agreement %></p>
+<p>Políticas de Uso: <%= @guesthouse.usage_policy %></p>
+<p>Check-in: <%= I18n.l(@guesthouse.check_in, format: "%H:%M") %></p>
+<p>Check-out: <%= I18n.l(@guesthouse.check_out, format: "%H:%M") %></p>
+
+<% if user_signed_in? && current_user.host? && @guesthouse.user == current_user %>
+  <div>
+    <%= link_to 'Editar', edit_guesthouse_path(@guesthouse.id) %>
+    <%= link_to 'Cadastrar novo quarto', new_room_path %>
+  </div>
+<% end %>
+<div>
+  <%= link_to 'Voltar', root_path %>
+</div>

@@ -1,17 +1,35 @@
 require 'rails_helper'
 
-describe 'Usuário visita a tela inicial' do
-  it 'e vê o nome da aplicação' do
+describe 'Usuário anfitrião vê sua pousada' do
+  it 'depois de fazer login' do
     #Arrange
-
+    paulo = User.create!(name: 'Paulo Menezes', email: 'paulomenezes@gmail.com', password: 'password', role: 'host')
+    g = Guesthouse.create!(corporate_name: 'Pousada Muro Alto Ltda', brand_name: 'Pousada Muro Alto', registration_number:'39165040000129', 
+                            phone_number: '8134658799', email: 'pousadamuroalto@gmail.com', address: 'Av. Beira Mar, 45', 
+                            neighborhood: 'Muro Alto', state: 'Pernambuco', city: 'Ipojuca', postal_code: '54350820', 
+                            description: 'Pousada a beira mar maravilhosa', payment_method: 'Dinheiro, pix e cartão', pet_agreement: 'sim',
+                            usage_policy: 'Proibido fumar nas áreas de convivência', check_in: '13:00', check_out: '12:00', user: paulo)
+    
     #Act
     visit root_path
+    within('nav') do
+      click_on 'Entrar na Conta'
+    end
+    within('form') do
+      fill_in 'E-mail', with: paulo.email
+      fill_in 'Senha', with: paulo.password
+      click_on 'Entrar'
+    end
 
     #Assert
-    expect(page).to have_content('Pousadaria')
+    expect(current_path).to eq my_guesthouse_path
+    expect(page).to have_content 'Login efetuado com sucesso.'
+    expect(page).to have_content 'Pousada Muro Alto'
+    expect(page).to have_content 'Descrição: Pousada a beira mar maravilhosa'
+    expect(page).to have_content 'Ipojuca - Pernambuco'
   end
 
-  it 'e vê as pousadas cadastradas' do
+  it 'e não vê pousada de outro usuário anfitrião' do
     #Arrange
     paulo = User.create!(name: 'Paulo Menezes', email: 'paulomenezes@gmail.com', password: 'password', role: 'host')
     mariana = User.create!(name: 'Mariana Silva', email: 'mariana@gmail.com', password: 'password', role: 'host')
@@ -26,28 +44,25 @@ describe 'Usuário visita a tela inicial' do
                             neighborhood: 'Boa Vista', state: 'Pernambuco', city: 'Recife', postal_code: '54560500', 
                             description: 'Pousada com ótima localização', payment_method: 'Dinheiro, pix e cartão', pet_agreement: 'não',
                             usage_policy: 'Proibido fumar nas áreas de convivência', check_in: '13:00', check_out: '12:00', user: mariana)
-
     #Act
     visit root_path
+    within('nav') do
+      click_on 'Entrar na Conta'
+    end
+    within('form') do
+      fill_in 'E-mail', with: mariana.email
+      fill_in 'Senha', with: mariana.password
+      click_on 'Entrar'
+    end
 
     #Assert
-    expect(page).not_to have_content 'Não existem pousadas cadastradas'
-    expect(page).to have_content 'Pousada Muro Alto'
-    expect(page).to have_content 'Descrição: Pousada a beira mar maravilhosa'
-    expect(page).to have_content 'Ipojuca - Pernambuco'
-
+    expect(current_path).to eq my_guesthouse_path
     expect(page).to have_content 'Pousada Sulamericana'
     expect(page).to have_content 'Descrição: Pousada com ótima localização'
     expect(page).to have_content 'Recife - Pernambuco'
-end
 
-  it 'e não existem pousadas cadastradas' do
-    #Arrange
-
-    #Act
-    visit root_path
-
-    #Assert
-    expect(page).to have_content 'Não existem pousadas cadastradas.'
+    expect(page).not_to have_content 'Pousada Muro Alto'
+    expect(page).not_to have_content 'Descrição: Pousada a beira mar maravilhosa'
+    expect(page).not_to have_content 'Ipojuca - Pernambuco'
   end
 end

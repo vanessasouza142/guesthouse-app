@@ -14,6 +14,7 @@ describe 'Usuário se cadastra' do
       expect(page).to have_field 'Nome'
       expect(page).to have_field 'E-mail'
       expect(page).to have_field 'Senha'
+      expect(page).to have_field 'Perfil de Cadastro'
       expect(page).to have_button 'Criar'
     end
   end

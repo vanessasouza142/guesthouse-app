@@ -18,6 +18,8 @@ require "action_view/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+# config.paths['app/views'] << "app/views/devise"
+
 module GuesthouseApp
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
