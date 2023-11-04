@@ -6,14 +6,7 @@ describe 'Usuário anfitrião cadastra uma pousada' do
 
     #Act
     visit root_path
-    click_on 'Entrar na Conta'
-    click_on 'Criar Conta'
-    fill_in 'Nome', with: 'Paulo Menezes'
-    fill_in 'E-mail', with: 'paulomenezes@example.com'
-    fill_in 'Senha', with: 'password'
-    fill_in 'Confirme sua senha', with: 'password'
-    select 'host', from: 'Perfil de Cadastro'
-    click_on 'Criar'
+    host_sign_up
 
     #Assert
     expect(current_path).to eq new_guesthouse_path
@@ -32,18 +25,10 @@ describe 'Usuário anfitrião cadastra uma pousada' do
 
   it 'com sucesso' do
     #Arrange
-    user = User.create!(name: 'Paulo Menezes', email: 'paulomenezes@gmail.com', password: 'password', role: 'host')
 
     #Act
     visit root_path
-    click_on 'Entrar na Conta'
-    click_on 'Criar Conta'
-    fill_in 'Nome', with: 'Paulo Menezes'
-    fill_in 'E-mail', with: 'paulomenezes@example.com'
-    fill_in 'Senha', with: 'password'
-    fill_in 'Confirme sua senha', with: 'password'
-    select 'host', from: 'Perfil de Cadastro'
-    click_on 'Criar'
+    host_sign_up
     fill_in 'Razão Social', with: 'Pousada Muro Alto Ltda'
     fill_in 'Nome Fantasia', with: 'Pousada Muro Alto'
     fill_in 'CNPJ', with: '39165040000129'
@@ -74,14 +59,7 @@ describe 'Usuário anfitrião cadastra uma pousada' do
 
     #Act
     visit root_path
-    click_on 'Entrar na Conta'
-    click_on 'Criar Conta'
-    fill_in 'Nome', with: 'Paulo Menezes'
-    fill_in 'E-mail', with: 'paulomenezes@example.com'
-    fill_in 'Senha', with: 'password'
-    fill_in 'Confirme sua senha', with: 'password'
-    select 'host', from: 'Perfil de Cadastro'
-    click_on 'Criar'
+    host_sign_up
     fill_in 'Razão Social', with: 'Pousada Muro Alto Ltda'
     fill_in 'Nome Fantasia', with: ''
     fill_in 'CNPJ', with: ''
