@@ -1,14 +1,17 @@
 class GuesthousesController < ApplicationController
   before_action :authenticate_user!, only: [:my_guesthouse, :new, :create, :edit, :update]
-  before_action :only_host_permit, only: [:new, :create, :edit, :update]
-  before_action :set_guesthouse_and_check_user, only: [:edit, :update]
+  before_action :check_user, only: [:new, :create, :edit, :update]
 
   def my_guesthouse
     @guesthouse = current_user.guesthouse
   end
 
   def new
-    @guesthouse = Guesthouse.new
+    if current_user.host? && current_user.guesthouse.present?
+      redirect_to my_guesthouse_path, alert: 'Só é possível ter uma pousada cadastrada por usuário!'
+    else
+      @guesthouse = Guesthouse.new
+    end
   end
 
   def create
@@ -48,17 +51,12 @@ class GuesthousesController < ApplicationController
 
   private
 
-    def only_host_permit
-      if current_user.guest?
-        return redirect_to root_path, alert: 'Você não tem permissão para realizar essa ação!'
-      end
+  def check_user
+    if params[:id].present?
+      @guesthouse = Guesthouse.find(params[:id])
+        return redirect_to root_path, alert: 'Você não tem permissão para realizar essa ação!' if @guesthouse.user != current_user
     end
-
-  def set_guesthouse_and_check_user
-    @guesthouse = Guesthouse.find(params[:id])
-    if @guesthouse.user != current_user
-      return redirect_to root_path, alert: 'Você não tem permissão para realizar essa ação!'
-    end
+      return redirect_to root_path, alert: 'Você não tem permissão para realizar essa ação!' if current_user.guest?
   end
 
 end

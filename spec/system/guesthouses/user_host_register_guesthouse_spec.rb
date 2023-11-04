@@ -85,4 +85,40 @@ describe 'Usuário anfitrião cadastra uma pousada' do
     expect(page).to have_content 'Cidade não pode ficar em branco'
     expect(page).to have_content 'Métodos de Pagamento não pode ficar em branco'
   end
+
+  it 'e não um usuário do tipo hóspede' do
+    #Arrange
+
+    #Act
+    visit root_path
+    guest_sign_up
+    visit new_guesthouse_path
+
+    #Assert
+    expect(current_path).to eq root_path
+    expect(page).to have_content 'Você não tem permissão para realizar essa ação!'
+  end
+
+  it 'e não consegue cadastrar outra pousada' do
+    #Arrange
+    mariana = User.create!(name: 'Mariana Silva', email: 'mariana@gmail.com', password: 'password', role: 'host')
+    Guesthouse.create!(corporate_name: 'Pousada Muro Alto Ltda', brand_name: 'Pousada Muro Alto', registration_number:'39165040000129', 
+                        phone_number: '8134658799', email: 'pousadamuroalto@gmail.com', address: 'Av. Beira Mar, 45', 
+                        neighborhood: 'Muro Alto', state: 'Pernambuco', city: 'Ipojuca', postal_code: '54350820', 
+                        description: 'Pousada a beira mar maravilhosa', payment_method: 'Dinheiro, pix e cartão', pet_agreement: 'sim',
+                        usage_policy: 'Proibido fumar nas áreas de convivência', check_in: '13:00', check_out: '12:00', user: mariana)
+
+    #Act
+    login_as(mariana)
+    visit new_guesthouse_path
+
+    #Assert
+    expect(current_path).to eq my_guesthouse_path
+    expect(page).to have_content 'Só é possível ter uma pousada cadastrada por usuário!'
+  end
+
+  # it 'e não consegue ir para outra tela sem antes concluir o cadastro' do
+
+  # end
+
 end

@@ -12,18 +12,33 @@ describe 'Usuário anfitrião vê sua pousada' do
     
     #Act
     visit root_path
-    within('nav') do
-      click_on 'Entrar na Conta'
-    end
-    within('form') do
-      fill_in 'E-mail', with: paulo.email
-      fill_in 'Senha', with: paulo.password
-      click_on 'Entrar'
-    end
+    login(paulo)
 
     #Assert
     expect(current_path).to eq my_guesthouse_path
     expect(page).to have_content 'Login efetuado com sucesso.'
+    expect(page).to have_content 'Pousada Muro Alto'
+    expect(page).to have_content 'Descrição: Pousada a beira mar maravilhosa'
+    expect(page).to have_content 'Ipojuca - Pernambuco'
+  end
+
+  it 'ou através do link Minha Pousada' do
+    #Arrange
+    paulo = User.create!(name: 'Paulo Menezes', email: 'paulomenezes@gmail.com', password: 'password', role: 'host')
+    g = Guesthouse.create!(corporate_name: 'Pousada Muro Alto Ltda', brand_name: 'Pousada Muro Alto', registration_number:'39165040000129', 
+                            phone_number: '8134658799', email: 'pousadamuroalto@gmail.com', address: 'Av. Beira Mar, 45', 
+                            neighborhood: 'Muro Alto', state: 'Pernambuco', city: 'Ipojuca', postal_code: '54350820', 
+                            description: 'Pousada a beira mar maravilhosa', payment_method: 'Dinheiro, pix e cartão', pet_agreement: 'sim',
+                            usage_policy: 'Proibido fumar nas áreas de convivência', check_in: '13:00', check_out: '12:00', user: paulo)
+    
+    #Act
+    visit root_path
+    login(paulo)
+    click_on 'Pousada Muro Alto'
+    click_on 'Minha Pousada'
+
+    #Assert
+    expect(current_path).to eq my_guesthouse_path
     expect(page).to have_content 'Pousada Muro Alto'
     expect(page).to have_content 'Descrição: Pousada a beira mar maravilhosa'
     expect(page).to have_content 'Ipojuca - Pernambuco'
@@ -46,14 +61,7 @@ describe 'Usuário anfitrião vê sua pousada' do
                             usage_policy: 'Proibido fumar nas áreas de convivência', check_in: '13:00', check_out: '12:00', user: mariana)
     #Act
     visit root_path
-    within('nav') do
-      click_on 'Entrar na Conta'
-    end
-    within('form') do
-      fill_in 'E-mail', with: mariana.email
-      fill_in 'Senha', with: mariana.password
-      click_on 'Entrar'
-    end
+    login(mariana)
 
     #Assert
     expect(current_path).to eq my_guesthouse_path
