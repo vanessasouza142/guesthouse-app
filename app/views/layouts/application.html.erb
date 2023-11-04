@@ -16,7 +16,10 @@
       <% end %>
       <nav>
         <% if user_signed_in? %>
-          <%= current_user.name %>
+          <%if current_user.guesthouse %>
+            <%= link_to 'Minha Pousada', my_guesthouse_path if current_user.guesthouse %> |
+          <% end %>
+          <%= current_user.name %> | 
           <%= button_to 'Sair', destroy_user_session_path, method: :delete %>
         <% else %>
           <%= link_to 'Entrar na Conta', new_user_session_path %>

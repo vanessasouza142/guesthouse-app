@@ -6,7 +6,6 @@ pt-BR:
       user:
         name: 'Nome'
         role: 'Perfil de Cadastro'
-        roles:
-          keys:
-            guest: 'Hóspede'
-            host: 'Anfitrião'
+      user/role:
+        guest: 'Hóspede'
+        host: 'Anfitrião'

@@ -1,0 +1,23 @@
+<h2><%= @room.name %></h2>
+<p>Descrição: <%= @room.description %></p>
+<p>Área: <%= @room.area %>m²</p>
+<p>Quantidade max. de hóspedes: <%= @room.max_guest %></p>
+<p>Valor padrão da diária: <%= number_to_currency(@room.daily_price, unit: "R$", separator: ",", delimiter: ".") %></p>
+<p>Possui banheiro?: <%= @room.bathroom %></p>
+<p>Possui varanda?: <%= @room.balcony %></p>
+<p>Possui ar-condicionado?: <%= @room.air_conditioner %></p>
+<p>Possui tv?: <%= @room.tv %></p>
+<p>Possui guarda-roupas?: <%= @room.wardrobe %></p>
+<p>Possui cofre?: <%= @room.safe %></p>
+<p>É acessível para pessoas com deficiência?: <%= @room.accessible %></p>
+
+<% if user_signed_in? && current_user.host? #&& @guesthouse.user == current_user %>
+  <div>
+    <%#= link_to 'Editar', edit_guesthouse_path(@guesthouse.id) %> | 
+    <%= link_to 'Voltar', my_guesthouse_path %>
+  </div>
+<% else %>
+<div>
+  <%= link_to 'Voltar', root_path %>
+</div>
+<% end %>

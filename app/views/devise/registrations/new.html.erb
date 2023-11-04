@@ -27,10 +27,10 @@
   </div>
 
   <div class="field">
-    <%= f.label :role %>
-    <%= f.select :role, User.roles.keys %>
+    <%= f.label :role %><br />
+    <%= f.select :role, [[User.human_attribute_name("role.guest"), :guest], [User.human_attribute_name("role.host"), :host]] %>
   </div>
-
+  
   <div class="actions">
     <%= f.submit "Criar" %>
   </div>

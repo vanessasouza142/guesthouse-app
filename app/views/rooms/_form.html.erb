@@ -1,0 +1,66 @@
+<% if @room.errors.any? %>
+<p>Verifique os erros abaixo:</p>
+  <ul>
+    <% @room.errors.full_messages.each do |msg|%>
+    <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_with(model: [@guesthouse, @room]) do |f| %>
+<div>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+</div>
+<div>
+  <%= f.label :description %>
+  <%= f.text_area :description %>
+</div>
+<div>
+  <%= f.label :area %>
+  <%= f.number_field :area %>
+</div>
+<div>
+  <%= f.label :max_guest %>
+  <%= f.number_field :max_guest %>
+</div>
+<div>
+  <%= f.label :daily_price %>
+  <%= f.number_field :daily_price %>
+</div>
+<div>
+  <%= f.label :bathroom %>
+  <%= f.text_field :bathroom %>
+</div>
+<div>
+  <%= f.label :balcony %>
+  <%= f.text_field :balcony %>
+</div>
+<div>
+  <%= f.label :air_conditioner %>
+  <%= f.text_field :air_conditioner %>
+</div>
+<div>
+  <%= f.label :tv %>
+  <%= f.text_field :tv %>
+</div>
+<div>
+  <%= f.label :wardrobe %>
+  <%= f.text_field :wardrobe %>
+</div>
+<div>
+  <%= f.label :safe %>
+  <%= f.text_field :safe %>
+</div>
+<div>
+  <%= f.label :accessible %>
+  <%= f.text_field :accessible %>
+</div>
+<div>
+  <%= f.submit 'Salvar' %>
+</div>
+<% end %>
+
+<div>
+  <%= link_to 'Voltar', my_guesthouse_path %>
+</div>
