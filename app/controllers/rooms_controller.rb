@@ -1,9 +1,10 @@
 class RoomsController < ApplicationController
   before_action :authenticate_user!, only: [:edit, :update]
-  before_action :check_user, only: [:new, :create] #:edit, :update]
+  before_action :check_user, only: [:new, :create, :edit, :update]
 
   def index
-    @rooms = current_user.guesthouse.rooms
+      @guesthouse = Guesthouse.find(params[:guesthouse_id])
+      @rooms = @guesthouse.rooms
   end
 
   def new
@@ -47,11 +48,24 @@ class RoomsController < ApplicationController
 
   private
 
+  # def check_user
+  #   @guesthouse = Guesthouse.find(params[:guesthouse_id])
+  #   @room = @guesthouse.rooms.build
+  #   if @room.guesthouse.user != current_user
+  #     return redirect_to root_path, alert: 'Você não tem permissão para realizar essa ação!'
+  #   end
+  # end
+
   def check_user
-    @guesthouse = Guesthouse.find(params[:guesthouse_id])
-    @room = @guesthouse.rooms.build
-    if @room.guesthouse.user != current_user
-      return redirect_to root_path, alert: 'Você não tem permissão para realizar essa ação!'
+    if params[:id].present?
+      @room = Room.find(params[:id])
+        return redirect_to root_path, alert: 'Você não tem permissão para realizar essa ação!' if @room.guesthouse.user != current_user
     end
+    if params[:guesthouse_id].present?
+      @guesthouse = Guesthouse.find(params[:guesthouse_id])
+      @room = @guesthouse.rooms.build
+      return redirect_to root_path, alert: 'Você não tem permissão para realizar essa ação!' if @room.guesthouse.user != current_user
+    end
+      return redirect_to root_path, alert: 'Você não tem permissão para realizar essa ação!' if current_user.guest?
   end
 end

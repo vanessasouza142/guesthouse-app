@@ -31,7 +31,7 @@ describe 'Usuário visita a tela inicial' do
     visit root_path
 
     #Assert
-    expect(page).not_to have_content 'Não existem pousadas cadastradas'
+    expect(page).not_to have_content 'Não existem pousadas cadastradas.'
     expect(page).to have_content 'Pousada Muro Alto'
     expect(page).to have_content 'Descrição: Pousada a beira mar maravilhosa'
     expect(page).to have_content 'Ipojuca - Pernambuco'

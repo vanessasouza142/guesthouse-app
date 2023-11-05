@@ -16,7 +16,7 @@
       <% end %>
       <nav>
         <% if user_signed_in? %>
-          <%if current_user.guesthouse %>
+          <% if current_user.guesthouse %>
             <%= link_to 'Minha Pousada', my_guesthouse_path if current_user.guesthouse %> |
           <% end %>
           <%= current_user.name %> | 
