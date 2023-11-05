@@ -1,6 +1,5 @@
 class Room < ApplicationRecord
   belongs_to :guesthouse
 
-  validates :name, :description, :area, :max_guest, :daily_price, :bathroom, :balcony, :air_conditioner, :tv, :wardrobe, :safe, 
-            :accessible, presence: true
+  validates :name, :description, :area, :max_guest, :daily_price, presence: true
 end

@@ -14,7 +14,8 @@
 <% if user_signed_in? && current_user.host? && @guesthouse.user == current_user %>
   <div>
     <%= link_to 'Editar', edit_guesthouse_path(@guesthouse.id) %> | 
-    <%= link_to 'Cadastrar novo quarto', new_guesthouse_room_path(@guesthouse) %> |
+    <%= link_to 'Cadastrar novo Quarto', new_guesthouse_room_path(@guesthouse) %> |
+    <%= link_to 'Quartos da Pousada', guesthouse_rooms_path(@guesthouse) %> |
     <%= link_to 'Voltar', my_guesthouse_path %>
   </div>
 <% else %>

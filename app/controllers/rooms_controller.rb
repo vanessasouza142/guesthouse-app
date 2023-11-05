@@ -1,6 +1,10 @@
 class RoomsController < ApplicationController
-  # before_action :authenticate_user!, only: [:edit, :update]
+  before_action :authenticate_user!, only: [:edit, :update]
   before_action :check_user, only: [:new, :create] #:edit, :update]
+
+  def index
+    @rooms = current_user.guesthouse.rooms
+  end
 
   def new
     @guesthouse = Guesthouse.find(params[:guesthouse_id])
@@ -23,6 +27,22 @@ class RoomsController < ApplicationController
 
   def show
     @room = Room.find(params[:id])
+  end
+
+  def edit
+    @room = Room.find(params[:id])
+  end
+
+  def update
+    room_params = params.require(:room).permit(:name, :description, :area, :max_guest, :daily_price, :bathroom, :balcony, :air_conditioner, 
+                                                :tv, :wardrobe, :safe, :accessible)
+    @room = Room.find(params[:id])
+    if @room.update(room_params)
+      redirect_to @room, notice: 'Quarto atualizado com sucesso.'
+    else
+      flash.now[:notice] = 'Quarto não atualizado.'
+      render 'edit'
+    end
   end
 
   private

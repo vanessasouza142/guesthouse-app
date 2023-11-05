@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_02_154553) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_05_025552) do
   create_table "guesthouses", force: :cascade do |t|
     t.string "corporate_name"
     t.string "brand_name"
@@ -37,16 +37,16 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_02_154553) do
   create_table "rooms", force: :cascade do |t|
     t.string "name"
     t.string "description"
-    t.float "area"
+    t.integer "area"
     t.integer "max_guest"
-    t.float "daily_price"
-    t.string "bathroom"
-    t.string "balcony"
-    t.string "air_conditioner"
-    t.string "tv"
-    t.string "wardrobe"
-    t.string "safe"
-    t.string "accessible"
+    t.integer "daily_price"
+    t.boolean "bathroom"
+    t.boolean "balcony"
+    t.boolean "air_conditioner"
+    t.boolean "tv"
+    t.boolean "wardrobe"
+    t.boolean "safe"
+    t.boolean "accessible"
     t.integer "guesthouse_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

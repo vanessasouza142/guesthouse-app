@@ -1,0 +1,12 @@
+<% @rooms.each do |room| %>
+  <div>
+    <h2><%= link_to room.name, room %></h2>
+    <p>Descrição: <%= room.description %></p>
+    <p>Valor da diária: <%= number_to_currency(room.daily_price, unit: "R$", separator: ",", delimiter: ".") %></p>
+  </div>
+<% end %>
+
+<% if @rooms.empty? %>
+  <p>Não existem quartos cadastrados.</p>
+<% end %>
+</section>
