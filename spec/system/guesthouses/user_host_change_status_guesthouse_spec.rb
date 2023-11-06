@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Usuário muda status da sua pousada' do
-  it 'para ativa e ela aparece na listagem de pousadas' do
+  it 'para ativa e ela muda o status para ativa' do
     #Arrange
     paulo = User.create!(name: 'Paulo Menezes', email: 'paulomenezes@gmail.com', password: 'password', role: 'host')
     Guesthouse.create!(corporate_name: 'Pousada Muro Alto Ltda', brand_name: 'Pousada Muro Alto', registration_number:'39165040000129', 
@@ -24,7 +24,7 @@ describe 'Usuário muda status da sua pousada' do
     expect(page).to have_content 'Status: Ativa'
   end
 
-  it 'para desativa e ela não aparece na listagem de pousadas' do
+  it 'para desativa e ela muda o status para inativa' do
     #Arrange
     paulo = User.create!(name: 'Paulo Menezes', email: 'paulomenezes@gmail.com', password: 'password', role: 'host')
     Guesthouse.create!(corporate_name: 'Pousada Muro Alto Ltda', brand_name: 'Pousada Muro Alto', registration_number:'39165040000129', 

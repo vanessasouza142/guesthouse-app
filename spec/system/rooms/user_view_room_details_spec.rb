@@ -12,7 +12,7 @@ describe 'Usuário vê detalhes de um quarto' do
                             user: paulo)
     r = Room.create!(name: 'Quarto Girassol', description: 'Quarto amplo com vista para o mar', area: '10', max_guest: '4', default_price: '210,00',
                       bathroom: 'sim', balcony: 'não', air_conditioner: 'sim', tv: 'sim', wardrobe: 'sim', safe: 'não', accessible: 'sim',
-                      guesthouse: g)
+                      status: 'available', guesthouse: g)
 
     #Act
     visit root_path
@@ -44,7 +44,7 @@ describe 'Usuário vê detalhes de um quarto' do
                             user: paulo)
     r = Room.create!(name: 'Quarto Girassol', description: 'Quarto amplo com vista para o mar', area: '10', max_guest: '4', default_price: '210,00',
                       bathroom: 'sim', balcony: 'não', air_conditioner: 'sim', tv: 'sim', wardrobe: 'sim', safe: 'não', accessible: 'sim',
-                      guesthouse: g)
+                      status: 'available', guesthouse: g)
 
     #Act
     visit root_path
@@ -77,7 +77,7 @@ describe 'Usuário vê detalhes de um quarto' do
                             user: paulo)
     r = Room.create!(name: 'Quarto Girassol', description: 'Quarto amplo com vista para o mar', area: '10', max_guest: '4', default_price: '210,00',
                     bathroom: 'sim', balcony: 'não', air_conditioner: 'sim', tv: 'sim', wardrobe: 'sim', safe: 'não', accessible: 'sim',
-                    guesthouse: g)
+                    status: 'available', guesthouse: g)
 
     #Act
     visit root_path

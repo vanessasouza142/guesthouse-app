@@ -4,7 +4,11 @@ class RoomsController < ApplicationController
 
   def index
       @guesthouse = Guesthouse.find(params[:guesthouse_id])
-      @rooms = @guesthouse.rooms
+      if current_user.present? && current_user == @guesthouse.user
+        @rooms = @guesthouse.rooms
+      else
+        @rooms = @guesthouse.rooms.available
+      end
   end
 
   def new
@@ -45,6 +49,18 @@ class RoomsController < ApplicationController
       flash.now[:notice] = 'Quarto não atualizado.'
       render 'edit'
     end
+  end
+
+  def set_available
+    @room = Room.find(params[:id])
+    @room.available!
+    redirect_to room_path(@room.id), notice: 'Quarto disponibilizado com sucesso.'
+  end
+
+  def set_unavailable
+    @room = Room.find(params[:id])
+    @room.unavailable!
+    redirect_to room_path(@room.id), notice: 'Quarto indisponibilizado com sucesso.'
   end
 
   private

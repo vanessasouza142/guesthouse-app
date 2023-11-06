@@ -8,6 +8,8 @@ Rails.application.routes.draw do
     resources :rooms, only: [:index, :new, :create]
   end
   resources :rooms, only: [:show, :edit, :update] do
+    patch :set_available, on: :member
+    patch :set_unavailable, on: :member
     resources :custom_prices, only: [:index, :new, :create]
   end
 end

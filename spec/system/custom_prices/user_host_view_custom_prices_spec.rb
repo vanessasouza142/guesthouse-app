@@ -11,7 +11,7 @@ describe 'Usuário anfitrião vê lista de preços personalizados' do
                             usage_policy: 'Proibido fumar nas áreas de convivência', check_in: '13:00', check_out: '12:00', user: paulo)
     r = Room.create!(name: 'Quarto Girassol', description: 'Quarto amplo com vista para o mar', area: '10', max_guest: '4', default_price: '210,00',
                       bathroom: 'sim', balcony: 'não', air_conditioner: 'sim', tv: 'sim', wardrobe: 'sim', safe: 'não', accessible: 'sim',
-                      guesthouse: g)
+                      status: 'available', guesthouse: g)
     cp = CustomPrice.create!(begin_date: '01/12/2023', end_date: '31/12/2023', price: '350,00', room: r)
 
     #Act
@@ -41,7 +41,7 @@ describe 'Usuário anfitrião vê lista de preços personalizados' do
                             usage_policy: 'Proibido fumar nas áreas de convivência', check_in: '13:00', check_out: '12:00', user: paulo)
     r = Room.create!(name: 'Quarto Girassol', description: 'Quarto amplo com vista para o mar', area: '10', max_guest: '4', default_price: '210,00',
                       bathroom: 'sim', balcony: 'não', air_conditioner: 'sim', tv: 'sim', wardrobe: 'sim', safe: 'não', accessible: 'sim',
-                      guesthouse: g)
+                      status: 'available', guesthouse: g)
 
     #Act
     visit root_path

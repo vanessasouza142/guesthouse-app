@@ -11,7 +11,7 @@ describe 'Usuário anfitrião cadastra preço personalizado para um quarto' do
                         usage_policy: 'Proibido fumar nas áreas de convivência', check_in: '13:00', check_out: '12:00', user: paulo)
     room = Room.create!(name: 'Quarto Girassol', description: 'Quarto amplo com vista para o mar', area: '10', max_guest: '4', default_price: '210,00',
                       bathroom: 'sim', balcony: 'não', air_conditioner: 'sim', tv: 'sim', wardrobe: 'sim', safe: 'não', accessible: 'sim',
-                      guesthouse: g)
+                      status: 'available', guesthouse: g)
 
     #Act
     visit root_path
@@ -39,7 +39,7 @@ describe 'Usuário anfitrião cadastra preço personalizado para um quarto' do
                         usage_policy: 'Proibido fumar nas áreas de convivência', check_in: '13:00', check_out: '12:00', user: paulo)
     room = Room.create!(name: 'Quarto Girassol', description: 'Quarto amplo com vista para o mar', area: '10', max_guest: '4', default_price: '210,00',
                       bathroom: 'sim', balcony: 'não', air_conditioner: 'sim', tv: 'sim', wardrobe: 'sim', safe: 'não', accessible: 'sim',
-                      guesthouse: g)
+                      status: 'available', guesthouse: g)
 
     #Act
     visit root_path
@@ -69,7 +69,7 @@ describe 'Usuário anfitrião cadastra preço personalizado para um quarto' do
                         usage_policy: 'Proibido fumar nas áreas de convivência', check_in: '13:00', check_out: '12:00', user: paulo)
     room = Room.create!(name: 'Quarto Girassol', description: 'Quarto amplo com vista para o mar', area: '10', max_guest: '4', default_price: '210,00',
                       bathroom: 'sim', balcony: 'não', air_conditioner: 'sim', tv: 'sim', wardrobe: 'sim', safe: 'não', accessible: 'sim',
-                      guesthouse: g)
+                      status: 'available', guesthouse: g)
 
     #Act
     visit root_path

@@ -1,4 +1,6 @@
 pt-BR:
+  unavailable: 'Indisponível'
+  available: 'Disponível'
   activerecord:
     models:
       room: 'Quarto'

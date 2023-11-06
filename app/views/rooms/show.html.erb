@@ -15,6 +15,9 @@
 
 <% if user_signed_in? && current_user.host? && @room.guesthouse.user == current_user %>
   <div>
+    <p>Status: <%= I18n.t(@room.status) %></p>
+    <%= button_to 'Disponibilizar Quarto', set_available_room_path(@room), method: 'patch' %>
+    <%= button_to 'Indisponibilizar Quarto', set_unavailable_room_path(@room), method: 'patch' %>
     <h4><strong>Lista de Preços Personalizados:</strong></h4>
     <% @custom_prices.each do |custom_price|%>
       <ul>

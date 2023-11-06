@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Usuário visita a pousada' do
-  it 'e vê os quartos cadastrados' do
+  it 'e só vê os quartos cadastrados disponíveis' do
     #Arrange
     mariana = User.create!(name: 'Mariana Silva', email: 'mariana@gmail.com', password: 'password', role: 'host')
 
@@ -13,10 +13,10 @@ describe 'Usuário visita a pousada' do
                             user: mariana)
     r1 = Room.create!(name: 'Quarto Girassol', description: 'Quarto amplo com vista para o mar', area: '10', max_guest: '4', default_price: '210,00',
                       bathroom: 'sim', balcony: 'não', air_conditioner: 'sim', tv: 'sim', wardrobe: 'sim', safe: 'não', accessible: 'sim',
-                      guesthouse: g)
+                      status: 'available', guesthouse: g)
     r2 = Room.create!(name: 'Quarto Tulipa', description: 'Quarto bem ventilado', area: '8', max_guest: '3', default_price: '180,00',
                       bathroom: 'sim', balcony: 'não', air_conditioner: 'sim', tv: 'não', wardrobe: 'sim', safe: 'não', accessible: 'sim',
-                      guesthouse: g)
+                      status: 'unavailable',guesthouse: g)
 
     #Act
     visit root_path
@@ -29,12 +29,12 @@ describe 'Usuário visita a pousada' do
     expect(page).to have_content 'Descrição: Quarto amplo com vista para o mar'
     expect(page).to have_content 'Valor padrão da diária: R$ 210,00'
 
-    expect(page).to have_content 'Quarto Tulipa'
-    expect(page).to have_content 'Descrição: Quarto bem ventilado'
-    expect(page).to have_content 'Valor padrão da diária: R$ 180,00'
+    expect(page).not_to have_content 'Quarto Tulipa'
+    expect(page).not_to have_content 'Descrição: Quarto bem ventilado'
+    expect(page).not_to have_content 'Valor padrão da diária: R$ 180,00'
 end
 
-  it 'e não existem quartos cadastrados' do
+  it 'e não existem quartos cadastrados disponíveis' do
     #Arrange
     mariana = User.create!(name: 'Mariana Silva', email: 'mariana@gmail.com', password: 'password', role: 'host')
 
