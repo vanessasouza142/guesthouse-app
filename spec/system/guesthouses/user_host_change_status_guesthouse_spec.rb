@@ -41,7 +41,7 @@ describe 'Usuário muda status da sua pousada' do
     click_on 'Desativar Pousada'
 
     #Assert
-    expect(page).to have_content 'Pousada inativada com sucesso.'
+    expect(page).to have_content 'Pousada desativada com sucesso.'
     expect(page).to have_content 'Pousada Muro Alto'
     expect(page).to have_content 'Descrição: Pousada a beira mar maravilhosa'
     expect(page).to have_content 'Status: Inativa'
