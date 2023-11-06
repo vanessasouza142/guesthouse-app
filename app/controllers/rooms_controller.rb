@@ -13,7 +13,7 @@ class RoomsController < ApplicationController
   end
 
   def create
-    room_params = params.require(:room).permit(:name, :description, :area, :max_guest, :daily_price, :bathroom, :balcony, :air_conditioner, 
+    room_params = params.require(:room).permit(:name, :description, :area, :max_guest, :default_price, :bathroom, :balcony, :air_conditioner, 
                                                 :tv, :wardrobe, :safe, :accessible)
     @guesthouse = Guesthouse.find(params[:guesthouse_id])
     @room = @guesthouse.rooms.build(room_params)
@@ -28,6 +28,7 @@ class RoomsController < ApplicationController
 
   def show
     @room = Room.find(params[:id])
+    @custom_prices = @room.custom_prices
   end
 
   def edit
@@ -35,7 +36,7 @@ class RoomsController < ApplicationController
   end
 
   def update
-    room_params = params.require(:room).permit(:name, :description, :area, :max_guest, :daily_price, :bathroom, :balcony, :air_conditioner, 
+    room_params = params.require(:room).permit(:name, :description, :area, :max_guest, :default_price, :bathroom, :balcony, :air_conditioner, 
                                                 :tv, :wardrobe, :safe, :accessible)
     @room = Room.find(params[:id])
     if @room.update(room_params)

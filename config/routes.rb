@@ -6,5 +6,7 @@ Rails.application.routes.draw do
     resources :rooms, only: [:index, :new, :create]
     # ou resources :rooms, shallow: true
   end
-  resources :rooms, only: [:show, :edit, :update]
+  resources :rooms, only: [:show, :edit, :update] do
+    resources :custom_prices, only: [:index, :new, :create]
+  end
 end
