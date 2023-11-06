@@ -67,7 +67,7 @@ describe 'Usuário anfitrião cadastra um quarto na sua pousada' do
     expect(page).to have_content 'Descrição: Quarto amplo com vista para o mar'
     expect(page).to have_content 'Área (m²): 10'
     expect(page).to have_content 'Quantidade max. de hóspedes: 4'
-    expect(page).to have_content 'Valor da diária: R$ 210,00'
+    expect(page).to have_content 'Valor padrão da diária: R$ 210,00'
     expect(page).to have_content 'Possui banheiro'
     expect(page).to have_content 'Possui ar-condicionado'
     expect(page).to have_content 'Possui tv'

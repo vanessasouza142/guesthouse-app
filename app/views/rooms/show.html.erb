@@ -1,24 +1,38 @@
 <h2><%= @room.name %></h2>
-<p>Descrição: <%= @room.description %></p>
-<p>Área (m²): <%= @room.area %></p>
-<p>Quantidade max. de hóspedes: <%= @room.max_guest %></p>
-<p>Valor da diária: <%= number_to_currency(@room.daily_price, unit: "R$", separator: ",", delimiter: ".") %></p>
+  <p>Descrição: <%= @room.description %></p>
+  <p>Área (m²): <%= @room.area %></p>
+  <p>Quantidade max. de hóspedes: <%= @room.max_guest %></p>
+  <p>Valor padrão da diária: <%= number_to_currency(@room.default_price, unit: "R$", separator: ",", delimiter: ".") %></p>
+
 <h4><strong>O que esse quarto oferece:</strong></h4>
-<% @room.attributes.each do |attribute, value| %>
-  <% if value == true %>
-    <ul>
-      <li><%= Room.human_attribute_name(attribute) %></li>
-    </ul>
+  <% @room.attributes.each do |attribute, value| %>
+    <% if value == true %>
+      <ul>
+        <li><%= Room.human_attribute_name(attribute) %></li>
+      </ul>
+    <% end %>
   <% end %>
-<% end %>
 
 <% if user_signed_in? && current_user.host? && @room.guesthouse.user == current_user %>
   <div>
-    <%= link_to 'Editar', edit_room_path(@room) %> | 
+    <h4><strong>Lista de Preços Personalizados:</strong></h4>
+    <% @custom_prices.each do |custom_price|%>
+      <ul>
+        <li>Data de início: <%= I18n.l(custom_price.begin_date, format: "%d/%m/%Y") %> | Data de fim: <%= I18n.l(custom_price.end_date, format: "%d/%m/%Y") %> | Valor da diária: <%= number_to_currency(custom_price.price, unit: "R$", separator: ",", delimiter: ".") %></li>
+      </ul>
+    <% end %>
+    
+    <% if @custom_prices.empty? %>
+      <p>Não existem preços personalizados cadastrados.</p>
+    <% end %>
+  </div>
+  <div>
+    <%= link_to 'Editar', edit_room_path(@room) %> |
+    <%= link_to 'Cadastrar novo Preço Personalizado', new_room_custom_price_path(@room) %> |
     <%= link_to 'Voltar', guesthouse_rooms_path(@room.guesthouse) %>
   </div>
 <% else %>
-<div>
-  <%= link_to 'Voltar', guesthouse_rooms_path(@room.guesthouse) %>
-</div>
+  <div>
+    <%= link_to 'Voltar', guesthouse_rooms_path(@room.guesthouse) %>
+  </div>
 <% end %>

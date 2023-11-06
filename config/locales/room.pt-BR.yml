@@ -8,7 +8,7 @@ pt-BR:
         description: 'Descrição'
         area: 'Área (m²)'
         max_guest: 'Quantidade max. de hóspedes'
-        daily_price: 'Valor da diária'
+        default_price: 'Valor da diária'
         bathroom: 'Possui banheiro'
         balcony: 'Possui varanda'
         air_conditioner: 'Possui ar-condicionado'

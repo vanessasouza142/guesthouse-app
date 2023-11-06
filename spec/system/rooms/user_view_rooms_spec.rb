@@ -10,10 +10,10 @@ describe 'Usuário visita a pousada' do
                             neighborhood: 'Boa Vista', state: 'Pernambuco', city: 'Recife', postal_code: '54560500', 
                             description: 'Pousada com ótima localização', payment_method: 'Dinheiro, pix e cartão', pet_agreement: 'não',
                             usage_policy: 'Proibido fumar nas áreas de convivência', check_in: '13:00', check_out: '12:00', user: mariana)
-    r1 = Room.create!(name: 'Quarto Girassol', description: 'Quarto amplo com vista para o mar', area: '10', max_guest: '4', daily_price: '210,00',
+    r1 = Room.create!(name: 'Quarto Girassol', description: 'Quarto amplo com vista para o mar', area: '10', max_guest: '4', default_price: '210,00',
                       bathroom: 'sim', balcony: 'não', air_conditioner: 'sim', tv: 'sim', wardrobe: 'sim', safe: 'não', accessible: 'sim',
                       guesthouse: g)
-    r2 = Room.create!(name: 'Quarto Tulipa', description: 'Quarto bem ventilado', area: '8', max_guest: '3', daily_price: '180,00',
+    r2 = Room.create!(name: 'Quarto Tulipa', description: 'Quarto bem ventilado', area: '8', max_guest: '3', default_price: '180,00',
                       bathroom: 'sim', balcony: 'não', air_conditioner: 'sim', tv: 'não', wardrobe: 'sim', safe: 'não', accessible: 'sim',
                       guesthouse: g)
 
@@ -26,11 +26,11 @@ describe 'Usuário visita a pousada' do
     expect(page).not_to have_content 'Não existem quartos cadastrados.'
     expect(page).to have_content 'Quarto Girassol'
     expect(page).to have_content 'Descrição: Quarto amplo com vista para o mar'
-    expect(page).to have_content 'Valor da diária: R$ 210,00'
+    expect(page).to have_content 'Valor padrão da diária: R$ 210,00'
 
     expect(page).to have_content 'Quarto Tulipa'
     expect(page).to have_content 'Descrição: Quarto bem ventilado'
-    expect(page).to have_content 'Valor da diária: R$ 180,00'
+    expect(page).to have_content 'Valor padrão da diária: R$ 180,00'
 end
 
   it 'e não existem quartos cadastrados' do
