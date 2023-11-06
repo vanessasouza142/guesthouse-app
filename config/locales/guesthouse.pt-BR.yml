@@ -1,4 +1,6 @@
 pt-BR:
+  inactive: 'Inativa'
+  active: 'Ativa'
   activerecord:
     models:
       guesthouse: 'Pousada'

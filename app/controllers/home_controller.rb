@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
 
   def index
-    @guesthouses = Guesthouse.all
+    @guesthouses = Guesthouse.active
   end
 
 end

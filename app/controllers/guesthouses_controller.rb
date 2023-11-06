@@ -49,6 +49,18 @@ class GuesthousesController < ApplicationController
     end
   end
 
+  def activate
+    @guesthouse = Guesthouse.find(params[:id])
+    @guesthouse.active!
+    redirect_to guesthouse_path(@guesthouse.id), notice: 'Pousada ativada com sucesso.'
+  end
+
+  def inactivate
+    @guesthouse = Guesthouse.find(params[:id])
+    @guesthouse.inactive!
+    redirect_to guesthouse_path(@guesthouse.id), notice: 'Pousada inativada com sucesso.'
+  end
+
   private
 
   def check_user

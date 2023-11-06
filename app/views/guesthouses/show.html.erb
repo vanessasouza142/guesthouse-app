@@ -13,6 +13,9 @@
 
 <% if user_signed_in? && current_user.host? && @guesthouse.user == current_user %>
   <div>
+    <p>Status: <%= I18n.t(@guesthouse.status) %></p>
+    <%= button_to 'Ativar Pousada', activate_guesthouse_path(@guesthouse), method: 'patch' %>
+    <%= button_to 'Desativar Pousada', inactivate_guesthouse_path(@guesthouse), method: 'patch' %>
     <%= link_to 'Editar', edit_guesthouse_path(@guesthouse) %> | 
     <%= link_to 'Cadastrar novo Quarto', new_guesthouse_room_path(@guesthouse) %> |
     <%= link_to 'Quartos da Pousada', guesthouse_rooms_path(@guesthouse) %> |

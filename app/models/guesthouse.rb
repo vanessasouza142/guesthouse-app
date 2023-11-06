@@ -1,4 +1,5 @@
 class Guesthouse < ApplicationRecord
+  enum status: {inactive: 0, active: 2}  
   belongs_to :user
   has_many :rooms
 
