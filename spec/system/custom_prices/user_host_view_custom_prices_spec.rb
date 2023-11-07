@@ -15,8 +15,8 @@ describe 'Usuário anfitrião vê lista de preços personalizados' do
     cp = CustomPrice.create!(begin_date: '01/12/2023', end_date: '31/12/2023', price: '350,00', room: r)
 
     #Act
-    visit root_path
-    login(paulo)
+    login_as(paulo)
+    visit my_guesthouse_path
     click_on 'Pousada Muro Alto'
     click_on 'Quartos da Pousada'
     click_on 'Quarto Girassol'
@@ -44,8 +44,8 @@ describe 'Usuário anfitrião vê lista de preços personalizados' do
                       status: 'available', guesthouse: g)
 
     #Act
-    visit root_path
-    login(paulo)
+    login_as(paulo)
+    visit my_guesthouse_path
     click_on 'Pousada Muro Alto'
     click_on 'Quartos da Pousada'
     click_on 'Quarto Girassol'

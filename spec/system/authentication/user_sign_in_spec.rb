@@ -6,7 +6,9 @@ describe 'Usuário faz login' do
 
     #Act
     visit root_path
-    click_on 'Entrar na Conta'
+    within('nav') do
+      click_on 'Entrar na Conta'
+    end
 
     #Assert
     within('form') do
@@ -16,13 +18,20 @@ describe 'Usuário faz login' do
     end
   end
 
-  it 'com sucesso sendo do tipo hóspede' do
+  it 'com sucesso sendo do tipo hóspede e é redirecionado para o homepage' do
     #Arrange
     maria = User.create!(name: 'Maria Barbosa', email: 'maria@gmail.com', password: 'password', role: 'guest')
 
     #Act
     visit root_path
-    login(maria)
+    within('nav') do
+      click_on 'Entrar na Conta'
+    end
+    within('form') do
+      fill_in 'E-mail', with: maria.email
+      fill_in 'Senha', with: maria.password
+      click_on 'Entrar'
+    end
 
     #Assert
     expect(page).to have_content 'Login efetuado com sucesso'
@@ -34,18 +43,25 @@ describe 'Usuário faz login' do
     end
   end
 
-  it 'com sucesso sendo do tipo anfitrião' do
+  it 'com sucesso sendo do tipo anfitrião e vai para a página minha pousada' do
     #Arrange
     julio = User.create!(name: 'Julio Almeida', email: 'julio@gmail.com', password: 'password', role: 'host')
     Guesthouse.create!(corporate_name: 'Pousada Muro Alto Ltda', brand_name: 'Pousada Muro Alto', registration_number:'39165040000129', 
-    phone_number: '8134658799', email: 'pousadamuroalto@gmail.com', address: 'Av. Beira Mar, 45', 
-    neighborhood: 'Muro Alto', state: 'Pernambuco', city: 'Ipojuca', postal_code: '54350820', 
-    description: 'Pousada a beira mar maravilhosa', payment_method: 'Dinheiro, pix e cartão', pet_agreement: 'sim',
-    usage_policy: 'Proibido fumar nas áreas de convivência', check_in: '13:00', check_out: '12:00', user: julio)
+                        phone_number: '8134658799', email: 'pousadamuroalto@gmail.com', address: 'Av. Beira Mar, 45', 
+                        neighborhood: 'Muro Alto', state: 'Pernambuco', city: 'Ipojuca', postal_code: '54350820', 
+                        description: 'Pousada a beira mar maravilhosa', payment_method: 'Dinheiro, pix e cartão', pet_agreement: 'sim',
+                        usage_policy: 'Proibido fumar nas áreas de convivência', check_in: '13:00', check_out: '12:00', user: julio)
 
     #Act
     visit root_path
-    login(julio)
+    within('nav') do
+      click_on 'Entrar na Conta'
+    end
+    within('form') do
+      fill_in 'E-mail', with: julio.email
+      fill_in 'Senha', with: julio.password
+      click_on 'Entrar'
+    end
 
     #Assert
     expect(page).to have_content 'Login efetuado com sucesso'

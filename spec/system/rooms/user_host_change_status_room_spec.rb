@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Usuário muda status do quarto da sua pousada' do
-  it 'para disponível e ele muda o status para disponível' do
+  it 'para disponível com sucesso' do
     #Arrange
     paulo = User.create!(name: 'Paulo Menezes', email: 'paulomenezes@gmail.com', password: 'password', role: 'host')
     g = Guesthouse.create!(corporate_name: 'Pousada Muro Alto Ltda', brand_name: 'Pousada Muro Alto', registration_number:'39165040000129', 
@@ -15,8 +15,7 @@ describe 'Usuário muda status do quarto da sua pousada' do
                   status: 'unavailable', guesthouse: g)
     
     #Act
-    visit root_path
-    login(paulo)
+    login_as(paulo)
     visit my_guesthouse_path
     click_on 'Pousada Muro Alto'
     click_on 'Quartos da Pousada'
@@ -31,7 +30,7 @@ describe 'Usuário muda status do quarto da sua pousada' do
     expect(page).to have_content 'Status: Disponível'
   end
 
-  it 'para indisponível e ele muda o status para indisponível' do
+  it 'para indisponível com sucesso' do
     #Arrange
     paulo = User.create!(name: 'Paulo Menezes', email: 'paulomenezes@gmail.com', password: 'password', role: 'host')
     g = Guesthouse.create!(corporate_name: 'Pousada Muro Alto Ltda', brand_name: 'Pousada Muro Alto', registration_number:'39165040000129', 
@@ -45,8 +44,8 @@ describe 'Usuário muda status do quarto da sua pousada' do
                   status: 'available', guesthouse: g)
     
     #Act
-    visit root_path
-    login(paulo)
+    login_as(paulo)
+    visit my_guesthouse_path
     click_on 'Pousada Muro Alto'
     click_on 'Quartos da Pousada'
     click_on 'Quarto Girassol'

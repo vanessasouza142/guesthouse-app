@@ -14,8 +14,8 @@ describe 'Usuário alfitrião edita um quarto da sua pousada' do
                   status: 'available', guesthouse: g)
     
     #Act
-    visit root_path
-    login(paulo)
+    login_as(paulo)
+    visit my_guesthouse_path
     click_on 'Pousada Muro Alto'
     click_on 'Quartos da Pousada'
     click_on 'Quarto Girassol'
@@ -50,8 +50,8 @@ describe 'Usuário alfitrião edita um quarto da sua pousada' do
                   status: 'available', guesthouse: g)
     
     #Act
-    visit root_path
-    login(paulo)
+    login_as(paulo)
+    visit my_guesthouse_path
     click_on 'Pousada Muro Alto'
     click_on 'Quartos da Pousada'
     click_on 'Quarto Girassol'
@@ -81,8 +81,8 @@ describe 'Usuário alfitrião edita um quarto da sua pousada' do
                   status: 'available', guesthouse: g)
     
     #Act
-    visit root_path
-    login(paulo)
+    login_as(paulo)
+    visit my_guesthouse_path
     click_on 'Pousada Muro Alto'
     click_on 'Quartos da Pousada'
     click_on 'Quarto Girassol'

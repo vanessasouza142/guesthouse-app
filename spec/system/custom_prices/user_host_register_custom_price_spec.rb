@@ -14,8 +14,8 @@ describe 'Usuário anfitrião cadastra preço personalizado para um quarto' do
                       status: 'available', guesthouse: g)
 
     #Act
-    visit root_path
-    login(paulo)
+    login_as(paulo)
+    visit my_guesthouse_path
     click_on 'Pousada Muro Alto'
     click_on 'Quartos da Pousada'
     click_on 'Quarto Girassol'
@@ -42,16 +42,16 @@ describe 'Usuário anfitrião cadastra preço personalizado para um quarto' do
                       status: 'available', guesthouse: g)
 
     #Act
-    visit root_path
-    login(paulo)
-    visit new_room_custom_price_path(room.id)
+    login_as(paulo)
+    visit room_path(room)    
+    click_on 'Cadastrar novo Preço Personalizado'
     fill_in 'Data de início', with: '01/12/2023'
     fill_in 'Data de fim', with: '31/12/2023'
     fill_in 'Valor da diária', with: '350,00'
     click_on 'Salvar'
 
     #Assert
-    expect(current_path).to eq room_path(room.id)
+    expect(current_path).to eq room_path(room)
     expect(page).to have_content 'Preço personalizado cadastrado com sucesso.'
     expect(page).to have_content 'Lista de Preços Personalizados:'
     expect(page).to have_content 'Data de início: 01/12/2023'
@@ -72,9 +72,9 @@ describe 'Usuário anfitrião cadastra preço personalizado para um quarto' do
                       status: 'available', guesthouse: g)
 
     #Act
-    visit root_path
-    login(paulo)
-    visit new_room_custom_price_path(room.id)
+    login_as(paulo)
+    visit room_path(room)    
+    click_on 'Cadastrar novo Preço Personalizado'
     fill_in 'Data de início', with: ''
     fill_in 'Data de fim', with: ''
     fill_in 'Valor da diária', with: ''

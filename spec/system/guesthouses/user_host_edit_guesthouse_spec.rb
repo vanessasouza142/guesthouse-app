@@ -11,8 +11,8 @@ describe 'Usuário alfitrião edita sua pousada' do
                         usage_policy: 'Proibido fumar nas áreas de convivência', check_in: '13:00', check_out: '12:00', user: paulo)
     
     #Act
-    visit root_path
-    login(paulo)
+    login_as(paulo)
+    visit my_guesthouse_path
     click_on 'Pousada Muro Alto'
     click_on 'Editar'
 
@@ -36,8 +36,8 @@ describe 'Usuário alfitrião edita sua pousada' do
                         usage_policy: 'Proibido fumar nas áreas de convivência', check_in: '13:00', check_out: '12:00', user: paulo)
     
     #Act
-    visit root_path
-    login(paulo)
+    login_as(paulo)
+    visit my_guesthouse_path
     click_on 'Pousada Muro Alto'
     click_on 'Editar'
     fill_in 'Razão Social', with: 'Pousada Muro Alto Beach Ltda'
@@ -62,8 +62,8 @@ describe 'Usuário alfitrião edita sua pousada' do
                         usage_policy: 'Proibido fumar nas áreas de convivência', check_in: '13:00', check_out: '12:00', user: paulo)
     
     #Act
-    visit root_path
-    login(paulo)
+    login_as(paulo)
+    visit my_guesthouse_path
     click_on 'Pousada Muro Alto'
     click_on 'Editar'
     fill_in 'Razão Social', with: ''
