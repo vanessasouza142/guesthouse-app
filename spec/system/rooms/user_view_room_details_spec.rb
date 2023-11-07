@@ -19,7 +19,6 @@ describe 'Usuário vê detalhes de um quarto' do
     within('.guesthouses-list') do
       click_on 'Pousada Muro Alto'
     end
-    click_on 'Quartos da Pousada'
     click_on 'Quarto Girassol'
 
     #Assert
@@ -54,7 +53,6 @@ describe 'Usuário vê detalhes de um quarto' do
     within('.guesthouses-list') do
       click_on 'Pousada Muro Alto'
     end
-    click_on 'Quartos da Pousada'
     click_on 'Quarto Girassol'
 
     #Assert
@@ -90,7 +88,6 @@ describe 'Usuário vê detalhes de um quarto' do
     within('.guesthouses-list') do
       click_on 'Pousada Muro Alto'
     end
-    click_on 'Quartos da Pousada'
     click_on 'Quarto Girassol'
 
     #Assert
@@ -124,11 +121,10 @@ describe 'Usuário vê detalhes de um quarto' do
     within('.guesthouses-list') do
       click_on 'Pousada Muro Alto'
     end
-    click_on 'Quartos da Pousada'
     click_on 'Quarto Girassol'
     click_on 'Voltar'
 
     #Assert
-    expect(current_path).to eq guesthouse_rooms_path(g.id)
+    expect(current_path).to eq guesthouse_path(g)
   end
 end

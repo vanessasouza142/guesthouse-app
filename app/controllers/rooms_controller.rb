@@ -2,15 +2,6 @@ class RoomsController < ApplicationController
   before_action :authenticate_user!, only: [:edit, :update]
   before_action :check_user, only: [:new, :create, :edit, :update]
 
-  def index
-      @guesthouse = Guesthouse.find(params[:guesthouse_id])
-      if current_user.present? && current_user == @guesthouse.user
-        @rooms = @guesthouse.rooms
-      else
-        @rooms = @guesthouse.rooms.available
-      end
-  end
-
   def new
     @guesthouse = Guesthouse.find(params[:guesthouse_id])
     @room = @guesthouse.rooms.build

@@ -30,6 +30,11 @@ class GuesthousesController < ApplicationController
 
   def show
     @guesthouse = Guesthouse.find(params[:id])
+    if current_user.present? && current_user == @guesthouse.user
+      @rooms = @guesthouse.rooms.order(:name)
+    else
+      @rooms = @guesthouse.rooms.available.order(:name)
+    end
   end
 
   def edit

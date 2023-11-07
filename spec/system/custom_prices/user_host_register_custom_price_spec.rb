@@ -17,7 +17,6 @@ describe 'Usuário anfitrião cadastra preço personalizado para um quarto' do
     login_as(paulo)
     visit my_guesthouse_path
     click_on 'Pousada Muro Alto'
-    click_on 'Quartos da Pousada'
     click_on 'Quarto Girassol'
     click_on 'Cadastrar novo Preço Personalizado'
 

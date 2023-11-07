@@ -18,7 +18,6 @@ describe 'Usuário muda status do quarto da sua pousada' do
     login_as(paulo)
     visit my_guesthouse_path
     click_on 'Pousada Muro Alto'
-    click_on 'Quartos da Pousada'
     click_on 'Quarto Girassol'
     click_on 'Disponibilizar Quarto'
 
@@ -47,7 +46,6 @@ describe 'Usuário muda status do quarto da sua pousada' do
     login_as(paulo)
     visit my_guesthouse_path
     click_on 'Pousada Muro Alto'
-    click_on 'Quartos da Pousada'
     click_on 'Quarto Girassol'
     click_on 'Indisponibilizar Quarto'
 

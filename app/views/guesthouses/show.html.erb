@@ -1,31 +1,52 @@
-<h2><%= @guesthouse.brand_name %></h2>
-<% if user_signed_in? && current_user.host? && @guesthouse.user == current_user %>
-  <p><strong>Razão Social: </strong><%= @guesthouse.corporate_name %></p>
-  <p><strong>CNPJ: </strong><%= @guesthouse.registration_number %></p>
-<% end %>
-<p><strong>Telefone para contato: </strong><%= @guesthouse.phone_number %></p>
-<p><strong>E-mail para contato: </strong><%= @guesthouse.email %></p>
-<p><strong>Endereço Completo: </strong><%= @guesthouse.full_address %></p>
-<p><strong>Descrição: </strong><%= @guesthouse.description %></p>
-<p><strong>Métodos de Pagamento: </strong><%= @guesthouse.payment_method %></p>
-<p><strong>Aceita animais de estimação? </strong><%= @guesthouse.pet_agreement %></p>
-<p><strong>Políticas de Uso: </strong><%= @guesthouse.usage_policy %></p>
-<p><strong>Check-in: </strong><%= I18n.l(@guesthouse.check_in, format: "%H:%M") %></p>
-<p><strong>Check-out: </strong><%= I18n.l(@guesthouse.check_out, format: "%H:%M") %></p>
+<section>
+  <% if user_signed_in? && current_user.host? && @guesthouse.user == current_user %>
+    <div>
+      <div class="p-buttons">
+        <p><strong>Status: </strong><%= I18n.t(@guesthouse.status) %></p>
+        <%= button_to 'Ativar Pousada', activate_guesthouse_path(@guesthouse), method: 'patch'%>
+        <%= button_to 'Desativar Pousada', inactivate_guesthouse_path(@guesthouse), method: 'patch'%>
+      </div>
+      <%= link_to 'Editar', edit_guesthouse_path(@guesthouse) %> | 
+      <%= link_to 'Cadastrar novo Quarto', new_guesthouse_room_path(@guesthouse) %> |
+      <%= link_to 'Voltar', root_path %>
+    </div>
+  <% else %>
+    <div>
+      <%= link_to 'Voltar', root_path %>
+    </div>
+  <% end %>
+</section>
 
-<% if user_signed_in? && current_user.host? && @guesthouse.user == current_user %>
-  <div>
-    <p><strong>Status: </strong><%= I18n.t(@guesthouse.status) %></p>
-    <%= button_to 'Ativar Pousada', activate_guesthouse_path(@guesthouse), method: 'patch' %>
-    <%= button_to 'Desativar Pousada', inactivate_guesthouse_path(@guesthouse), method: 'patch' %>
-    <%= link_to 'Editar', edit_guesthouse_path(@guesthouse) %> | 
-    <%= link_to 'Cadastrar novo Quarto', new_guesthouse_room_path(@guesthouse) %> |
-    <%= link_to 'Quartos da Pousada', guesthouse_rooms_path(@guesthouse) %> |
-    <%= link_to 'Voltar', root_path %>
+<section>
+  <h2><%= @guesthouse.brand_name %></h2>
+  <% if user_signed_in? && current_user.host? && @guesthouse.user == current_user %>
+    <p><strong>Razão Social: </strong><%= @guesthouse.corporate_name %></p>
+    <p><strong>CNPJ: </strong><%= @guesthouse.registration_number %></p>
+  <% end %>
+  <p><strong>Telefone para contato: </strong><%= @guesthouse.phone_number %></p>
+  <p><strong>E-mail para contato: </strong><%= @guesthouse.email %></p>
+  <p><strong>Endereço Completo: </strong><%= @guesthouse.full_address %></p>
+  <p><strong>Descrição: </strong><%= @guesthouse.description %></p>
+  <p><strong>Métodos de Pagamento: </strong><%= @guesthouse.payment_method %></p>
+  <p><strong>Aceita animais de estimação? </strong><%= @guesthouse.pet_agreement %></p>
+  <p><strong>Políticas de Uso: </strong><%= @guesthouse.usage_policy %></p>
+  <p><strong>Check-in: </strong><%= I18n.l(@guesthouse.check_in, format: "%H:%M") %></p>
+  <p><strong>Check-out: </strong><%= I18n.l(@guesthouse.check_out, format: "%H:%M") %></p>
+</section>
+
+<section>
+  <h2>Quartos da Pousada</h2>
+  <div class="room-container">
+    <% @rooms.each do |room| %>
+      <div class="l-room">
+        <h3><%= link_to room.name, room %></h3>
+        <p><strong>Descrição: </strong><%= room.description %></p>
+        <p><strong>Valor padrão da diária: </strong><%= number_to_currency(room.default_price, unit: "R$", separator: ",", delimiter: ".") %></p>
+      </div>
+    <% end %>
   </div>
-<% else %>
-<div>
-  <%= link_to 'Quartos da Pousada', guesthouse_rooms_path(@guesthouse) %> |
-  <%= link_to 'Voltar', root_path %>
-</div>
-<% end %>
+
+  <% if @rooms.empty? %>
+    <p>Não existem quartos cadastrados.</p>
+  <% end %>
+</section> 

@@ -18,7 +18,6 @@ describe 'Usuário anfitrião vê lista de preços personalizados' do
     login_as(paulo)
     visit my_guesthouse_path
     click_on 'Pousada Muro Alto'
-    click_on 'Quartos da Pousada'
     click_on 'Quarto Girassol'
 
     #Assert
@@ -47,7 +46,6 @@ describe 'Usuário anfitrião vê lista de preços personalizados' do
     login_as(paulo)
     visit my_guesthouse_path
     click_on 'Pousada Muro Alto'
-    click_on 'Quartos da Pousada'
     click_on 'Quarto Girassol'
 
     #Assert

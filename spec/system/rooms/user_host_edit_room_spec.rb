@@ -17,7 +17,6 @@ describe 'Usuário alfitrião edita um quarto da sua pousada' do
     login_as(paulo)
     visit my_guesthouse_path
     click_on 'Pousada Muro Alto'
-    click_on 'Quartos da Pousada'
     click_on 'Quarto Girassol'
     click_on 'Editar'
 
@@ -53,7 +52,6 @@ describe 'Usuário alfitrião edita um quarto da sua pousada' do
     login_as(paulo)
     visit my_guesthouse_path
     click_on 'Pousada Muro Alto'
-    click_on 'Quartos da Pousada'
     click_on 'Quarto Girassol'
     click_on 'Editar'
     fill_in 'Nome', with: '102 - Quarto Girassol'
@@ -84,7 +82,6 @@ describe 'Usuário alfitrião edita um quarto da sua pousada' do
     login_as(paulo)
     visit my_guesthouse_path
     click_on 'Pousada Muro Alto'
-    click_on 'Quartos da Pousada'
     click_on 'Quarto Girassol'
     click_on 'Editar'
     fill_in 'Nome', with: ''

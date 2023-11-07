@@ -1,10 +1,30 @@
-<h2><%= @room.name %></h2>
-  <p>Descrição: <%= @room.description %></p>
-  <p>Área (m²): <%= @room.area %></p>
-  <p>Quantidade max. de hóspedes: <%= @room.max_guest %></p>
-  <p>Valor padrão da diária: <%= number_to_currency(@room.default_price, unit: "R$", separator: ",", delimiter: ".") %></p>
+<section>
+<% if user_signed_in? && current_user.host? && @room.guesthouse.user == current_user %>
+  <div>
+    <div class="p-buttons">
+      <p><strong>Status: </strong><%= I18n.t(@room.status) %></p>
+      <%= button_to 'Disponibilizar Quarto', set_available_room_path(@room), method: 'patch' %>
+      <%= button_to 'Indisponibilizar Quarto', set_unavailable_room_path(@room), method: 'patch' %>
+    </div>
+    <%= link_to 'Editar', edit_room_path(@room) %> |
+    <%= link_to 'Cadastrar novo Preço Personalizado', new_room_custom_price_path(@room) %> |
+    <%= link_to 'Voltar', guesthouse_path(@room.guesthouse) %>
+  </div>
+<% else %>
+  <div>
+    <%= link_to 'Voltar', guesthouse_path(@room.guesthouse) %>
+  </div>
+<% end %>
+</section>
 
-<h4><strong>O que esse quarto oferece:</strong></h4>
+<section>
+  <h2><%= @room.name %></h2>
+  <p><strong>Descrição: </strong><%= @room.description %></p>
+  <p><strong>Área (m²): </strong><%= @room.area %></p>
+  <p><strong>Quantidade max. de hóspedes: </strong><%= @room.max_guest %></p>
+  <p><strong>Valor padrão da diária: </strong><%= number_to_currency(@room.default_price, unit: "R$", separator: ",", delimiter: ".") %></p>
+
+  <h4><strong>O que esse quarto oferece:</strong></h4>
   <% @room.attributes.each do |attribute, value| %>
     <% if value == true %>
       <ul>
@@ -12,16 +32,17 @@
       </ul>
     <% end %>
   <% end %>
+</section>
 
+<section>
 <% if user_signed_in? && current_user.host? && @room.guesthouse.user == current_user %>
   <div>
-    <p>Status: <%= I18n.t(@room.status) %></p>
-    <%= button_to 'Disponibilizar Quarto', set_available_room_path(@room), method: 'patch' %>
-    <%= button_to 'Indisponibilizar Quarto', set_unavailable_room_path(@room), method: 'patch' %>
     <h4><strong>Lista de Preços Personalizados:</strong></h4>
     <% @custom_prices.each do |custom_price|%>
       <ul>
-        <li>Data de início: <%= I18n.l(custom_price.begin_date, format: "%d/%m/%Y") %> | Data de fim: <%= I18n.l(custom_price.end_date, format: "%d/%m/%Y") %> | Valor da diária: <%= number_to_currency(custom_price.price, unit: "R$", separator: ",", delimiter: ".") %></li>
+        <li><strong>Data de início: </strong><%= I18n.l(custom_price.begin_date, format: "%d/%m/%Y") %> | 
+        <strong>Data de fim: </strong><%= I18n.l(custom_price.end_date, format: "%d/%m/%Y") %> | 
+        <strong>Valor da diária: </strong><%= number_to_currency(custom_price.price, unit: "R$", separator: ",", delimiter: ".") %></li>
       </ul>
     <% end %>
     
@@ -29,13 +50,7 @@
       <p>Não existem preços personalizados cadastrados.</p>
     <% end %>
   </div>
-  <div>
-    <%= link_to 'Editar', edit_room_path(@room) %> |
-    <%= link_to 'Cadastrar novo Preço Personalizado', new_room_custom_price_path(@room) %> |
-    <%= link_to 'Voltar', guesthouse_rooms_path(@room.guesthouse) %>
-  </div>
-<% else %>
-  <div>
-    <%= link_to 'Voltar', guesthouse_rooms_path(@room.guesthouse) %>
-  </div>
 <% end %>
+</section>
+
+

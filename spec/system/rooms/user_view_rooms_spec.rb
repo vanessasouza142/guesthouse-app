@@ -23,7 +23,6 @@ describe 'Usuário visita a pousada' do
     within('.guesthouses-list') do
       click_on 'Pousada Sulamericana'
     end
-    click_on 'Quartos da Pousada'
 
     #Assert
     expect(page).not_to have_content 'Não existem quartos cadastrados.'
@@ -52,7 +51,6 @@ end
     within('.guesthouses-list') do
       click_on 'Pousada Sulamericana'
     end
-    click_on 'Quartos da Pousada'
 
     #Assert
     expect(page).to have_content 'Não existem quartos cadastrados.'

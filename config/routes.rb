@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :guesthouses, only: [:new, :create, :show, :edit, :update] do
     patch :activate, on: :member
     patch :inactivate, on: :member
-    resources :rooms, only: [:index, :new, :create]
+    resources :rooms, only: [:new, :create]
   end
   resources :rooms, only: [:show, :edit, :update] do
     patch :set_available, on: :member

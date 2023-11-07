@@ -2,7 +2,12 @@ button {
   border: 0;
   background-color: #fff;
   font-size: 16px;
-  display: inline;
+}
+
+.p-buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 body {
@@ -12,7 +17,8 @@ body {
 h2 {
   font-size: 24px;
   font-weight: bold;
-  margin: 10px 0;
+  line-height: 2.0;
+  margin: 0px;
 }
 
 p {
@@ -28,4 +34,13 @@ p {
 
 .l-guesthouse {
   margin: 50px;
+}
+
+.room-container {
+  display: flex;
+  justify-content: left;
+}
+
+.l-room {
+  margin: 0px 50px 10px 0px;
 }
