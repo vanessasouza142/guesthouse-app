@@ -1,13 +1,27 @@
-<section>
+<section class="latest-guesthouses-list">
+  <div class="guesthouse-container">
+    <% @latest_guesthouses.each do |latest_guesthouse| %>
+      <div class="l-guesthouse">
+        <h2><%= link_to latest_guesthouse.brand_name, latest_guesthouse %></h2>
+        <p><%= latest_guesthouse.city %></p>
+      </div>
+    <% end %>
+  </div>
+</section>
+
+<hr>
+
+<section class="guesthouses-list">
 <% @guesthouses.each do |guesthouse| %>
   <div>
     <h2><%= link_to guesthouse.brand_name, guesthouse %></h2>
-    <p>Descrição: <%= guesthouse.description %></p>
-    <p><%= guesthouse.city %> - <%= guesthouse.state %></p>
+    <p><%= guesthouse.city %></p>
   </div>
 <% end %>
+</section>
 
-<% if @guesthouses.empty? %>
-  <p>Não existem pousadas cadastradas.</p>
-<% end %>
+<section>
+  <% if @guesthouses.empty? %>
+    <p>Não existem pousadas cadastradas.</p>
+  <% end %>
 </section>

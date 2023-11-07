@@ -27,10 +27,8 @@ describe 'Usuário anfitrião faz login ' do
     #Assert
     expect(current_path).to eq my_guesthouse_path
     expect(page).to have_content 'Pousada Muro Alto'
-    expect(page).to have_content 'Descrição: Pousada a beira mar maravilhosa'
-    expect(page).to have_content 'Ipojuca - Pernambuco'
+    expect(page).to have_content 'Ipojuca'
     expect(page).not_to have_content 'Pousada Sulamericana'
-    expect(page).not_to have_content 'Descrição: Pousada com ótima localização'
-    expect(page).not_to have_content 'Recife - Pernambuco'
+    expect(page).not_to have_content 'Recife'
   end
 end

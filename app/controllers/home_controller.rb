@@ -1,7 +1,8 @@
 class HomeController < ApplicationController
 
   def index
-    @guesthouses = Guesthouse.active
+    @latest_guesthouses = Guesthouse.active.last(3)
+    @guesthouses = Guesthouse.active.order(:brand_name)
   end
 
 end

@@ -8,3 +8,24 @@ button {
 body {
   font-family: Arial, sans-serif;
 }
+
+h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+p {
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0px;
+}
+
+.guesthouse-container {
+  display: flex;
+  justify-content: center;
+}
+
+.l-guesthouse {
+  margin: 50px;
+}

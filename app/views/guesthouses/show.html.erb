@@ -1,19 +1,21 @@
 <h2><%= @guesthouse.brand_name %></h2>
-<p>Razão Social: <%= @guesthouse.corporate_name %></p>
-<p>CNPJ: <%= @guesthouse.registration_number %></p>
-<p>Telefone para contato: <%= @guesthouse.phone_number %></p>
-<p>E-mail para contato: <%= @guesthouse.email %></p>
-<p>Endereço Completo: <%= @guesthouse.full_address %></p>
-<p>Descrição: <%= @guesthouse.description %></p>
-<p>Métodos de Pagamento: <%= @guesthouse.payment_method %></p>
-<p>Aceita animais de estimação? <%= @guesthouse.pet_agreement %></p>
-<p>Políticas de Uso: <%= @guesthouse.usage_policy %></p>
-<p>Check-in: <%= I18n.l(@guesthouse.check_in, format: "%H:%M") %></p>
-<p>Check-out: <%= I18n.l(@guesthouse.check_out, format: "%H:%M") %></p>
+<% if user_signed_in? && current_user.host? && @guesthouse.user == current_user %>
+  <p><strong>Razão Social: </strong><%= @guesthouse.corporate_name %></p>
+  <p><strong>CNPJ: </strong><%= @guesthouse.registration_number %></p>
+<% end %>
+<p><strong>Telefone para contato: </strong><%= @guesthouse.phone_number %></p>
+<p><strong>E-mail para contato: </strong><%= @guesthouse.email %></p>
+<p><strong>Endereço Completo: </strong><%= @guesthouse.full_address %></p>
+<p><strong>Descrição: </strong><%= @guesthouse.description %></p>
+<p><strong>Métodos de Pagamento: </strong><%= @guesthouse.payment_method %></p>
+<p><strong>Aceita animais de estimação? </strong><%= @guesthouse.pet_agreement %></p>
+<p><strong>Políticas de Uso: </strong><%= @guesthouse.usage_policy %></p>
+<p><strong>Check-in: </strong><%= I18n.l(@guesthouse.check_in, format: "%H:%M") %></p>
+<p><strong>Check-out: </strong><%= I18n.l(@guesthouse.check_out, format: "%H:%M") %></p>
 
 <% if user_signed_in? && current_user.host? && @guesthouse.user == current_user %>
   <div>
-    <p>Status: <%= I18n.t(@guesthouse.status) %></p>
+    <p><strong>Status: </strong><%= I18n.t(@guesthouse.status) %></p>
     <%= button_to 'Ativar Pousada', activate_guesthouse_path(@guesthouse), method: 'patch' %>
     <%= button_to 'Desativar Pousada', inactivate_guesthouse_path(@guesthouse), method: 'patch' %>
     <%= link_to 'Editar', edit_guesthouse_path(@guesthouse) %> | 

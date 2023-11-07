@@ -20,7 +20,9 @@ describe 'Usuário visita a pousada' do
 
     #Act
     visit root_path
-    click_on 'Pousada Sulamericana'
+    within('.guesthouses-list') do
+      click_on 'Pousada Sulamericana'
+    end
     click_on 'Quartos da Pousada'
 
     #Assert
@@ -47,7 +49,9 @@ end
 
     #Act
     visit root_path
-    click_on 'Pousada Sulamericana'
+    within('.guesthouses-list') do
+      click_on 'Pousada Sulamericana'
+    end
     click_on 'Quartos da Pousada'
 
     #Assert

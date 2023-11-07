@@ -12,14 +12,20 @@ describe 'Usuário vê detalhes de uma pousada' do
                             user: paulo)
     #Act
     visit root_path
-    click_on 'Pousada Muro Alto'
+    within('.guesthouses-list') do
+      click_on 'Pousada Muro Alto'
+    end
 
     #Assert
     expect(page).to have_content 'Pousada Muro Alto'
-    expect(page).to have_content 'Razão Social: Pousada Muro Alto Ltda'
-    expect(page).to have_content 'CNPJ: 39165040000129'
+    expect(page).to have_content 'Telefone para contato: 8134658799'
     expect(page).to have_content 'E-mail para contato: pousadamuroalto@gmail.com'
     expect(page).to have_content 'Endereço Completo: Av. Beira Mar, 45, Muro Alto, Ipojuca - Pernambuco CEP: 54350820'
+    expect(page).to have_content 'Descrição: Pousada a beira mar maravilhosa'
+    expect(page).to have_content 'Métodos de Pagamento: Dinheiro, pix e cartão'
+    expect(page).to have_content 'Aceita animais de estimação? sim'
+    expect(page).to have_content 'Check-in: 13:00'
+    expect(page).to have_content 'Check-out: 12:00'
   end
 
   it 'e vê informacoes adicionais estando logado como anfitrião' do
@@ -40,8 +46,14 @@ describe 'Usuário vê detalhes de uma pousada' do
     expect(page).to have_content 'Pousada Muro Alto'
     expect(page).to have_content 'Razão Social: Pousada Muro Alto Ltda'
     expect(page).to have_content 'CNPJ: 39165040000129'
+    expect(page).to have_content 'Telefone para contato: 8134658799'
     expect(page).to have_content 'E-mail para contato: pousadamuroalto@gmail.com'
     expect(page).to have_content 'Endereço Completo: Av. Beira Mar, 45, Muro Alto, Ipojuca - Pernambuco CEP: 54350820'
+    expect(page).to have_content 'Descrição: Pousada a beira mar maravilhosa'
+    expect(page).to have_content 'Métodos de Pagamento: Dinheiro, pix e cartão'
+    expect(page).to have_content 'Aceita animais de estimação? sim'
+    expect(page).to have_content 'Check-in: 13:00'
+    expect(page).to have_content 'Check-out: 12:00'
   end
 
   it 'e vê informacoes adicionais estando logado como hóspede' do
@@ -58,14 +70,20 @@ describe 'Usuário vê detalhes de uma pousada' do
     #Act
     login_as(mariana)
     visit root_path
-    click_on 'Pousada Muro Alto'
+    within('.guesthouses-list') do
+      click_on 'Pousada Muro Alto'
+    end
 
     #Assert
     expect(page).to have_content 'Pousada Muro Alto'
-    expect(page).to have_content 'Razão Social: Pousada Muro Alto Ltda'
-    expect(page).to have_content 'CNPJ: 39165040000129'
+    expect(page).to have_content 'Telefone para contato: 8134658799'
     expect(page).to have_content 'E-mail para contato: pousadamuroalto@gmail.com'
     expect(page).to have_content 'Endereço Completo: Av. Beira Mar, 45, Muro Alto, Ipojuca - Pernambuco CEP: 54350820'
+    expect(page).to have_content 'Descrição: Pousada a beira mar maravilhosa'
+    expect(page).to have_content 'Métodos de Pagamento: Dinheiro, pix e cartão'
+    expect(page).to have_content 'Aceita animais de estimação? sim'
+    expect(page).to have_content 'Check-in: 13:00'
+    expect(page).to have_content 'Check-out: 12:00'
   end
 
   it 'e volta para a tela de listagem das pousadas' do
@@ -80,7 +98,9 @@ describe 'Usuário vê detalhes de uma pousada' do
     
     #Act
     visit root_path
-    click_on 'Pousada Muro Alto'
+    within('.guesthouses-list') do
+      click_on 'Pousada Muro Alto'
+    end
     click_on 'Voltar'
 
     #Assert

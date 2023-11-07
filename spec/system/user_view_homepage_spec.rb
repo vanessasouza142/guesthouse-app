@@ -41,16 +41,13 @@ describe 'Usuário visita a tela inicial' do
     #Assert
     expect(page).not_to have_content 'Não existem pousadas cadastradas.'
     expect(page).to have_content 'Pousada Muro Alto'
-    expect(page).to have_content 'Descrição: Pousada a beira mar maravilhosa'
-    expect(page).to have_content 'Ipojuca - Pernambuco'
+    expect(page).to have_content 'Ipojuca'
 
     expect(page).to have_content 'Pousada Sulamericana'
-    expect(page).to have_content 'Descrição: Pousada com ótima localização'
-    expect(page).to have_content 'Recife - Pernambuco'
+    expect(page).to have_content 'Recife'
 
     expect(page).not_to have_content 'Pousada Aconchego'
-    expect(page).not_to have_content 'Descrição: Pousada ótima'
-    expect(page).not_to have_content 'Paulista - Pernambuco'
+    expect(page).not_to have_content 'Paulista'
   end
 
   it 'e não existem pousadas cadastradas ativas' do

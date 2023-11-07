@@ -16,7 +16,9 @@ describe 'Usuário vê detalhes de um quarto' do
 
     #Act
     visit root_path
-    click_on 'Pousada Muro Alto'
+    within('.guesthouses-list') do
+      click_on 'Pousada Muro Alto'
+    end
     click_on 'Quartos da Pousada'
     click_on 'Quarto Girassol'
 
@@ -49,7 +51,9 @@ describe 'Usuário vê detalhes de um quarto' do
     #Act
     login_as(paulo)
     visit root_path
-    click_on 'Pousada Muro Alto'
+    within('.guesthouses-list') do
+      click_on 'Pousada Muro Alto'
+    end
     click_on 'Quartos da Pousada'
     click_on 'Quarto Girassol'
 
@@ -83,7 +87,9 @@ describe 'Usuário vê detalhes de um quarto' do
     #Act
     login_as(mariana)
     visit root_path
-    click_on 'Pousada Muro Alto'
+    within('.guesthouses-list') do
+      click_on 'Pousada Muro Alto'
+    end
     click_on 'Quartos da Pousada'
     click_on 'Quarto Girassol'
 
@@ -115,7 +121,9 @@ describe 'Usuário vê detalhes de um quarto' do
 
     #Act
     visit root_path
-    click_on 'Pousada Muro Alto'
+    within('.guesthouses-list') do
+      click_on 'Pousada Muro Alto'
+    end
     click_on 'Quartos da Pousada'
     click_on 'Quarto Girassol'
     click_on 'Voltar'
