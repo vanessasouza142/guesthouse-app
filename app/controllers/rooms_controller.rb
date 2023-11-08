@@ -1,6 +1,6 @@
 class RoomsController < ApplicationController
-  before_action :authenticate_user!, only: [:edit, :update]
-  before_action :check_user, only: [:new, :create, :edit, :update]
+  before_action :authenticate_user!, except: [:show]
+  before_action :check_user, except: [:show]
 
   def new
     @guesthouse = Guesthouse.find(params[:guesthouse_id])

@@ -25,3 +25,12 @@
     <p>Não existem pousadas cadastradas.</p>
   <% end %>
 </section>
+
+<section class="menu-cities">
+<h4>Menu de Cidades<h4>
+<% @guesthouse_cities.each do |guesthouse_city| %>
+  <ul>
+    <li><%= link_to guesthouse_city, root_path %></li>
+  </ul>
+<% end %>
+</section>

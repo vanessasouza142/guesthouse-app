@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Usuário muda status do quarto da sua pousada' do
+describe 'Usuário atualiza status do quarto da sua pousada' do
   it 'para disponível com sucesso' do
     #Arrange
     paulo = User.create!(name: 'Paulo Menezes', email: 'paulomenezes@gmail.com', password: 'password', role: 'host')
@@ -10,9 +10,9 @@ describe 'Usuário muda status do quarto da sua pousada' do
                         description: 'Pousada a beira mar maravilhosa', payment_method: 'Dinheiro, pix e cartão', pet_agreement: 'sim',
                         usage_policy: 'Proibido fumar nas áreas de convivência', check_in: '13:00', check_out: '12:00', status: 'active',
                         user: paulo)
-    Room.create!(name: 'Quarto Girassol', description: 'Quarto amplo com vista para o mar', area: '10', max_guest: '4', default_price: '210,00',
-                  bathroom: 'sim', balcony: 'sim', air_conditioner: 'sim', tv: 'sim', wardrobe: 'sim', safe: 'não', accessible: 'sim',
-                  status: 'unavailable', guesthouse: g)
+    r = Room.create!(name: 'Quarto Girassol', description: 'Quarto amplo com vista para o mar', area: '10', max_guest: '4', default_price: '210,00',
+                    bathroom: 'sim', balcony: 'sim', air_conditioner: 'sim', tv: 'sim', wardrobe: 'sim', safe: 'não', accessible: 'sim',
+                    status: 'unavailable', guesthouse: g)
     
     #Act
     login_as(paulo)
@@ -22,6 +22,7 @@ describe 'Usuário muda status do quarto da sua pousada' do
     click_on 'Disponibilizar Quarto'
 
     #Assert
+    expect(current_path).to eq room_path(r)
     expect(page).to have_content 'Quarto disponibilizado com sucesso.'
     expect(page).to have_content 'Quarto Girassol'
     expect(page).to have_content 'Descrição: Quarto amplo com vista para o mar'
@@ -38,7 +39,7 @@ describe 'Usuário muda status do quarto da sua pousada' do
                         description: 'Pousada a beira mar maravilhosa', payment_method: 'Dinheiro, pix e cartão', pet_agreement: 'sim',
                         usage_policy: 'Proibido fumar nas áreas de convivência', check_in: '13:00', check_out: '12:00', status: 'active',
                         user: paulo)
-    Room.create!(name: 'Quarto Girassol', description: 'Quarto amplo com vista para o mar', area: '10', max_guest: '4', default_price: '210,00',
+    r = Room.create!(name: 'Quarto Girassol', description: 'Quarto amplo com vista para o mar', area: '10', max_guest: '4', default_price: '210,00',
                   bathroom: 'sim', balcony: 'sim', air_conditioner: 'sim', tv: 'sim', wardrobe: 'sim', safe: 'não', accessible: 'sim',
                   status: 'available', guesthouse: g)
     
@@ -50,6 +51,7 @@ describe 'Usuário muda status do quarto da sua pousada' do
     click_on 'Indisponibilizar Quarto'
 
     #Assert
+    expect(current_path).to eq room_path(r)
     expect(page).to have_content 'Quarto indisponibilizado com sucesso.'
     expect(page).to have_content 'Quarto Girassol'
     expect(page).to have_content 'Descrição: Quarto amplo com vista para o mar'

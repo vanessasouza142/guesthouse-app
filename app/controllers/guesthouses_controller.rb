@@ -1,6 +1,6 @@
 class GuesthousesController < ApplicationController
-  before_action :authenticate_user!, only: [:my_guesthouse, :new, :create, :edit, :update]
-  before_action :check_user, only: [:new, :create, :edit, :update]
+  before_action :authenticate_user!, except: [:show]
+  before_action :check_user, except: [:my_guesthouse, :show]
 
   def my_guesthouse
     @guesthouse = current_user.guesthouse
@@ -65,6 +65,11 @@ class GuesthousesController < ApplicationController
     @guesthouse.inactive!
     redirect_to guesthouse_path(@guesthouse.id), notice: 'Pousada desativada com sucesso.'
   end
+
+  # def search_by_city
+  #   city_name = params[:city]
+  #   @guesthouses_in_city = Guesthouse.where(city: city_name)
+  # end
 
   private
 
