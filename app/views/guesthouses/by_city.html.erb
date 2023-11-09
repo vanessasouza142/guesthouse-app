@@ -1,0 +1,6 @@
+<h2>Pousadas em <%= @city %>: </h2>
+<% @guesthouses_by_city.each do |guesthouse_by_city| %>
+  <ul>
+    <li><%= link_to guesthouse_by_city.brand_name, guesthouse_by_city %></li>
+  </ul>
+<% end %>

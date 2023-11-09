@@ -30,7 +30,7 @@
 <h4>Menu de Cidades<h4>
 <% @guesthouse_cities.each do |guesthouse_city| %>
   <ul>
-    <li><%= link_to guesthouse_city, root_path %></li>
+    <li><%= link_to guesthouse_city, guesthouses_by_city_path(guesthouse_city) %></li>
   </ul>
 <% end %>
 </section>

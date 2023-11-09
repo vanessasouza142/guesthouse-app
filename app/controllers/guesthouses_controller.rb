@@ -1,6 +1,6 @@
 class GuesthousesController < ApplicationController
-  before_action :authenticate_user!, except: [:show, :search]
-  before_action :check_user, except: [:my_guesthouse, :show, :search]
+  before_action :authenticate_user!, except: [:show, :search, :by_city]
+  before_action :check_user, except: [:my_guesthouse, :show, :search, :by_city]
 
   def my_guesthouse
     @guesthouse = current_user.guesthouse
@@ -66,24 +66,16 @@ class GuesthousesController < ApplicationController
     redirect_to guesthouse_path(@guesthouse.id), notice: 'Pousada desativada com sucesso.'
   end
 
-  # def search
-  #   @brand_name = params["brand_name"]
-  #   @neighborhood = params["neighborhood"]
-  #   @city = params["city"]
-  #   @guesthouses = Guesthouse.where("brand_name LIKE ? OR neighborhood LIKE ? or city LIKE ?", "%#{@brand_name}%", 
-  #                                   "%#{@neighborhood}%", "%#{@city}")
-  # end
-
   def search
     @query = params["query"]
     @guesthouses = Guesthouse.where("brand_name LIKE ? OR neighborhood LIKE ? OR city LIKE ?", "%#{@query}%", "%#{@query}%", 
                                     "%#{@query}%").active.order(:brand_name)
   end
 
-  # def search_by_city
-  #   city_name = params[:city]
-  #   @guesthouses_in_city = Guesthouse.where(city: city_name)
-  # end
+  def by_city
+    @city = params[:city]
+    @guesthouses_by_city = Guesthouse.where(city: @city).active.order(:brand_name)
+  end
 
   private
 

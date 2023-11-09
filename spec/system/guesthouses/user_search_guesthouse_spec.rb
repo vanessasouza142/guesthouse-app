@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Usuário faz a busca de uma pousada' do
-  it 'a partir do menu sem estar autenticado' do
+  it 'a partir do menu do cabeçalho sem estar autenticado' do
     #Arrange
 
     #Act

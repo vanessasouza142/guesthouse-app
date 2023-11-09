@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: "registrations" }
   root to: 'home#index'
   get 'my-guesthouse', to: 'guesthouses#my_guesthouse'
+  get 'guesthouses_by_city/:city', to: 'guesthouses#by_city', as: 'guesthouses_by_city'
   resources :guesthouses, only: [:new, :create, :show, :edit, :update] do
     post :activate, on: :member
     post :inactivate, on: :member
