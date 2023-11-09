@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe 'Usuário encontra pousadas ativas de uma cidade' do
-  it 'pelo menu de cidades na homepage' do
+describe 'Usuário vê menu de cidades que tem pousadas cadastradas ativas' do
+  it 'com sucesso na homepage' do
     #Arrange
     paulo = User.create!(name: 'Paulo Menezes', email: 'paulomenezes@gmail.com', password: 'password', role: 'host')
     mariana = User.create!(name: 'Mariana Silva', email: 'mariana@gmail.com', password: 'password', role: 'host')
@@ -37,7 +37,7 @@ describe 'Usuário encontra pousadas ativas de uma cidade' do
     end
   end
 
-  it 'clicando em uma cidade do menu' do
+  it 'e ao clicar em uma cidade do menu, encontra as pousadas dessa cidade' do
     #Arrange
     paulo = User.create!(name: 'Paulo Menezes', email: 'paulomenezes@gmail.com', password: 'password', role: 'host')
     mariana = User.create!(name: 'Mariana Silva', email: 'mariana@gmail.com', password: 'password', role: 'host')
