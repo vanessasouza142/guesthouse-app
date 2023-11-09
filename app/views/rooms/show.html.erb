@@ -3,8 +3,11 @@
   <div>
     <div class="p-buttons">
       <p><strong>Status: </strong><%= I18n.t(@room.status) %></p>
-      <%= button_to 'Disponibilizar Quarto', set_available_room_path(@room), method: :post %>
-      <%= button_to 'Indisponibilizar Quarto', set_unavailable_room_path(@room), method: :post %>
+      <% if @room.unavailable? %>
+        <%= button_to 'Disponibilizar Quarto', set_available_room_path(@room), method: :post %>
+      <% else %>
+        <%= button_to 'Indisponibilizar Quarto', set_unavailable_room_path(@room), method: :post %>
+      <% end %>
     </div>
     <%= link_to 'Editar', edit_room_path(@room) %> |
     <%= link_to 'Cadastrar novo Preço Personalizado', new_room_custom_price_path(@room) %> |
