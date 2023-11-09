@@ -70,6 +70,7 @@ describe 'Usuário vê menu de cidades que tem pousadas cadastradas ativas' do
     #Assert
     expect(current_path).to eq guesthouses_by_city_path(g1.city)
     expect(page).not_to have_content 'Não existem pousadas cadastradas.'
+    expect(page).to have_content 'Pousadas em Ipojuca:'
     within('ul li') do
       expect(page).to have_link "#{g1.brand_name}"
       expect(page).not_to have_link "#{g2.brand_name}"
