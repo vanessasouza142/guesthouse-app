@@ -36,13 +36,14 @@
 
 <section>
 <% if user_signed_in? && current_user.host? && @room.guesthouse.user == current_user %>
-  <div>
+  <div class="custom-prices">
     <h4><strong>Lista de Preços Personalizados:</strong></h4>
     <% @custom_prices.each do |custom_price|%>
       <ul>
         <li><strong>Data de início: </strong><%= I18n.l(custom_price.begin_date, format: "%d/%m/%Y") %> | 
         <strong>Data de fim: </strong><%= I18n.l(custom_price.end_date, format: "%d/%m/%Y") %> | 
-        <strong>Valor da diária: </strong><%= number_to_currency(custom_price.price, unit: "R$", separator: ",", delimiter: ".") %></li>
+        <strong>Valor da diária: </strong><%= number_to_currency(custom_price.price, unit: "R$", separator: ",", delimiter: ".") %>
+        <%= link_to 'Editar', edit_custom_price_path(custom_price) %></li>
       </ul>
     <% end %>
     
