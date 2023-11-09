@@ -10,8 +10,8 @@ describe 'Usuário anfitrião cadastra preço personalizado para um quarto' do
                         description: 'Pousada a beira mar maravilhosa', payment_method: 'Dinheiro, pix e cartão', pet_agreement: 'sim',
                         usage_policy: 'Proibido fumar nas áreas de convivência', check_in: '13:00', check_out: '12:00', user: paulo)
     room = Room.create!(name: 'Quarto Girassol', description: 'Quarto amplo com vista para o mar', area: '10', max_guest: '4', default_price: '210,00',
-                      bathroom: 'sim', balcony: 'não', air_conditioner: 'sim', tv: 'sim', wardrobe: 'sim', safe: 'não', accessible: 'sim',
-                      status: 'available', guesthouse: g)
+                        bathroom: 'sim', balcony: 'não', air_conditioner: 'sim', tv: 'sim', wardrobe: 'sim', safe: 'não', accessible: 'sim',
+                        status: 'available', guesthouse: g)
 
     #Act
     login_as(paulo)
@@ -37,15 +37,15 @@ describe 'Usuário anfitrião cadastra preço personalizado para um quarto' do
                         description: 'Pousada a beira mar maravilhosa', payment_method: 'Dinheiro, pix e cartão', pet_agreement: 'sim',
                         usage_policy: 'Proibido fumar nas áreas de convivência', check_in: '13:00', check_out: '12:00', user: paulo)
     room = Room.create!(name: 'Quarto Girassol', description: 'Quarto amplo com vista para o mar', area: '10', max_guest: '4', default_price: '210,00',
-                      bathroom: 'sim', balcony: 'não', air_conditioner: 'sim', tv: 'sim', wardrobe: 'sim', safe: 'não', accessible: 'sim',
-                      status: 'available', guesthouse: g)
+                        bathroom: 'sim', balcony: 'não', air_conditioner: 'sim', tv: 'sim', wardrobe: 'sim', safe: 'não', accessible: 'sim',
+                        status: 'available', guesthouse: g)
 
     #Act
     login_as(paulo)
     visit room_path(room)    
     click_on 'Cadastrar novo Preço Personalizado'
-    fill_in 'Data de início', with: '01/12/2023'
-    fill_in 'Data de fim', with: '31/12/2023'
+    fill_in 'Data de início', with: '01/01/2024'
+    fill_in 'Data de fim', with: '15/01/2024'
     fill_in 'Valor da diária', with: '350,00'
     click_on 'Salvar'
 
@@ -53,8 +53,8 @@ describe 'Usuário anfitrião cadastra preço personalizado para um quarto' do
     expect(current_path).to eq room_path(room)
     expect(page).to have_content 'Preço personalizado cadastrado com sucesso.'
     expect(page).to have_content 'Lista de Preços Personalizados:'
-    expect(page).to have_content 'Data de início: 01/12/2023'
-    expect(page).to have_content 'Data de fim: 31/12/2023'
+    expect(page).to have_content 'Data de início: 01/01/2024'
+    expect(page).to have_content 'Data de fim: 15/01/2024'
     expect(page).to have_content 'Valor da diária: R$ 350,00'
   end
 

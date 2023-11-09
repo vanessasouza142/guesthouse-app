@@ -216,17 +216,17 @@ RSpec.describe Guesthouse, type: :model do
   end
 
   describe '#full_address' do
-  it 'evibe endereço completo' do
-    #Arrange
-    paulo = User.create!(name: 'Paulo Menezes', email: 'paulomenezes@gmail.com', password: 'password', role: 'host')
-    g = Guesthouse.new(address: 'Av. Beira Mar, 45', neighborhood: 'Muro Alto', state: 'Pernambuco', city: 'Ipojuca', 
-                          postal_code: '54350820', user: paulo)
+    it 'exibe endereço completo' do
+      #Arrange
+      paulo = User.create!(name: 'Paulo Menezes', email: 'paulomenezes@gmail.com', password: 'password', role: 'host')
+      g = Guesthouse.new(address: 'Av. Beira Mar, 45', neighborhood: 'Muro Alto', state: 'Pernambuco', city: 'Ipojuca', 
+                            postal_code: '54350820', user: paulo)
 
-    #Act
-    result = g.full_address
+      #Act
+      result = g.full_address
 
-    #Assert
-    expect(result).to eq 'Av. Beira Mar, 45, Muro Alto, Ipojuca - Pernambuco CEP: 54350820'
+      #Assert
+      expect(result).to eq 'Av. Beira Mar, 45, Muro Alto, Ipojuca - Pernambuco CEP: 54350820'
+    end
   end
-end
 end
