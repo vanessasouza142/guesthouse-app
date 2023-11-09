@@ -3,7 +3,7 @@ def guest_sign_up
     click_on 'Entrar na Conta'
   end
   click_on 'Criar Conta'
-  within('form') do
+  within('main form') do
     fill_in 'Nome', with: 'Maria Barbosa'
     fill_in 'E-mail', with: 'maria@example.com'
     fill_in 'Senha', with: 'password'
@@ -18,7 +18,7 @@ def host_sign_up
     click_on 'Entrar na Conta'
   end
   click_on 'Criar Conta'
-  within('form') do
+  within('main form') do
     fill_in 'Nome', with: 'Julio Almeida'
     fill_in 'E-mail', with: 'julio@example.com'
     fill_in 'Senha', with: 'password'

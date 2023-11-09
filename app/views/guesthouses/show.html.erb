@@ -1,14 +1,12 @@
 <section>
   <% if user_signed_in? && current_user.host? && @guesthouse.user == current_user %>
     <div>
-      <div class="p-buttons">
-        <p><strong>Status: </strong><%= I18n.t(@guesthouse.status) %></p>
-        <% if @guesthouse.inactive? %>
-          <%= button_to 'Ativar Pousada', activate_guesthouse_path(@guesthouse), method: :post %>
-        <% else %>
-          <%= button_to 'Desativar Pousada', inactivate_guesthouse_path(@guesthouse), method: :post %>
-        <% end %>
-      </div>
+      <p><strong>Status: </strong><%= I18n.t(@guesthouse.status) %></p>
+      <% if @guesthouse.inactive? %>
+        <%= button_to 'Ativar Pousada', activate_guesthouse_path(@guesthouse), method: :post %>
+      <% else %>
+        <%= button_to 'Desativar Pousada', inactivate_guesthouse_path(@guesthouse), method: :post %>
+      <% end %>
       <%= link_to 'Editar', edit_guesthouse_path(@guesthouse) %> | 
       <%= link_to 'Cadastrar novo Quarto', new_guesthouse_room_path(@guesthouse) %> |
       <%= link_to 'Voltar', root_path %>

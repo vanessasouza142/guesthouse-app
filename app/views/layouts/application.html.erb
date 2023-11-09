@@ -15,7 +15,6 @@
         <h1>Pousadaria</h1>
       <% end %>
       <nav>
-        <div class="p-buttons">
           <% if user_signed_in? %>
             <% if current_user.guesthouse %>
               <%= link_to 'Minha Pousada', my_guesthouse_path if current_user.guesthouse %> |
@@ -24,8 +23,12 @@
               <%= button_to 'Sair', destroy_user_session_path, method: :delete %>
           <% else %>
             <%= link_to 'Entrar na Conta', new_user_session_path %>
+              <%= form_with(url: search_guesthouses_path, method: :get) do |f| %>
+              <%= f.label :query, 'Buscar Pousada' %>
+              <%= f.text_field :query %>
+              <%= f.submit 'Buscar' %>
+            <% end %>
           <% end %>
-        </div>
       </nav>
     </header>
     <main>

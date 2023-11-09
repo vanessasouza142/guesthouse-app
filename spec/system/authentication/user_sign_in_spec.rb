@@ -11,7 +11,7 @@ describe 'Usuário faz login' do
     end
 
     #Assert
-    within('form') do
+    within('main form') do
       expect(page).to have_field 'E-mail'
       expect(page).to have_field 'Senha'
       expect(page).to have_button 'Entrar'
@@ -27,7 +27,7 @@ describe 'Usuário faz login' do
     within('nav') do
       click_on 'Entrar na Conta'
     end
-    within('form') do
+    within('main form') do
       fill_in 'E-mail', with: maria.email
       fill_in 'Senha', with: maria.password
       click_on 'Entrar'
@@ -57,7 +57,7 @@ describe 'Usuário faz login' do
     within('nav') do
       click_on 'Entrar na Conta'
     end
-    within('form') do
+    within('main form') do
       fill_in 'E-mail', with: julio.email
       fill_in 'Senha', with: julio.password
       click_on 'Entrar'
@@ -82,9 +82,11 @@ describe 'Usuário faz login' do
     within('nav') do
       click_on 'Entrar na Conta'
     end
-    fill_in 'E-mail', with: 'maria@gmail.com'
-    fill_in 'Senha', with: ''
-    click_on 'Entrar'
+    within('main form') do
+      fill_in 'E-mail', with: 'maria@gmail.com'
+      fill_in 'Senha', with: ''
+      click_on 'Entrar'
+    end
 
     #Assert
     expect(current_path).to eq new_user_session_path

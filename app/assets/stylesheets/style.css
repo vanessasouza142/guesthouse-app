@@ -1,14 +1,8 @@
-button {
+/* button {
   border: 0;
   background-color: #fff;
   font-size: 16px;
-}
-
-.p-buttons {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
+} */
 
 body {
   font-family: Arial, sans-serif;
@@ -44,3 +38,4 @@ p {
 .l-room {
   margin: 0px 50px 10px 0px;
 }
+

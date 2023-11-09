@@ -10,7 +10,7 @@ describe 'Usuário se cadastra' do
     click_on 'Criar Conta'
 
     #Assert
-    within('form') do
+    within('main form') do
       expect(page).to have_field 'Nome'
       expect(page).to have_field 'E-mail'
       expect(page).to have_field 'Senha'

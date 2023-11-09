@@ -1,14 +1,12 @@
 <section>
 <% if user_signed_in? && current_user.host? && @room.guesthouse.user == current_user %>
   <div>
-    <div class="p-buttons">
-      <p><strong>Status: </strong><%= I18n.t(@room.status) %></p>
-      <% if @room.unavailable? %>
-        <%= button_to 'Disponibilizar Quarto', set_available_room_path(@room), method: :post %>
-      <% else %>
-        <%= button_to 'Indisponibilizar Quarto', set_unavailable_room_path(@room), method: :post %>
-      <% end %>
-    </div>
+    <p><strong>Status: </strong><%= I18n.t(@room.status) %></p>
+    <% if @room.unavailable? %>
+      <%= button_to 'Disponibilizar Quarto', set_available_room_path(@room), method: :post %>
+    <% else %>
+      <%= button_to 'Indisponibilizar Quarto', set_unavailable_room_path(@room), method: :post %>
+    <% end %>
     <%= link_to 'Editar', edit_room_path(@room) %> |
     <%= link_to 'Cadastrar novo Preço Personalizado', new_room_custom_price_path(@room) %> |
     <%= link_to 'Voltar', guesthouse_path(@room.guesthouse) %>

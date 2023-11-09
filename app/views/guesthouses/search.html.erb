@@ -1,0 +1,11 @@
+<h2>Resultados da Busca por: <%= @query %></h2>
+<% if @guesthouses.present? %>
+  <p><%= @guesthouses.count %> <%= Guesthouse.model_name.human(count: @guesthouses.count).downcase %> <%= t(:found, count: @guesthouses.count) %></p>
+  <% @guesthouses.each do |guesthouse| %>
+    <ul>
+      <li><%= link_to guesthouse.brand_name, guesthouse %></li>
+    </ul>
+  <% end %>
+<% else %>
+  <p>Nenhum resultado encontrado.</p>
+<% end%>
