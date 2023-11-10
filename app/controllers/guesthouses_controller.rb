@@ -1,6 +1,6 @@
 class GuesthousesController < ApplicationController
   before_action :authenticate_user!, except: [:show, :search, :by_city]
-  before_action :check_user, except: [:my_guesthouse, :show, :search, :by_city]
+  before_action :check_user, except: [:my_guesthouse, :create, :show, :search, :by_city]
 
   def my_guesthouse
     @guesthouse = current_user.guesthouse

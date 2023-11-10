@@ -13,6 +13,7 @@ describe 'Usuário vê detalhes de um quarto' do
     r = Room.create!(name: 'Quarto Girassol', description: 'Quarto amplo com vista para o mar', area: '10', max_guest: '4', default_price: '210,00',
                       bathroom: 'sim', balcony: 'não', air_conditioner: 'sim', tv: 'sim', wardrobe: 'sim', safe: 'não', accessible: 'sim',
                       status: 'available', guesthouse: g)
+    cp = CustomPrice.create!(begin_date: '01/12/2023', end_date: '31/12/2023', price: '250,00', room: r)
 
     #Act
     visit root_path
@@ -32,6 +33,8 @@ describe 'Usuário vê detalhes de um quarto' do
     expect(page).to have_content 'Possui tv'
     expect(page).to have_content 'Possui guarda-roupas'
     expect(page).to have_content 'Acessível para pessoas com deficiência'
+    expect(page).not_to have_content 'Lista de Preços Personalizados'
+    expect(page).not_to have_content 'Data de início: 01/12/2023 | Data de fim: 31/12/2023 | Valor da diária: R$ 250,00'
   end
 
   it 'e vê informacoes adicionais estando logado como anfitrião' do
@@ -46,6 +49,7 @@ describe 'Usuário vê detalhes de um quarto' do
     r = Room.create!(name: 'Quarto Girassol', description: 'Quarto amplo com vista para o mar', area: '10', max_guest: '4', default_price: '210,00',
                       bathroom: 'sim', balcony: 'não', air_conditioner: 'sim', tv: 'sim', wardrobe: 'sim', safe: 'não', accessible: 'sim',
                       status: 'available', guesthouse: g)
+    cp = CustomPrice.create!(begin_date: '01/12/2023', end_date: '31/12/2023', price: '250,00', room: r)
 
     #Act
     login_as(paulo)
@@ -66,6 +70,8 @@ describe 'Usuário vê detalhes de um quarto' do
     expect(page).to have_content 'Possui tv'
     expect(page).to have_content 'Possui guarda-roupas'
     expect(page).to have_content 'Acessível para pessoas com deficiência'
+    expect(page).to have_content 'Lista de Preços Personalizados'
+    expect(page).to have_content 'Data de início: 01/12/2023 | Data de fim: 31/12/2023 | Valor da diária: R$ 250,00'
   end
 
   it 'e vê informacoes adicionais estando logado como hóspede' do
@@ -81,6 +87,7 @@ describe 'Usuário vê detalhes de um quarto' do
     r = Room.create!(name: 'Quarto Girassol', description: 'Quarto amplo com vista para o mar', area: '10', max_guest: '4', default_price: '210,00',
                       bathroom: 'sim', balcony: 'não', air_conditioner: 'sim', tv: 'sim', wardrobe: 'sim', safe: 'não', accessible: 'sim',
                       status: 'available', guesthouse: g)
+    cp = CustomPrice.create!(begin_date: '01/12/2023', end_date: '31/12/2023', price: '250,00', room: r)
 
     #Act
     login_as(mariana)
@@ -101,6 +108,8 @@ describe 'Usuário vê detalhes de um quarto' do
     expect(page).to have_content 'Possui tv'
     expect(page).to have_content 'Possui guarda-roupas'
     expect(page).to have_content 'Acessível para pessoas com deficiência'
+    expect(page).not_to have_content 'Lista de Preços Personalizados'
+    expect(page).not_to have_content 'Data de início: 01/12/2023 | Data de fim: 31/12/2023 | Valor da diária: R$ 250,00'
   end
 
   it 'e volta para a tela de listagem dos quartos da pousada' do

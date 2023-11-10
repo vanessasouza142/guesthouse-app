@@ -1,7 +1,17 @@
 require 'rails_helper'
 
-describe 'Usuário anfitrião faz login ' do
-  it 'e só vê sua pousada quando clica no link Minha Pousada' do
+describe 'Usuário anfitrião vê sua pousada' do
+  it 'e deve estar autenticado' do
+    #Arrange
+
+    #Act
+    visit my_guesthouse_path
+
+    #Assert
+    expect(current_path).to eq new_user_session_path
+  end
+
+  it 'e não vê outras pousadas quando clica no link Minha Pousada' do
     #Arrange
     paulo = User.create!(name: 'Paulo Menezes', email: 'paulomenezes@gmail.com', password: 'password', role: 'host')
     mariana = User.create!(name: 'Mariana Silva', email: 'mariana@gmail.com', password: 'password', role: 'host')
@@ -19,8 +29,8 @@ describe 'Usuário anfitrião faz login ' do
     
     #Act
     login_as(paulo)
-    visit guesthouse_path(g1)
-    within('nav') do
+    visit root_path
+    within('header nav') do
       click_on 'Minha Pousada'
     end
 

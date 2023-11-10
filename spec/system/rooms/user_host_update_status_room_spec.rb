@@ -24,6 +24,8 @@ describe 'Usuário atualiza status do quarto da sua pousada' do
     #Assert
     expect(current_path).to eq room_path(r)
     expect(page).to have_content 'Quarto disponibilizado com sucesso.'
+    expect(page).to have_button 'Indisponibilizar'
+    expect(page).not_to have_button 'Disponibilizar'
     expect(page).to have_content 'Quarto Girassol'
     expect(page).to have_content 'Descrição: Quarto amplo com vista para o mar'
     expect(page).to have_content 'Valor padrão da diária: R$ 210,00'
@@ -53,6 +55,8 @@ describe 'Usuário atualiza status do quarto da sua pousada' do
     #Assert
     expect(current_path).to eq room_path(r)
     expect(page).to have_content 'Quarto indisponibilizado com sucesso.'
+    expect(page).not_to have_button 'Indisponibilizar'
+    expect(page).to have_button 'Disponibilizar'
     expect(page).to have_content 'Quarto Girassol'
     expect(page).to have_content 'Descrição: Quarto amplo com vista para o mar'
     expect(page).to have_content 'Valor padrão da diária: R$ 210,00'

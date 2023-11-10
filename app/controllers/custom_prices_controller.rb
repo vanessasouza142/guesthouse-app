@@ -1,5 +1,6 @@
 class CustomPricesController < ApplicationController
   before_action :authenticate_user!
+  # before_action :check_user
 
   def new
     @room = Room.find(params[:room_id])
@@ -36,7 +37,17 @@ class CustomPricesController < ApplicationController
 
   private
 
-  def check_user
-  end
+  # def check_user
+  #   if params[:id].present?
+  #     @custom_price = CustomPrice.find(params[:id])
+  #     return redirect_to root_path, alert: 'Você não tem permissão para realizar essa ação!' if @custom_price.room.guesthouse.user = current_user
+  #   end
+  #   if params[:room_id].present?
+  #     @room = Room.find(params[:room_id])
+  #     @custom_price = @room.custom_prices.build
+  #     return redirect_to root_path, alert: 'Você não tem permissão para realizar essa ação!' if @custom_price.room.guesthouse.user = current_user
+  #   end
+  #     return redirect_to root_path, alert: 'Você não tem permissão para realizar essa ação!' if current_user.guest?
+  # end
 
 end
