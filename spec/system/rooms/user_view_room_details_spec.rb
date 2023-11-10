@@ -17,9 +17,7 @@ describe 'Usuário vê detalhes de um quarto' do
 
     #Act
     visit root_path
-    within('.guesthouses-list') do
-      click_on 'Pousada Muro Alto'
-    end
+    click_on 'Pousada Muro Alto'
     click_on 'Quarto Girassol'
 
     #Assert
@@ -54,9 +52,7 @@ describe 'Usuário vê detalhes de um quarto' do
     #Act
     login_as(paulo)
     visit root_path
-    within('.guesthouses-list') do
-      click_on 'Pousada Muro Alto'
-    end
+    click_on 'Pousada Muro Alto'
     click_on 'Quarto Girassol'
 
     #Assert
@@ -92,9 +88,7 @@ describe 'Usuário vê detalhes de um quarto' do
     #Act
     login_as(mariana)
     visit root_path
-    within('.guesthouses-list') do
-      click_on 'Pousada Muro Alto'
-    end
+    click_on 'Pousada Muro Alto'
     click_on 'Quarto Girassol'
 
     #Assert
@@ -127,9 +121,7 @@ describe 'Usuário vê detalhes de um quarto' do
 
     #Act
     visit root_path
-    within('.guesthouses-list') do
-      click_on 'Pousada Muro Alto'
-    end
+    click_on 'Pousada Muro Alto'
     click_on 'Quarto Girassol'
     click_on 'Voltar'
 

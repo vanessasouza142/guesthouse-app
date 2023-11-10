@@ -1,9 +1,9 @@
 <section class="latest-guesthouses-list">
   <div class="guesthouse-container">
-    <% @latest_guesthouses.each do |latest_guesthouse| %>
+    <% @latest_guesthouses.each do |lg| %>
       <div class="l-guesthouse">
-        <h2><%= link_to latest_guesthouse.brand_name, latest_guesthouse %></h2>
-        <p><%= latest_guesthouse.city %></p>
+        <h2><%= link_to lg.brand_name, lg %></h2>
+        <p><%= lg.city %></p>
       </div>
     <% end %>
   </div>
@@ -11,11 +11,11 @@
 
 <hr>
 
-<section class="guesthouses-list">
-<% @guesthouses.each do |guesthouse| %>
+<section>
+<% @rest_guesthouses.each do |rg| %>
   <div>
-    <h2><%= link_to guesthouse.brand_name, guesthouse %></h2>
-    <p><%= guesthouse.city %></p>
+    <h2><%= link_to rg.brand_name, rg %></h2>
+    <p><%= rg.city %></p>
   </div>
 <% end %>
 </section>
@@ -28,9 +28,9 @@
 
 <section class="menu-cities">
 <h4>Menu de Cidades<h4>
-<% @guesthouse_cities.each do |guesthouse_city| %>
+<% @guesthouse_cities.each do |gc| %>
   <ul>
-    <li><%= link_to guesthouse_city, guesthouses_by_city_path(guesthouse_city) %></li>
+    <li><%= link_to gc, guesthouses_by_city_path(gc) %></li>
   </ul>
 <% end %>
 </section>

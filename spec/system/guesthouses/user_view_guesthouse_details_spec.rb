@@ -12,9 +12,7 @@ describe 'Usuário vê detalhes de uma pousada' do
                             user: paulo)
     #Act
     visit root_path
-    within('.guesthouses-list') do
-      click_on 'Pousada Muro Alto'
-    end
+    click_on 'Pousada Muro Alto'
 
     #Assert
     expect(page).to have_content 'Pousada Muro Alto'
@@ -70,9 +68,7 @@ describe 'Usuário vê detalhes de uma pousada' do
     #Act
     login_as(mariana)
     visit root_path
-    within('.guesthouses-list') do
-      click_on 'Pousada Muro Alto'
-    end
+    click_on 'Pousada Muro Alto'
 
     #Assert
     expect(page).to have_content 'Pousada Muro Alto'
@@ -98,9 +94,7 @@ describe 'Usuário vê detalhes de uma pousada' do
     
     #Act
     visit root_path
-    within('.guesthouses-list') do
-      click_on 'Pousada Muro Alto'
-    end
+    click_on 'Pousada Muro Alto'
     click_on 'Voltar'
 
     #Assert

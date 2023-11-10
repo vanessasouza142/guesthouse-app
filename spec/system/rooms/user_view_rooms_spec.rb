@@ -20,9 +20,7 @@ describe 'Usuário visita a pousada' do
 
     #Act
     visit root_path
-    within('.guesthouses-list') do
-      click_on 'Pousada Sulamericana'
-    end
+    click_on 'Pousada Sulamericana'
 
     #Assert
     expect(page).not_to have_content 'Não existem quartos cadastrados.'
@@ -48,9 +46,7 @@ end
 
     #Act
     visit root_path
-    within('.guesthouses-list') do
-      click_on 'Pousada Sulamericana'
-    end
+    click_on 'Pousada Sulamericana'
 
     #Assert
     expect(page).to have_content 'Não existem quartos cadastrados.'
