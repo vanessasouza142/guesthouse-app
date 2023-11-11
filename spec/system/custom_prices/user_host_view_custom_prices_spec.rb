@@ -25,12 +25,12 @@ describe 'Usuário anfitrião vê lista de preços personalizados' do
     expect(page).to have_content 'Descrição: Quarto amplo com vista para o mar'
     expect(page).to have_content 'Área (m²): 10'
     expect(page).to have_content 'Lista de Preços Personalizados:'
-    expect(page).to have_content 'Data de início'
-    expect(page).to have_content 'Data de fim'
-    expect(page).to have_content 'Valor padrão da diária:'
+    expect(page).to have_content 'Data de início: 01/12/2023'
+    expect(page).to have_content 'Data de fim: 31/12/2023'
+    expect(page).to have_content 'Valor da diária: R$ 350,00'
   end
 
-  it 'vê mensagem caso não exista preços personalizados cadastrados' do
+  it 'vê mensagem caso não existam preços personalizados cadastrados' do
     #Arrange
     paulo = User.create!(name: 'Paulo Menezes', email: 'paulomenezes@gmail.com', password: 'password', role: 'host')
     g = Guesthouse.create!(corporate_name: 'Pousada Muro Alto Ltda', brand_name: 'Pousada Muro Alto', registration_number:'39165040000129', 

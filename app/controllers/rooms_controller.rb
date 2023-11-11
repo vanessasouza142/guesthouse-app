@@ -1,16 +1,12 @@
 class RoomsController < ApplicationController
   before_action :authenticate_user!, except: [:show]
-  before_action :check_user, except: [:show]
+  before_action :set_room_and_check_user, except: [:show]
 
   def new
-    @guesthouse = Guesthouse.find(params[:guesthouse_id])
     @room = @guesthouse.rooms.build
   end
 
   def create
-    room_params = params.require(:room).permit(:name, :description, :area, :max_guest, :default_price, :bathroom, :balcony, :air_conditioner, 
-                                                :tv, :wardrobe, :safe, :accessible)
-    @guesthouse = Guesthouse.find(params[:guesthouse_id])
     @room = @guesthouse.rooms.build(room_params)
     @room.guesthouse.user = current_user
     if @room.save
@@ -26,14 +22,9 @@ class RoomsController < ApplicationController
     @custom_prices = @room.custom_prices
   end
 
-  def edit
-    @room = Room.find(params[:id])
-  end
+  def edit; end
 
   def update
-    room_params = params.require(:room).permit(:name, :description, :area, :max_guest, :default_price, :bathroom, :balcony, :air_conditioner, 
-                                                :tv, :wardrobe, :safe, :accessible)
-    @room = Room.find(params[:id])
     if @room.update(room_params)
       redirect_to @room, notice: 'Quarto atualizado com sucesso.'
     else
@@ -43,37 +34,35 @@ class RoomsController < ApplicationController
   end
 
   def set_available
-    @room = Room.find(params[:id])
     @room.available!
     redirect_to room_path(@room.id), notice: 'Quarto disponibilizado com sucesso.'
   end
 
   def set_unavailable
-    @room = Room.find(params[:id])
     @room.unavailable!
     redirect_to room_path(@room.id), notice: 'Quarto indisponibilizado com sucesso.'
   end
 
   private
 
-  # def check_user
-  #   @guesthouse = Guesthouse.find(params[:guesthouse_id])
-  #   @room = @guesthouse.rooms.build
-  #   if @room.guesthouse.user != current_user
-  #     return redirect_to root_path, alert: 'Você não tem permissão para realizar essa ação!'
+  def room_params
+    params.require(:room).permit(:name, :description, :area, :max_guest, :default_price, :bathroom, :balcony, :air_conditioner, 
+                                  :tv, :wardrobe, :safe, :accessible)
+  end
+
+  def set_room_and_check_user
+    if params[:id].present?
+      @room = Room.find(params[:id])    
+      return redirect_to root_path, alert: 'Você não tem permissão para realizar essa ação!' if @room.guesthouse.user != current_user
+    elsif params[:guesthouse_id].present?
+      @guesthouse = Guesthouse.find(params[:guesthouse_id])      
+      redirect_to root_path, alert: 'Você não tem permissão para realizar essa ação!' if @guesthouse.user != current_user
+    end
+  end
+
+  # def check_user_guest
+  #   if current_user.guest?
+  #     redirect_to root_path, alert: 'Você não tem permissão para realizar essa ação!'
   #   end
   # end
-
-  def check_user
-    if params[:id].present?
-      @room = Room.find(params[:id])
-        return redirect_to root_path, alert: 'Você não tem permissão para realizar essa ação!' if @room.guesthouse.user != current_user
-    end
-    if params[:guesthouse_id].present?
-      @guesthouse = Guesthouse.find(params[:guesthouse_id])
-      @room = @guesthouse.rooms.build
-      return redirect_to root_path, alert: 'Você não tem permissão para realizar essa ação!' if @room.guesthouse.user != current_user
-    end
-      return redirect_to root_path, alert: 'Você não tem permissão para realizar essa ação!' if current_user.guest?
-  end
 end

@@ -1,23 +1,17 @@
 class GuesthousesController < ApplicationController
   before_action :authenticate_user!, except: [:show, :search, :by_city]
-  before_action :check_user, except: [:my_guesthouse, :create, :show, :search, :by_city]
+  before_action :set_guesthouse_and_check_user, only: [:edit, :update, :activate, :inactivate]
+  before_action :check_guesthouse_presence, only: [:new, :create]
 
   def my_guesthouse
     @guesthouse = current_user.guesthouse
   end
 
   def new
-    if current_user.host? && current_user.guesthouse.present?
-      redirect_to my_guesthouse_path, alert: 'Só é possível ter uma pousada cadastrada por usuário!'
-    else
-      @guesthouse = Guesthouse.new
-    end
+    @guesthouse = Guesthouse.new
   end
 
   def create
-    guesthouse_params = params.require(:guesthouse).permit(:corporate_name, :brand_name, :registration_number, :phone_number, :email,
-                                                            :address, :neighborhood, :state, :city, :postal_code, :description, 
-                                                            :payment_method, :pet_agreement, :usage_policy, :check_in, :check_out)
     @guesthouse = Guesthouse.new(guesthouse_params)
     @guesthouse.user = current_user
     if @guesthouse.save
@@ -37,15 +31,9 @@ class GuesthousesController < ApplicationController
     end
   end
 
-  def edit
-    @guesthouse = Guesthouse.find(params[:id])
-  end
+  def edit; end
 
   def update
-    guesthouse_params = params.require(:guesthouse).permit(:corporate_name, :brand_name, :registration_number, :phone_number, :email,
-                                                            :address, :neighborhood, :state, :city, :postal_code, :description, 
-                                                            :payment_method, :pet_agreement, :usage_policy, :check_in, :check_out)
-    @guesthouse = Guesthouse.find(params[:id])
     if @guesthouse.update(guesthouse_params)
       redirect_to @guesthouse, notice: 'Pousada atualizada com sucesso.'
     else
@@ -55,13 +43,11 @@ class GuesthousesController < ApplicationController
   end
 
   def activate
-    @guesthouse = Guesthouse.find(params[:id])
     @guesthouse.active!
     redirect_to guesthouse_path(@guesthouse.id), notice: 'Pousada ativada com sucesso.'
   end
 
   def inactivate
-    @guesthouse = Guesthouse.find(params[:id])
     @guesthouse.inactive!
     redirect_to guesthouse_path(@guesthouse.id), notice: 'Pousada desativada com sucesso.'
   end
@@ -79,12 +65,28 @@ class GuesthousesController < ApplicationController
 
   private
 
-  def check_user
-    if params[:id].present?
-      @guesthouse = Guesthouse.find(params[:id])
-        return redirect_to root_path, alert: 'Você não tem permissão para realizar essa ação!' if @guesthouse.user != current_user
-    end
-      return redirect_to root_path, alert: 'Você não tem permissão para realizar essa ação!' if current_user.guest?
+  def guesthouse_params
+    params.require(:guesthouse).permit(:corporate_name, :brand_name, :registration_number, :phone_number, :email, :address, :neighborhood, 
+                                        :state, :city, :postal_code, :description, :payment_method, :pet_agreement, :usage_policy, 
+                                        :check_in, :check_out)
   end
 
+  def set_guesthouse_and_check_user
+    @guesthouse = Guesthouse.find(params[:id])
+    if @guesthouse.user != current_user
+      return redirect_to root_path, alert: 'Você não tem permissão para realizar essa ação!'
+    end
+  end
+
+  def check_guesthouse_presence
+    if current_user.guesthouse.present?
+      redirect_to my_guesthouse_path, alert: 'Só é possível ter uma pousada cadastrada por usuário!'
+    end
+  end
+
+  # def check_user_guest
+  #   if current_user.guest?
+  #     redirect_to root_path, alert: 'Você não tem permissão para realizar essa ação!'
+  #   end
+  # end
 end
