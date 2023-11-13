@@ -1,5 +1,5 @@
 <section>
-  <% if user_signed_in? && current_user.host? && @guesthouse.user == current_user %>
+  <% if current_user == @guesthouse.user %>
     <div>
       <p><strong>Status: </strong><%= I18n.t(@guesthouse.status) %></p>
       <% if @guesthouse.inactive? %>
@@ -20,7 +20,7 @@
 
 <section>
   <h2><%= @guesthouse.brand_name %></h2>
-  <% if user_signed_in? && current_user.host? && @guesthouse.user == current_user %>
+  <% if current_user == @guesthouse.user %>
     <p><strong>Razão Social: </strong><%= @guesthouse.corporate_name %></p>
     <p><strong>CNPJ: </strong><%= @guesthouse.registration_number %></p>
   <% end %>

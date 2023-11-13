@@ -229,4 +229,90 @@ RSpec.describe Guesthouse, type: :model do
       expect(result).to eq 'Av. Beira Mar, 45, Muro Alto, Ipojuca - Pernambuco CEP: 54350820'
     end
   end
+
+  describe '.search' do
+    it 'busca uma pousada pelo nome fantasia e tem resultado' do
+      #Arrange
+      paulo = User.create!(name: 'Paulo Menezes', email: 'paulomenezes@gmail.com', password: 'password', role: 'host')
+      g = Guesthouse.create!(corporate_name: 'Pousada Muro Alto Ltda', brand_name: 'Pousada Muro Alto', registration_number:'39165040000129', 
+                            phone_number: '8134658799', email: 'pousadamuroalto@gmail.com', address: 'Av. Beira Mar, 45', 
+                            neighborhood: 'Muro Alto', state: 'Pernambuco', city: 'Ipojuca', postal_code: '54350820', 
+                            description: 'Pousada a beira mar maravilhosa', payment_method: 'Dinheiro, pix e cartão', pet_agreement: 'sim',
+                            usage_policy: 'Proibido fumar nas áreas de convivência', check_in: '13:00', check_out: '12:00', status: 'active',
+                            user: paulo)
+
+      #Act
+      result = Guesthouse.search('Pousada Muro Alto')
+
+      #Assert
+      expect(result).to include(g)
+      expect(result.length).to eq 1
+    end
+
+    it 'busca uma pousada pelo nome fantasia e não tem resultado' do
+      #Arrange
+
+      #Act
+      result = Guesthouse.search('Pousada Muro Alto')
+
+      #Assert
+      expect(result).to be_empty
+    end
+
+    it 'busca uma pousada pelo bairro e tem resultado' do
+      #Arrange
+      paulo = User.create!(name: 'Paulo Menezes', email: 'paulomenezes@gmail.com', password: 'password', role: 'host')
+      g = Guesthouse.create!(corporate_name: 'Pousada Muro Alto Ltda', brand_name: 'Pousada Muro Alto', registration_number:'39165040000129', 
+                            phone_number: '8134658799', email: 'pousadamuroalto@gmail.com', address: 'Av. Beira Mar, 45', 
+                            neighborhood: 'Muro Alto', state: 'Pernambuco', city: 'Ipojuca', postal_code: '54350820', 
+                            description: 'Pousada a beira mar maravilhosa', payment_method: 'Dinheiro, pix e cartão', pet_agreement: 'sim',
+                            usage_policy: 'Proibido fumar nas áreas de convivência', check_in: '13:00', check_out: '12:00', status: 'active',
+                            user: paulo)
+
+      #Act
+      result = Guesthouse.search('Muro Alto')
+
+      #Assert
+      expect(result).to include(g)
+      expect(result.length).to eq 1
+    end
+
+    it 'busca uma pousada pelo bairro e não tem resultado' do
+      #Arrange
+
+      #Act
+      result = Guesthouse.search('Muro Alto')
+
+      #Assert
+      expect(result).to be_empty
+    end
+
+    it 'busca uma pousada pela cidade e tem resultado' do
+      #Arrange
+      paulo = User.create!(name: 'Paulo Menezes', email: 'paulomenezes@gmail.com', password: 'password', role: 'host')
+      g = Guesthouse.create!(corporate_name: 'Pousada Muro Alto Ltda', brand_name: 'Pousada Muro Alto', registration_number:'39165040000129', 
+                            phone_number: '8134658799', email: 'pousadamuroalto@gmail.com', address: 'Av. Beira Mar, 45', 
+                            neighborhood: 'Muro Alto', state: 'Pernambuco', city: 'Ipojuca', postal_code: '54350820', 
+                            description: 'Pousada a beira mar maravilhosa', payment_method: 'Dinheiro, pix e cartão', pet_agreement: 'sim',
+                            usage_policy: 'Proibido fumar nas áreas de convivência', check_in: '13:00', check_out: '12:00', status: 'active',
+                            user: paulo)
+
+      #Act
+      result = Guesthouse.search('Ipojuca')
+
+      #Assert
+      expect(result).to include(g)
+      expect(result.length).to eq 1
+    end
+
+    it 'busca uma pousada pela cidade e não tem resultado' do
+      #Arrange
+
+      #Act
+      result = Guesthouse.search('Ipojuca')
+
+      #Assert
+      expect(result).to be_empty
+    end
+  end
 end

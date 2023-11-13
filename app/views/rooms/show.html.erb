@@ -1,5 +1,5 @@
 <section>
-<% if user_signed_in? && current_user.host? && @room.guesthouse.user == current_user %>
+<% if current_user == @room.guesthouse.user %>
   <div>
     <p><strong>Status: </strong><%= I18n.t(@room.status) %></p>
     <% if @room.unavailable? %>
@@ -36,7 +36,7 @@
 </section>
 
 <section>
-<% if user_signed_in? && current_user.host? && @room.guesthouse.user == current_user %>
+<% if current_user == @room.guesthouse.user  %>
   <div class="custom-prices">
     <h4><strong>Lista de Preços Personalizados:</strong></h4>
     <% @custom_prices.each do |custom_price|%>

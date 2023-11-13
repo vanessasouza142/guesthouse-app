@@ -1,7 +1,12 @@
 class GuesthousesController < ApplicationController
   before_action :authenticate_user!, except: [:show, :search, :by_city]
-  before_action :set_guesthouse_and_check_user, only: [:edit, :update, :activate, :inactivate]
   before_action :check_guesthouse_presence, only: [:new, :create]
+  before_action only: [:edit, :update, :activate, :inactivate] do
+    set_guesthouse_and_check_user(params[:id])
+  end
+  before_action only: [:show] do
+    guesthouse_inactive(params[:id])
+  end
 
   def my_guesthouse
     @guesthouse = current_user.guesthouse
@@ -23,8 +28,7 @@ class GuesthousesController < ApplicationController
   end
 
   def show
-    @guesthouse = Guesthouse.find(params[:id])
-    if current_user.present? && current_user == @guesthouse.user
+    if @guesthouse.user == current_user
       @rooms = @guesthouse.rooms.order(:name)
     else
       @rooms = @guesthouse.rooms.available.order(:name)
@@ -54,8 +58,7 @@ class GuesthousesController < ApplicationController
 
   def search
     @query = params["query"]
-    @guesthouses = Guesthouse.where("brand_name LIKE ? OR neighborhood LIKE ? OR city LIKE ?", "%#{@query}%", "%#{@query}%", 
-                                    "%#{@query}%").active.order(:brand_name)
+    @guesthouses = Guesthouse.search(@query)
   end
 
   def by_city
@@ -69,13 +72,6 @@ class GuesthousesController < ApplicationController
     params.require(:guesthouse).permit(:corporate_name, :brand_name, :registration_number, :phone_number, :email, :address, :neighborhood, 
                                         :state, :city, :postal_code, :description, :payment_method, :pet_agreement, :usage_policy, 
                                         :check_in, :check_out)
-  end
-
-  def set_guesthouse_and_check_user
-    @guesthouse = Guesthouse.find(params[:id])
-    if @guesthouse.user != current_user
-      return redirect_to root_path, alert: 'Você não tem permissão para realizar essa ação!'
-    end
   end
 
   def check_guesthouse_presence

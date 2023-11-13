@@ -10,4 +10,8 @@ class Guesthouse < ApplicationRecord
     "#{address}, #{neighborhood}, #{city} - #{state} CEP: #{postal_code}"
   end
 
+  def self.search(query)
+    where("brand_name LIKE ? OR neighborhood LIKE ? OR city LIKE ?", "%#{query}%", "%#{query}%", "%#{query}%").active.order(:brand_name)
+  end
+
 end

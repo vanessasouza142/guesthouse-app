@@ -43,7 +43,7 @@ describe 'Usuário faz login' do
     end
   end
 
-  it 'com sucesso sendo do tipo anfitrião e vai para a página minha pousada' do
+  it 'com sucesso sendo do tipo anfitrião e tendo cadastrado sua pousada' do
     #Arrange
     julio = User.create!(name: 'Julio Almeida', email: 'julio@gmail.com', password: 'password', role: 'host')
     Guesthouse.create!(corporate_name: 'Pousada Muro Alto Ltda', brand_name: 'Pousada Muro Alto', registration_number:'39165040000129', 
@@ -66,6 +66,31 @@ describe 'Usuário faz login' do
     #Assert
     expect(page).to have_content 'Login efetuado com sucesso'
     expect(current_path).to eq my_guesthouse_path
+    within('nav') do
+      expect(page).not_to have_link 'Entrar'
+      expect(page).to have_button 'Sair'
+      expect(page).to have_content 'Julio Almeida'
+    end
+  end
+
+  it 'com sucesso sendo do tipo anfitrião e não tendo cadastrado sua pousada' do
+    #Arrange
+    julio = User.create!(name: 'Julio Almeida', email: 'julio@gmail.com', password: 'password', role: 'host')
+
+    #Act
+    visit root_path
+    within('nav') do
+      click_on 'Entrar na Conta'
+    end
+    within('main form') do
+      fill_in 'E-mail', with: julio.email
+      fill_in 'Senha', with: julio.password
+      click_on 'Entrar'
+    end
+
+    #Assert
+    expect(page).to have_content 'Você ainda não cadastrou sua pousada.'
+    expect(current_path).to eq new_guesthouse_path
     within('nav') do
       expect(page).not_to have_link 'Entrar'
       expect(page).to have_button 'Sair'

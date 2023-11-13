@@ -117,8 +117,4 @@ describe 'Usuário anfitrião cadastra uma pousada' do
     expect(page).to have_content 'Só é possível ter uma pousada cadastrada por usuário!'
   end
 
-  # it 'e não consegue ir para outra tela sem antes concluir o cadastro' do
-
-  # end
-
 end

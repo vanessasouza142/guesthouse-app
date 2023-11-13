@@ -1,6 +1,11 @@
 class RoomsController < ApplicationController
   before_action :authenticate_user!, except: [:show]
-  before_action :set_room_and_check_user, except: [:show]
+  before_action only: [:new, :create] do
+    set_guesthouse_and_check_user(params[:guesthouse_id])
+  end
+  before_action only: [:edit, :update, :set_available, :set_unavailable] do
+    set_room_and_check_user(params[:id])
+  end
 
   def new
     @room = @guesthouse.rooms.build
@@ -48,16 +53,6 @@ class RoomsController < ApplicationController
   def room_params
     params.require(:room).permit(:name, :description, :area, :max_guest, :default_price, :bathroom, :balcony, :air_conditioner, 
                                   :tv, :wardrobe, :safe, :accessible)
-  end
-
-  def set_room_and_check_user
-    if params[:id].present?
-      @room = Room.find(params[:id])    
-      return redirect_to root_path, alert: 'Você não tem permissão para realizar essa ação!' if @room.guesthouse.user != current_user
-    elsif params[:guesthouse_id].present?
-      @guesthouse = Guesthouse.find(params[:guesthouse_id])      
-      redirect_to root_path, alert: 'Você não tem permissão para realizar essa ação!' if @guesthouse.user != current_user
-    end
   end
 
   # def check_user_guest
