@@ -8,6 +8,8 @@ class RoomsController < ApplicationController
     @room = Room.find(params[:id])
     check_user(@room.guesthouse)
   end
+  before_action :room_unavailable, only: [:show]
+
 
   def new
     @room = @guesthouse.rooms.build

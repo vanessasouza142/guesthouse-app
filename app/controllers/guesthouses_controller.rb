@@ -5,9 +5,7 @@ class GuesthousesController < ApplicationController
     @guesthouse = Guesthouse.find(params[:id])
     check_user(@guesthouse)
   end
-  before_action only: [:show] do
-    guesthouse_inactive(params[:id])
-  end
+  before_action :guesthouse_inactive, only: [:show]
 
   def my_guesthouse
     @guesthouse = current_user.guesthouse

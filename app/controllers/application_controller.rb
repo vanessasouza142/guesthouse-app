@@ -24,20 +24,16 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  # def set_guesthouse(guesthouse_id)
-  #   @guesthouse = Guesthouse.find(guesthouse_id)
-  # end
-
-  # def set_guesthouse_and_check_user(guesthouse_id)
-  #   @guesthouse = Guesthouse.find(guesthouse_id)
-  #   if @guesthouse.user != current_user
-  #     return redirect_to root_path, alert: 'Você não tem permissão para realizar essa ação!'
-  #   end
-  # end
-
-  def guesthouse_inactive(guesthouse_id)
-    @guesthouse = Guesthouse.find(guesthouse_id)
+  def guesthouse_inactive
+    @guesthouse = Guesthouse.find(params[:id])
     if @guesthouse.user != current_user && @guesthouse.inactive?
+      return redirect_to root_path, alert: 'Você não tem permissão para realizar essa ação!'
+    end
+  end
+
+  def room_unavailable
+    @room = Room.find(params[:id])
+    if @room.guesthouse.user != current_user && @room.unavailable?
       return redirect_to root_path, alert: 'Você não tem permissão para realizar essa ação!'
     end
   end
