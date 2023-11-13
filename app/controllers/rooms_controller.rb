@@ -1,10 +1,12 @@
 class RoomsController < ApplicationController
   before_action :authenticate_user!, except: [:show]
   before_action only: [:new, :create] do
-    set_guesthouse_and_check_user(params[:guesthouse_id])
+    @guesthouse = Guesthouse.find(params[:guesthouse_id])
+    check_user(@guesthouse)
   end
   before_action only: [:edit, :update, :set_available, :set_unavailable] do
-    set_room_and_check_user(params[:id])
+    @room = Room.find(params[:id])
+    check_user(@room.guesthouse)
   end
 
   def new

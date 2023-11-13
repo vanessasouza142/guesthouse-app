@@ -2,7 +2,8 @@ class GuesthousesController < ApplicationController
   before_action :authenticate_user!, except: [:show, :search, :by_city]
   before_action :check_guesthouse_presence, only: [:new, :create]
   before_action only: [:edit, :update, :activate, :inactivate] do
-    set_guesthouse_and_check_user(params[:id])
+    @guesthouse = Guesthouse.find(params[:id])
+    check_user(@guesthouse)
   end
   before_action only: [:show] do
     guesthouse_inactive(params[:id])

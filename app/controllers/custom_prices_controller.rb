@@ -1,10 +1,12 @@
 class CustomPricesController < ApplicationController
   before_action :authenticate_user!
   before_action only: [:new, :create] do
-    set_room_and_check_user(params[:room_id])
+    @room = Room.find(params[:room_id])
+    check_user(@room.guesthouse)
   end
   before_action only: [:edit, :update] do
-    set_custom_price_and_check_user(params[:id])
+    @custom_price = CustomPrice.find(params[:id])
+    check_user(@custom_price.room.guesthouse)
   end
 
   def new
@@ -38,16 +40,6 @@ class CustomPricesController < ApplicationController
   def custom_price_params
     params.require(:custom_price).permit(:begin_date, :end_date, :price)
   end
-
-  # def set_custom_price_and_check_user
-  #   if params[:id].present?
-  #     @custom_price = CustomPrice.find(params[:id])
-  #     return redirect_to root_path, alert: 'Você não tem permissão para realizar essa ação!' if @custom_price.room.guesthouse.user != current_user
-  #   elsif params[:room_id].present?
-  #     @room = Room.find(params[:room_id])
-  #     return redirect_to root_path, alert: 'Você não tem permissão para realizar essa ação!' if @room.guesthouse.user != current_user
-  #   end
-  # end
 
   # def check_user_guest
   #   if current_user.guest?
