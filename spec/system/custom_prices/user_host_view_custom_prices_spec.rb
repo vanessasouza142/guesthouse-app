@@ -27,7 +27,7 @@ describe 'Usuário anfitrião vê lista de preços personalizados' do
     expect(page).to have_content 'Lista de Preços Personalizados:'
     expect(page).to have_content 'Data de início: 01/12/2023'
     expect(page).to have_content 'Data de fim: 31/12/2023'
-    expect(page).to have_content 'Valor da diária: R$ 350,00'
+    expect(page).to have_content 'Valor personalizado da diária: R$ 350,00'
   end
 
   it 'vê mensagem caso não existam preços personalizados cadastrados' do

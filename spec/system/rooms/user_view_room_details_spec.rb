@@ -25,14 +25,14 @@ describe 'Usuário vê detalhes de um quarto' do
     expect(page).to have_content 'Descrição: Quarto amplo com vista para o mar'
     expect(page).to have_content 'Área (m²): 10'
     expect(page).to have_content 'Quantidade max. de hóspedes: 4'
-    expect(page).to have_content 'Valor padrão da diária: R$ 210,00'
+    expect(page).to have_content 'Valor da diária: R$ 210,00'
     expect(page).to have_content 'Possui banheiro'
     expect(page).to have_content 'Possui ar-condicionado'
     expect(page).to have_content 'Possui tv'
     expect(page).to have_content 'Possui guarda-roupas'
     expect(page).to have_content 'Acessível para pessoas com deficiência'
     expect(page).not_to have_content 'Lista de Preços Personalizados'
-    expect(page).not_to have_content 'Data de início: 01/12/2023 | Data de fim: 31/12/2023 | Valor da diária: R$ 250,00'
+    expect(page).not_to have_content 'Data de início: 01/12/2023 | Data de fim: 31/12/2023 | Valor personalizado da diária: R$ 250,00'
   end
 
   it 'e não vê informacoes adicionais se o quarto estiver indisponível' do
@@ -80,14 +80,14 @@ describe 'Usuário vê detalhes de um quarto' do
     expect(page).to have_content 'Descrição: Quarto amplo com vista para o mar'
     expect(page).to have_content 'Área (m²): 10'
     expect(page).to have_content 'Quantidade max. de hóspedes: 4'
-    expect(page).to have_content 'Valor padrão da diária: R$ 210,00'
+    expect(page).to have_content 'Valor da diária: R$ 210,00'
     expect(page).to have_content 'Possui banheiro'
     expect(page).to have_content 'Possui ar-condicionado'
     expect(page).to have_content 'Possui tv'
     expect(page).to have_content 'Possui guarda-roupas'
     expect(page).to have_content 'Acessível para pessoas com deficiência'
     expect(page).to have_content 'Lista de Preços Personalizados'
-    expect(page).to have_content 'Data de início: 01/12/2023 | Data de fim: 31/12/2023 | Valor da diária: R$ 250,00'
+    expect(page).to have_content 'Data de início: 01/12/2023 | Data de fim: 31/12/2023 | Valor personalizado da diária: R$ 250,00'
   end
 
   it 'e vê informacoes adicionais estando logado como hóspede' do
@@ -116,14 +116,14 @@ describe 'Usuário vê detalhes de um quarto' do
     expect(page).to have_content 'Descrição: Quarto amplo com vista para o mar'
     expect(page).to have_content 'Área (m²): 10'
     expect(page).to have_content 'Quantidade max. de hóspedes: 4'
-    expect(page).to have_content 'Valor padrão da diária: R$ 210,00'
+    expect(page).to have_content 'Valor da diária: R$ 210,00'
     expect(page).to have_content 'Possui banheiro'
     expect(page).to have_content 'Possui ar-condicionado'
     expect(page).to have_content 'Possui tv'
     expect(page).to have_content 'Possui guarda-roupas'
     expect(page).to have_content 'Acessível para pessoas com deficiência'
     expect(page).not_to have_content 'Lista de Preços Personalizados'
-    expect(page).not_to have_content 'Data de início: 01/12/2023 | Data de fim: 31/12/2023 | Valor da diária: R$ 250,00'
+    expect(page).not_to have_content 'Data de início: 01/12/2023 | Data de fim: 31/12/2023 | Valor personalizado da diária: R$ 250,00'
   end
 
   it 'e volta para a tela de listagem dos quartos da pousada' do

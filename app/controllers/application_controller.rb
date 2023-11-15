@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     if current_user.host? && current_user.guesthouse.present?
       my_guesthouse_path
-    elsif current_user.host? && current_user.guesthouse.nil?
+    elsif current_user.present? && current_user.host? && current_user.guesthouse.nil?
       flash[:notice] = 'Você ainda não cadastrou sua pousada.'
       new_guesthouse_path
     else
@@ -18,9 +18,16 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def redirect_host_to_new
+    if current_user.present? && current_user.host? && current_user.guesthouse.nil?
+      flash[:notice] = 'Você ainda não cadastrou sua pousada.'
+      return redirect_to new_guesthouse_path
+    end
+  end
+
   def check_user(object)
     unless object.user == current_user
-      redirect_to root_path, alert: 'Você não tem permissão para realizar essa ação!'
+      return redirect_to root_path, alert: 'Você não tem permissão para realizar essa ação!'
     end
   end
 

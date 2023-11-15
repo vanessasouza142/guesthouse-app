@@ -1,5 +1,6 @@
 class RoomsController < ApplicationController
   before_action :authenticate_user!, except: [:show]
+  before_action :redirect_host_to_new
   before_action only: [:new, :create] do
     @guesthouse = Guesthouse.find(params[:guesthouse_id])
     check_user(@guesthouse)
@@ -27,8 +28,8 @@ class RoomsController < ApplicationController
   end
 
   def show
-    @room = Room.find(params[:id])
     @custom_prices = @room.custom_prices
+    @current_price = @room.current_daily_price
   end
 
   def edit; end
