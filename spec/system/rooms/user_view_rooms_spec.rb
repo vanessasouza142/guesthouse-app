@@ -26,11 +26,11 @@ describe 'Usuário visita a pousada' do
     expect(page).not_to have_content 'Não existem quartos cadastrados.'
     expect(page).to have_content 'Quarto Girassol'
     expect(page).to have_content 'Descrição: Quarto amplo com vista para o mar'
-    expect(page).to have_content 'Valor padrão da diária: R$ 210,00'
+    expect(page).to have_content 'Valor da diária: R$ 210,00'
 
     expect(page).not_to have_content 'Quarto Tulipa'
     expect(page).not_to have_content 'Descrição: Quarto bem ventilado'
-    expect(page).not_to have_content 'Valor padrão da diária: R$ 180,00'
+    expect(page).not_to have_content 'Valor da diária: R$ 180,00'
 end
 
   it 'e não existem quartos cadastrados disponíveis' do

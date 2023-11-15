@@ -1,5 +1,6 @@
 class CustomPricesController < ApplicationController
   before_action :authenticate_user!
+  before_action :redirect_host_to_new
   before_action only: [:new, :create] do
     @room = Room.find(params[:room_id])
     check_user(@room.guesthouse)

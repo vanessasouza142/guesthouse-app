@@ -5,7 +5,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   enum role: {guest: 0, host: 10}
   has_one :guesthouse
+  has_many :bookings
+  has_many :rooms, through: :bookings
 
   validates :name, :role, presence: true
-  # validates_uniqueness_of :role
+
 end

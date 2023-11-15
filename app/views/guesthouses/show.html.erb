@@ -42,7 +42,7 @@
       <div class="l-room">
         <h3><%= link_to room.name, room %></h3>
         <p><strong>Descrição: </strong><%= room.description %></p>
-        <p><strong>Valor padrão da diária: </strong><%= number_to_currency(room.default_price, unit: "R$", separator: ",", delimiter: ".") %></p>
+        <p><strong>Valor da diária: </strong><%= number_to_currency(room.current_daily_price(Date.today), unit: "R$", separator: ",", delimiter: ".") %></p>
       </div>
     <% end %>
   </div>

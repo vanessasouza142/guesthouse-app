@@ -29,7 +29,6 @@ class RoomsController < ApplicationController
 
   def show
     @custom_prices = @room.custom_prices
-    @current_price = @room.current_daily_price
   end
 
   def edit; end

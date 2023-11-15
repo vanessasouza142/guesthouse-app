@@ -6,4 +6,4 @@ pt-BR:
       custom_price:
         begin_date: 'Data de início'
         end_date: 'Data de fim'
-        price: 'Valor da diária'
+        price: 'Valor personalizado da diária'

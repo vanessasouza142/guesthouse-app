@@ -13,7 +13,11 @@ Rails.application.routes.draw do
     post :set_available, on: :member
     post :set_unavailable, on: :member
     resources :custom_prices, only: [:index, :new, :create]
+    resources :bookings, only: [:new, :create] do
+      post 'check_availability', on: :collection
+    end
   end
   resources :custom_prices, only: [:edit, :update]
+
 
 end
