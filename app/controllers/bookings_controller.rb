@@ -30,7 +30,7 @@ class BookingsController < ApplicationController
       @guests_number = booking_data_session['guests_number']
       @total_price = booking_data_session['total_price']
     else
-      redirect_to room(@room_id), notice: 'Não foi posível prosseguir com sua reserva.'
+      flash.now[:notice] =  'Não foi posível prosseguir com sua reserva.'
     end
     @room = Room.find(@room_id)
     @guesthouse = @room.guesthouse
@@ -46,7 +46,7 @@ class BookingsController < ApplicationController
       @guests_number = booking_data_session['guests_number']
       @total_price = booking_data_session['total_price']
     else
-      redirect_to room(@room_id), notice: 'Não foi posível prosseguir com sua reserva.'
+      flash.now[:notice] =  'Não foi posível prosseguir com sua reserva.'
     end
 
     @booking = Booking.create!(room_id: @room_id, user_id: current_user.id, check_in_date: @checkin_date, check_out_date: @checkout_date, 

@@ -26,7 +26,7 @@
 
 <section>
   <h2>Consulte a Disponibilidade do <%= @room.name %>:</h2>
-  <%= form_with(model: [@room, @booking], url: check_availability_room_bookings_path(@room, @booking), method: :post) do |f| %>
+  <%= form_with(model: [@room, @booking], url: check_availability_room_bookings_path(@room, @booking)) do |f| %>
   <div>
     <%= f.label :check_in_date %>
     <%= f.date_field :check_in_date %>

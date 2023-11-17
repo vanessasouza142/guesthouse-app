@@ -6,6 +6,7 @@ def guest_sign_up
   within('main form') do
     fill_in 'Nome', with: 'Maria Barbosa'
     fill_in 'E-mail', with: 'maria@example.com'
+    fill_in 'CPF', with: '18598745698'
     fill_in 'Senha', with: 'password'
     fill_in 'Confirme sua senha', with: 'password'
     select 'Hóspede', from: 'Perfil de Cadastro'
@@ -21,6 +22,7 @@ def host_sign_up
   within('main form') do
     fill_in 'Nome', with: 'Julio Almeida'
     fill_in 'E-mail', with: 'julio@example.com'
+    fill_in 'CPF', with: '48798745675'
     fill_in 'Senha', with: 'password'
     fill_in 'Confirme sua senha', with: 'password'
     select 'Anfitrião', from: 'Perfil de Cadastro'

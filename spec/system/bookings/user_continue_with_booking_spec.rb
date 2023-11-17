@@ -24,13 +24,7 @@ describe 'Usuário prossegue com a reserva depois de ver disponibilidade do quar
     fill_in 'Quantidade de hóspedes', with: '2'
     click_on 'Consultar'
     click_on 'Prosseguir com a Reserva'
-    fill_in 'Nome', with: 'Mateus Barros'
-    fill_in 'E-mail', with: 'mateusbarros@gmail.com'
-    fill_in 'CPF', with: '18598745698'
-    fill_in 'Senha', with: 'senha'
-    fill_in 'Confirme sua senha', with: 'senha'
-    select 'Hóspede', from: 'Perfil de Cadastro'
-    click_on 'Criar'
+    guest_sign_up
 
     #Assert
     expect(current_path).to eq confirm_booking_path
@@ -42,5 +36,9 @@ describe 'Usuário prossegue com a reserva depois de ver disponibilidade do quar
     expect(page).to have_content 'Meios de pagamento aceitos pela pousada: Dinheiro, pix e cartão'
     expect(page).to have_content 'Após a reserva ser confirmada, ela pode ser cancelada até 7 dias antes da data agendada para o check-in.'
     expect(page).to have_button 'Confirmar Reserva'
+  end
+
+  it 'e confirma a reserva' do
+    
   end
 end
