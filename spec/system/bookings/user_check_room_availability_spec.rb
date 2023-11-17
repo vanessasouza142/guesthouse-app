@@ -64,8 +64,10 @@ describe 'Visitante consulta disponibilidade de um quarto durante um período' d
     
     #Assert
     expect(current_path).to eq check_availability_room_bookings_path(r.id)
-    expect(page).to have_content 'Quarto disponível entre os dias 10/12/2023 - 15/12/2023'
+    expect(page).to have_content 'Quarto Padrão disponível entre os dias 10/12/2023 - 15/12/2023'
     expect(page).to have_content 'Valor total das diárias: R$ 900,00'
+    expect(page).to have_content 'Para prosseguir com a reserva, você precisa criar sua conta ou fazer login:'
+    expect(page).to have_link 'Prosseguir com a Reserva'
   end
 
   it 'com sucesso e tendo o quarto um preço personalizado no período' do
@@ -94,8 +96,10 @@ describe 'Visitante consulta disponibilidade de um quarto durante um período' d
     
     #Assert
     expect(current_path).to eq check_availability_room_bookings_path(r.id)
-    expect(page).to have_content 'Quarto disponível entre os dias 10/12/2023 - 15/12/2023'
+    expect(page).to have_content 'Quarto Padrão disponível entre os dias 10/12/2023 - 15/12/2023'
     expect(page).to have_content 'Valor total das diárias: R$ 700,00'
+    expect(page).to have_content 'Para prosseguir com a reserva, você precisa criar sua conta ou fazer login:'
+    expect(page).to have_link 'Prosseguir com a Reserva'
   end
 
   it 'com dados incompletos' do
