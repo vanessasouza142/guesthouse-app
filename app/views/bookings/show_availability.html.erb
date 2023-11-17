@@ -1,7 +1,6 @@
 <section>
-  <h2>Quarto disponível entre os dias <%= l(@booking.check_in_date) %> - <%= l(@booking.check_out_date) %> </h2>
+  <h2><%= @room.name %> disponível entre os dias <%= l(@booking.check_in_date) %> - <%= l(@booking.check_out_date) %> </h2>
   <p><strong>Valor total das diárias: </strong><%= number_to_currency(@total_price, unit: "R$", separator: ",", delimiter: ".") %></p>
-  <p>Para efetuar a reserva, você precisa criar sua conta ou fazer login: </p>
-  <%= link_to 'Entrar na Conta', new_user_session_path %>
-  <%= link_to 'Confirmar Reserva', room_bookings_path(@room, @booking), method: :post %>
+  <p>Para prosseguir com a reserva, você precisa criar sua conta ou fazer login: </p>
+  <%= link_to 'Prosseguir com a Reserva', new_user_registration_path %>
 </section>

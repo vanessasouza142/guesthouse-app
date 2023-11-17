@@ -31,8 +31,8 @@
   <p><strong>Métodos de Pagamento: </strong><%= @guesthouse.payment_method %></p>
   <p><strong>Aceita animais de estimação? </strong><%= @guesthouse.pet_agreement %></p>
   <p><strong>Políticas de Uso: </strong><%= @guesthouse.usage_policy %></p>
-  <p><strong>Check-in: </strong><%= I18n.l(@guesthouse.check_in, format: "%H:%M") %></p>
-  <p><strong>Check-out: </strong><%= I18n.l(@guesthouse.check_out, format: "%H:%M") %></p>
+  <p><strong>Check-in: </strong><%= l(@guesthouse.check_in, format: "%H:%M") %></p>
+  <p><strong>Check-out: </strong><%= l(@guesthouse.check_out, format: "%H:%M") %></p>
 </section>
 
 <section>

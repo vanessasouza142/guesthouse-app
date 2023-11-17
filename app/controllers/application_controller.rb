@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :role])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :role, :cpf])
   end
 
   def after_sign_in_path_for(resource)
@@ -13,6 +13,8 @@ class ApplicationController < ActionController::Base
     elsif current_user.present? && current_user.host? && current_user.guesthouse.nil?
       flash[:notice] = 'Você ainda não cadastrou sua pousada.'
       new_guesthouse_path
+    elsif current_user.guest? && current_user.bookings.empty?
+      confirm_booking_path
     else
       root_path
     end

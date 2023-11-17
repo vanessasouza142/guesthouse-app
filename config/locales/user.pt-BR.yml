@@ -6,6 +6,7 @@ pt-BR:
       user:
         name: 'Nome'
         role: 'Perfil de Cadastro'
+        cpf: 'CPF'
       user/role:
         guest: 'Hóspede'
         host: 'Anfitrião'

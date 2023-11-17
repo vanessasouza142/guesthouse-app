@@ -18,6 +18,5 @@ Rails.application.routes.draw do
     end
   end
   resources :custom_prices, only: [:edit, :update]
-
-
+  get 'confirm_booking', to: 'bookings#confirm_booking'
 end
