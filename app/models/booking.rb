@@ -1,10 +1,13 @@
 class Booking < ApplicationRecord
   belongs_to :room
   belongs_to :user
-
+  enum status: {pending: 0, in_progress: 2, canceled: 5}
+  
   validates :check_in_date, :check_out_date, :guests_number, presence: true
   validate :check_dates
   validate :check_guests_number
+
+  before_validation :generate_code
 
   def calculate_total_price
     total_price = 0
@@ -36,6 +39,10 @@ class Booking < ApplicationRecord
     if room.present? && self.guests_number && self.guests_number > room.max_guest
       errors.add(:guests_number, ' ultrapassa o permitido para o quarto.')
     end
+  end
+
+  def generate_code
+    self.code = SecureRandom.alphanumeric(8).upcase
   end
 
 end

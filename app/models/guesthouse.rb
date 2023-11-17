@@ -1,7 +1,7 @@
 class Guesthouse < ApplicationRecord
-  enum status: {inactive: 0, active: 2}  
   belongs_to :user
   has_many :rooms
+  enum status: {inactive: 0, active: 2}
 
   validates :corporate_name, :brand_name, :registration_number, :phone_number, :email, :address, :neighborhood, :state, :city, 
             :postal_code, :description, :payment_method, :usage_policy, :check_in, :check_out, presence: true
