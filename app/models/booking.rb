@@ -7,7 +7,7 @@ class Booking < ApplicationRecord
   validate :check_dates
   validate :check_guests_number
 
-  before_validation :generate_code
+  before_validation :generate_code, on: :create
 
   def calculate_total_price
     total_price = 0

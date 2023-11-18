@@ -1,4 +1,7 @@
 pt-BR:
+  pending: 'Pendente'
+  in_progress: 'Em andamento'
+  canceled: 'Cancelada'
   activerecord:
     models:
       booking: 'Reserva'

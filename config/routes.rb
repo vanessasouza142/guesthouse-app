@@ -21,5 +21,7 @@ Rails.application.routes.draw do
   resources :custom_prices, only: [:edit, :update]
   get 'confirm_booking', to: 'bookings#confirm_booking'
   get 'my-bookings', to: 'bookings#my_bookings'
-  resources :bookings, only: [:show]
+  resources :bookings, only: [:show] do
+    post :set_in_progress, on: :member
+  end
 end
