@@ -66,6 +66,11 @@ class GuesthousesController < ApplicationController
     @guesthouses_by_city = Guesthouse.where(city: @city).active.order(:brand_name)
   end
 
+  def bookings
+    @guesthouse = Guesthouse.find(params[:id])    
+    @bookings = Booking.joins(:room).where(rooms: { guesthouse_id: @guesthouse.id}) 
+  end
+
   private
 
   def guesthouse_params

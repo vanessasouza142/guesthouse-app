@@ -3,7 +3,7 @@ class BookingsController < ApplicationController
   before_action :redirect_host_to_new
 
   def my_bookings
-    @bookings = current_user.bookings
+    @my_bookings = current_user.bookings
   end
 
   def new
@@ -55,6 +55,10 @@ class BookingsController < ApplicationController
     else
       redirect_to room_path(@room_id), notice: 'Reserva não realizada.'
     end
+  end
+
+  def show
+    @booking = Booking.find(params[:id])
   end
 
   private

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     post :activate, on: :member
     post :inactivate, on: :member
     get 'search', on: :collection
+    get 'bookings', on: :member
     resources :rooms, only: [:new, :create]
   end
   resources :rooms, only: [:show, :edit, :update] do
@@ -20,4 +21,5 @@ Rails.application.routes.draw do
   resources :custom_prices, only: [:edit, :update]
   get 'confirm_booking', to: 'bookings#confirm_booking'
   get 'my-bookings', to: 'bookings#my_bookings'
+  resources :bookings, only: [:show]
 end
