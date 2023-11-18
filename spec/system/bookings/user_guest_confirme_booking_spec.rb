@@ -52,12 +52,21 @@ describe 'Usuário hóspede confirma a reserva' do
     expect(current_path).to eq my_bookings_path
     expect(page).to have_content 'Reserva realizada com sucesso.'
     expect(page).to have_content 'Minhas Reservas'
-    expect(page).to have_content 'Quarto Padrão'
-    expect(page).to have_content '10/12/2023'
-    expect(page).to have_content '15/12/2023'
-    expect(page).to have_content '2'
-    expect(page).to have_content 'ABC12345'
-    expect(Booking.count).to eq 1
+    within('thead') do
+      expect(page).to have_content 'Código da Reserva'
+      expect(page).to have_content 'Quarto Reservado'
+      expect(page).to have_content 'Data de entrada'
+      expect(page).to have_content 'Data de saída'
+      expect(page).to have_content 'Número de hóspedes'
+    end
+    within('tbody') do
+      expect(page).to have_content 'ABC12345'
+      expect(page).to have_content 'Quarto Padrão'
+      expect(page).to have_content '10/12/2023'
+      expect(page).to have_content '15/12/2023'
+      expect(page).to have_content '2'
+      expect(Booking.count).to eq 1
+    end
   end
 
   # it 'sem sucesso' do
