@@ -1,0 +1,29 @@
+<section>
+  <h2>Minhas Reservas</h2>
+  <table style="border-collapse: collapse; width: 100%;">
+    <thead>
+      <tr>
+        <th style="text-align: center; padding: 5px;">Quarto</th>
+        <th style="text-align: center; padding: 5px;">Data de entrada</th>
+        <th style="text-align: center; padding: 5px;">Data de saída</th>
+        <th style="text-align: center; padding: 5px;">Número de hóspedes</th>
+        <th style="text-align: center; padding: 5px;">Código da Reserva</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @bookings.each do |booking| %>
+        <tr>
+          <td style="text-align: center; padding: 5px;"><%= booking.room.name %></td>
+          <td style="text-align: center; padding: 5px;"><%= l(booking.check_in_date) %></td>
+          <td style="text-align: center; padding: 5px;"><%= l(booking.check_out_date) %></td>
+          <td style="text-align: center; padding: 5px;"><%= booking.guests_number %></td>
+          <td style="text-align: center; padding: 5px;"><%= booking.code %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <% if @bookings.empty? %>
+    <p>Não existem quartos cadastrados.</p>
+  <% end %>
+</section> 

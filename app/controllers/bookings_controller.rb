@@ -1,5 +1,10 @@
 class BookingsController < ApplicationController
+  before_action :authenticate_user!, only: [:my_bookings, :confirm_booking, :create]
   before_action :redirect_host_to_new
+
+  def my_bookings
+    @bookings = current_user.bookings
+  end
 
   def new
     @room = Room.find(params[:room_id])
@@ -21,42 +26,34 @@ class BookingsController < ApplicationController
   end
 
   def confirm_booking
-    booking_data_session = session['booking_data']
-    if booking_data_session.present?
-      @room_id = booking_data_session['room_id']
-      @room_name = booking_data_session['room_name']
-      @checkin_date = Date.parse(booking_data_session['checkin'])
-      @checkout_date = Date.parse(booking_data_session['checkout'])
-      @guests_number = booking_data_session['guests_number']
-      @total_price = booking_data_session['total_price']
-    else
-      flash.now[:notice] =  'Não foi posível prosseguir com sua reserva.'
-    end
+    booking_data_session = session.fetch('booking_data', {})
+    @room_id = booking_data_session['room_id']
+    @room_name = booking_data_session['room_name']
+    @checkin_date = Date.parse(booking_data_session['checkin'])
+    @checkout_date = Date.parse(booking_data_session['checkout'])
+    @guests_number = booking_data_session['guests_number']
+    @total_price = booking_data_session['total_price']
     @room = Room.find(@room_id)
     @guesthouse = @room.guesthouse
   end
 
   def create
-    booking_data_session = session['booking_data']
-    if booking_data_session.present?
-      @room_id = booking_data_session['room_id']
-      @room_name = booking_data_session['room_name']
-      @checkin_date = Date.parse(booking_data_session['checkin'])
-      @checkout_date = Date.parse(booking_data_session['checkout'])
-      @guests_number = booking_data_session['guests_number']
-      @total_price = booking_data_session['total_price']
-    else
-      flash.now[:notice] =  'Não foi posível prosseguir com sua reserva.'
-    end
+    booking_data_session = session.fetch('booking_data', {})
+    @room_id = booking_data_session['room_id']
+    @room_name = booking_data_session['room_name']
+    @checkin_date = Date.parse(booking_data_session['checkin'])
+    @checkout_date = Date.parse(booking_data_session['checkout'])
+    @guests_number = booking_data_session['guests_number']
+    @total_price = booking_data_session['total_price']
 
     @booking = Booking.create!(room_id: @room_id, user_id: current_user.id, check_in_date: @checkin_date, check_out_date: @checkout_date, 
-                              guests_number: @guests_number)
+                              guests_number: @guests_number) 
+    @booking.user = current_user
     if @booking.save
-      reset_session
-      redirect_to root_path, notice: 'Reserva cadastrada com sucesso.'
+      session.delete('booking_data')
+      redirect_to my_bookings_path, notice: 'Reserva realizada com sucesso.'
     else
-      flash.now[:notice] = 'Reserva não cadastrada.'
-      # render 'new'
+      redirect_to room_path(@room_id), notice: 'Reserva não realizada.'
     end
   end
 

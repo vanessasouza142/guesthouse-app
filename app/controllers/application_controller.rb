@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
     elsif current_user.present? && current_user.host? && current_user.guesthouse.nil?
       flash[:notice] = 'Você ainda não cadastrou sua pousada.'
       new_guesthouse_path
-    elsif current_user.guest? && current_user.bookings.empty?
+    elsif current_user.guest? && !session['booking_data'].nil?
       confirm_booking_path
     else
       root_path

@@ -15,10 +15,9 @@
         <h1>Pousadaria</h1>
       <% end %>
       <nav>
-          <% if user_signed_in? %>
-            <% if current_user.guesthouse %>
+          <% if user_signed_in? %>            
               <%= link_to 'Minha Pousada', my_guesthouse_path if current_user.guesthouse %> |
-            <% end %>
+              <%= link_to 'Minhas Reservas', my_bookings_path if current_user.guesthouse || current_user.bookings %> |            
               <%= current_user.name %> |
               <%= button_to 'Sair', destroy_user_session_path, method: :delete %>
           <% else %>
