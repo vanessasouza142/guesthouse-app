@@ -63,9 +63,11 @@ class BookingsController < ApplicationController
 
   def set_in_progress
     @booking = Booking.find(params[:id])
-    @booking.in_progress!
-    @booking.update(check_in_done: Time.current)
-    redirect_to booking_path(@booking), notice: 'Check-in realizado com sucesso.'
+    if @booking.allow_check_in
+      redirect_to booking_path(@booking), notice: 'Check-in realizado com sucesso.'
+    else
+      redirect_to booking_path(@booking), alert: 'Ainda não é possível realizar o check-in dessa reserva.'
+    end
   end
 
   private

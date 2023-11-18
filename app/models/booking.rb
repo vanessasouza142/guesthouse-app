@@ -21,6 +21,16 @@ class Booking < ApplicationRecord
     total_price
   end
 
+  def allow_check_in
+    if Date.today >= self.check_in_date
+      self.in_progress!
+      self.update(check_in_done: Time.current)
+      return true
+    else
+      return false
+    end
+  end
+
   private
 
   def check_dates

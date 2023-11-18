@@ -111,7 +111,7 @@ RSpec.describe Booking, type: :model do
     end
 
     context 'check_guests_number' do
-      it 'o número de hóspedes da consulta é menor que o número de hóspedes permitido do quarto' do
+      it 'o Quantidade de hóspedes da consulta é menor que o Quantidade de hóspedes permitido do quarto' do
         #Arrange
         luiza = User.create!(name: 'Luiza Souza', email: 'luiza@gmail.com', password: 'password', role: 'host')
         g = Guesthouse.create!(corporate_name: 'Pousada Ouro Branco Ltda', brand_name: 'Pousada Ouro Branco', registration_number:'45789800129', 
@@ -133,7 +133,7 @@ RSpec.describe Booking, type: :model do
         expect(booking2.errors.include?(:guests_number)).to be false
       end
 
-      it 'o número de hóspedes da consulta é igual ao número de hóspedes permitido do quarto' do
+      it 'o Quantidade de hóspedes da consulta é igual ao Quantidade de hóspedes permitido do quarto' do
         #Arrange
         luiza = User.create!(name: 'Luiza Souza', email: 'luiza@gmail.com', password: 'password', role: 'host')
         g = Guesthouse.create!(corporate_name: 'Pousada Ouro Branco Ltda', brand_name: 'Pousada Ouro Branco', registration_number:'45789800129', 
@@ -155,7 +155,7 @@ RSpec.describe Booking, type: :model do
         expect(booking2.errors.include?(:guests_number)).to be false
       end
 
-      it 'o número de hóspedes da consulta é maior que o número de hóspedes permitido do quarto' do
+      it 'o Quantidade de hóspedes da consulta é maior que o Quantidade de hóspedes permitido do quarto' do
         #Arrange
         luiza = User.create!(name: 'Luiza Souza', email: 'luiza@gmail.com', password: 'password', role: 'host')
         g = Guesthouse.create!(corporate_name: 'Pousada Ouro Branco Ltda', brand_name: 'Pousada Ouro Branco', registration_number:'45789800129', 
@@ -178,5 +178,74 @@ RSpec.describe Booking, type: :model do
         expect(booking2.errors[:guests_number]).to include(' ultrapassa o permitido para o quarto.')
       end
     end
+
+    context 'allow_check_in' do
+      it 'O dia atual é anterior ao dia do check-in' do
+        #Arrange
+        luiza = User.create!(name: 'Luiza Souza', email: 'luiza@gmail.com', password: 'password', role: 'host')
+        g = Guesthouse.create!(corporate_name: 'Pousada Ouro Branco Ltda', brand_name: 'Pousada Ouro Branco', registration_number:'45789800129', 
+                              phone_number: '11998756542', email: 'pousadaourobranco@gmail.com', address: 'Rua Santos Dumont, 65', 
+                              neighborhood: 'Centro', state: 'Rio de Janeiro', city: 'Rio de Janeiro', postal_code: '27120-100', 
+                              description: 'Pousada muito bem localizada', payment_method: 'Dinheiro, pix e cartão', pet_agreement: 'sim',
+                              usage_policy: 'Proibido fumar nas áreas de convivência', check_in: '14:00', check_out: '12:00', status:'active',
+                              user: luiza)
+        r = Room.create!(name: 'Quarto Padrão', description: 'Quarto bem ventilado', area: '10', max_guest: '2', default_price: '180,00',
+                        bathroom: 'sim', balcony: 'sim', air_conditioner: 'sim', tv: 'sim', wardrobe: 'sim', safe: 'não', accessible: 'sim',
+                        status: 'available', guesthouse: g)
+        mario = User.create!(name: 'Mario Barbosa', email: 'mario@gmail.com', password: 'password', role: 'guest')
+        b = Booking.create!(room: r, user: mario, check_in_date: 1.day.from_now, check_out_date: 5.days.from_now, guests_number: '1')
+
+        # Act
+        result = b.allow_check_in
+
+        # Assert
+        expect(result).to eq(false)
+      end
+
+      it 'O dia atual é igual ao dia do check-in' do
+        #Arrange
+        luiza = User.create!(name: 'Luiza Souza', email: 'luiza@gmail.com', password: 'password', role: 'host')
+        g = Guesthouse.create!(corporate_name: 'Pousada Ouro Branco Ltda', brand_name: 'Pousada Ouro Branco', registration_number:'45789800129', 
+                              phone_number: '11998756542', email: 'pousadaourobranco@gmail.com', address: 'Rua Santos Dumont, 65', 
+                              neighborhood: 'Centro', state: 'Rio de Janeiro', city: 'Rio de Janeiro', postal_code: '27120-100', 
+                              description: 'Pousada muito bem localizada', payment_method: 'Dinheiro, pix e cartão', pet_agreement: 'sim',
+                              usage_policy: 'Proibido fumar nas áreas de convivência', check_in: '14:00', check_out: '12:00', status:'active',
+                              user: luiza)
+        r = Room.create!(name: 'Quarto Padrão', description: 'Quarto bem ventilado', area: '10', max_guest: '2', default_price: '180,00',
+                        bathroom: 'sim', balcony: 'sim', air_conditioner: 'sim', tv: 'sim', wardrobe: 'sim', safe: 'não', accessible: 'sim',
+                        status: 'available', guesthouse: g)
+        mario = User.create!(name: 'Mario Barbosa', email: 'mario@gmail.com', password: 'password', role: 'guest')
+        b = Booking.create!(room: r, user: mario, check_in_date: Date.today, check_out_date: 5.days.from_now, guests_number: '1')
+
+        # Act
+        result = b.allow_check_in
+
+        # Assert
+        expect(result).to eq(true)
+      end
+
+      it 'O dia atual é maior que o dia do check-in' do
+        #Arrange
+        luiza = User.create!(name: 'Luiza Souza', email: 'luiza@gmail.com', password: 'password', role: 'host')
+        g = Guesthouse.create!(corporate_name: 'Pousada Ouro Branco Ltda', brand_name: 'Pousada Ouro Branco', registration_number:'45789800129', 
+                              phone_number: '11998756542', email: 'pousadaourobranco@gmail.com', address: 'Rua Santos Dumont, 65', 
+                              neighborhood: 'Centro', state: 'Rio de Janeiro', city: 'Rio de Janeiro', postal_code: '27120-100', 
+                              description: 'Pousada muito bem localizada', payment_method: 'Dinheiro, pix e cartão', pet_agreement: 'sim',
+                              usage_policy: 'Proibido fumar nas áreas de convivência', check_in: '14:00', check_out: '12:00', status:'active',
+                              user: luiza)
+        r = Room.create!(name: 'Quarto Padrão', description: 'Quarto bem ventilado', area: '10', max_guest: '2', default_price: '180,00',
+                        bathroom: 'sim', balcony: 'sim', air_conditioner: 'sim', tv: 'sim', wardrobe: 'sim', safe: 'não', accessible: 'sim',
+                        status: 'available', guesthouse: g)
+        mario = User.create!(name: 'Mario Barbosa', email: 'mario@gmail.com', password: 'password', role: 'guest')
+        b = Booking.create!(room: r, user: mario, check_in_date: 1.day.ago, check_out_date: 5.days.from_now, guests_number: '1')
+
+        # Act
+        result = b.allow_check_in
+
+        # Assert
+        expect(result).to eq(true)
+      end
+    end
+
   end
 end

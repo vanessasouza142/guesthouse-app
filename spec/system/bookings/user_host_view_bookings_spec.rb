@@ -51,7 +51,7 @@ describe 'Usuário anfitrião vê as reservas agendadas' do
       expect(page).to have_content 'Quarto Reservado'
       expect(page).to have_content 'Data de entrada'
       expect(page).to have_content 'Data de saída'
-      expect(page).to have_content 'Número de hóspedes'
+      expect(page).to have_content 'Quantidade de hóspedes'
     end
     within('tbody') do
       expect(page).to have_content "#{b1.code}"

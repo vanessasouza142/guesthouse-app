@@ -3,7 +3,7 @@
   <p><strong>Quarto Reservado: </strong><%= @booking.room.name %></p>
   <p><strong>Data de entrada: </strong><%= l(@booking.check_in_date) %></p>
   <p><strong>Data de saída: </strong><%= l(@booking.check_out_date) %></p>
-  <p><strong>Número de hóspedes: </strong><%= @booking.guests_number %></p>
+  <p><strong>Quantidade de hóspedes: </strong><%= @booking.guests_number %></p>
   <p><strong>Status da Reserva: </strong><%= t(@booking.status) %></p>
   <% if @booking.pending? %>
     <%= button_to 'Realizar Check-in', set_in_progress_booking_path(@booking) %>

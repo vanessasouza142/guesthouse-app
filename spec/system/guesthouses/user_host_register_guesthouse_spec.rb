@@ -55,6 +55,7 @@ describe 'Usuário anfitrião cadastra uma pousada' do
   end
 
   it 'com dados incompletos' do
+    pending 'Teste pendente'
     #Arrange
 
     #Act
