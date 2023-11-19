@@ -15,13 +15,12 @@ describe 'Usuário anfitrião realiza check-out' do
                       bathroom: 'sim', balcony: 'sim', air_conditioner: 'sim', tv: 'sim', wardrobe: 'sim', safe: 'não', accessible: 'sim',
                       status: 'available', guesthouse: g)
     mario = User.create!(name: 'Mario Barbosa', email: 'mario@gmail.com', password: 'password', role: 'guest')
-    b = Booking.create!(room: r, user: mario, check_in_date: Date.today, check_out_date: 1.week.from_now, guests_number: '1',
-                        status: 'in_progress')
+    b = Booking.create!(room: r, user: mario, check_in_date: 5.days.ago, check_out_date: Date.today, guests_number: '1',
+                        status: 'in_progress', check_in_done: 5.days.ago.change(hour: 14, minute: 0))
 
     #Act
     login_as(luiza)
     visit root_path
-    b.update(check_in_done: Time.current)
     click_on 'Estadias Ativas'
     click_on "#{b.code}"
 
@@ -29,7 +28,7 @@ describe 'Usuário anfitrião realiza check-out' do
     expect(current_path).to eq booking_path(b.id)
     expect(page).to have_content "Estadia Ativa #{b.code}"
     expect(page).to have_content 'Quarto: Quarto Padrão'
-    expect(page).to have_content 'Quantidade de hóspedes: 1'
+    expect(page).to have_content "Quantidade de hóspedes: #{b.guests_number}"
     expect(page).to have_content 'Status: Em andamento'
     expect(page).to have_content "Check-in realizado em: #{I18n.l(b.check_in_done, format: '%d/%m/%Y, às %H:%M horas')}"
     expect(page).to have_button 'Realizar Check-out'
@@ -49,25 +48,25 @@ describe 'Usuário anfitrião realiza check-out' do
                       status: 'available', guesthouse: g)
     mario = User.create!(name: 'Mario Barbosa', email: 'mario@gmail.com', password: 'password', role: 'guest')
     b = Booking.create!(room: r, user: mario, check_in_date: Date.today, check_out_date: 1.week.from_now, guests_number: '1',
-                        status: 'in_progress')
+                        status: 'in_progress', check_in_done: 5.days.ago.change(hour: 14, minute: 0))
 
     #Act
     login_as(luiza)
     visit root_path
-    # b.update(check_in_done: Time.current)
     click_on 'Estadias Ativas'
     click_on "#{b.code}"
+    travel_to Time.zone.local(2023, 11, 19, 11, 45)
     click_on 'Realizar Check-out'
 
     #Assert
     expect(current_path).to eq payment_booking_path(b.id)
-    expect(page).to have_content 'Check-out realizado com sucesso.'
-    expect(page).to have_content "Check-out realizado em: "
-    expect(page).to have_content "Período da hospedagem:"
+    expect(page).to have_content 'Check-out realizado com sucesso dentro do horário previsto.'
+    expect(page).to have_content "Pagamento da Hospedagem #{b.code}"
+    expect(page).to have_content "Check-out realizado em: #{I18n.l(b.check_out_done, format: '%d/%m/%Y, às %H:%M horas')}"
+    perido = "#{I18n.l(b.check_in_done, format: '%d/%m/%Y')} a #{I18n.l(b.check_out_done, format: '%d/%m/%Y')}"
+    expect(page).to have_content "Período da hospedagem: #{period}"
     expect(page).to have_content 'Valor total a pagar: R$ '
     expect(page).to have_field 'Valor do Pagamento'
     expect(page).to have_field 'Método de Pagamento'
   end
 end
-
-#{I18n.l(Time.current, format: '%d/%m/%Y, às %H:%M horas')}

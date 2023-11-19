@@ -33,12 +33,16 @@ class Booking < ApplicationRecord
 
   def calculate_payment_amount
     total_price = 0
-    current_date = self.check_in_done
-  
-    while current_date < self.check_out_done
+    current_date = self.check_in_done.to_date
+
+    while current_date < self.check_out_done.to_date
       daily_price = room.current_daily_price(current_date)  
       total_price += daily_price  
       current_date += 1.day
+    end
+
+    if self.check_out_done.strftime('%H:%M') > room.guesthouse.check_out.strftime('%H:%M')
+      total_price += room.current_daily_price(self.check_out_done)
     end
     total_price
   end

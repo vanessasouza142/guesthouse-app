@@ -74,12 +74,17 @@ class BookingsController < ApplicationController
     @booking = Booking.find(params[:id])
     @booking.finished!
     @booking.update(check_out_done: Time.current)
-    redirect_to payment_booking_path(@booking), notice: 'Check-out realizado com sucesso.'
+    redirect_to payment_booking_path(@booking)
   end
 
   def payment
     @booking = Booking.find(params[:id])
     @payment_amount = @booking.calculate_payment_amount
+    if @booking.check_out_done.strftime('%H:%M') > @booking.room.guesthouse.check_out.strftime('%H:%M')
+      flash[:notice] = 'Check-out realizado com sucesso mas depois do horário previsto, portanto será cobrada mais uma diária.'
+    else
+      flash[:notice] = 'Check-out realizado com sucesso dentro do horário previsto.'
+    end
   end
 
   private

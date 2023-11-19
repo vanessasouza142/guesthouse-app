@@ -81,14 +81,14 @@ describe 'Usuário anfitrião vê estadias ativas da sua pousada' do
     r1 = Room.create!(name: 'Quarto Padrão', description: 'Quarto bem ventilado', area: '10', max_guest: '2', default_price: '180,00',
                       bathroom: 'sim', balcony: 'sim', air_conditioner: 'sim', tv: 'sim', wardrobe: 'sim', safe: 'não', accessible: 'sim',
                       status: 'available', guesthouse: g)
-    r2 = Room.create!(name: 'Quarto Premium', description: 'Quarto maravilhoso', area: '13', max_guest: '4', default_price: '250,00',
+    r2 = Room.create!(name: 'Quarto Premium', description: 'Quarto maravilhoso', area: '13', max_guest: '5', default_price: '250,00',
                       bathroom: 'sim', balcony: 'sim', air_conditioner: 'sim', tv: 'sim', wardrobe: 'sim', safe: 'sim', accessible: 'sim',
                       status: 'available', guesthouse: g)
     mario = User.create!(name: 'Mario Barbosa', email: 'mario@gmail.com', password: 'password', role: 'guest')
     juliana = User.create!(name: 'Juliana Matos', email: 'juliana@gmail.com', password: 'password', role: 'guest')
     b1 = Booking.create!(room: r1, user: mario, check_in_date: 1.day.ago, check_out_date: 10.days.from_now, guests_number: '1', 
                           status: 'in_progress')
-    b2 = Booking.create!(room: r2, user: juliana, check_in_date: 5.days.from_now, check_out_date: 15.days.from_now, guests_number: '4',
+    b2 = Booking.create!(room: r2, user: juliana, check_in_date: 5.days.from_now, check_out_date: 15.days.from_now, guests_number: '5',
                           status: 'pending')
 
     #Act
