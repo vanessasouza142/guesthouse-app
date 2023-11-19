@@ -1,7 +1,7 @@
 class Booking < ApplicationRecord
   belongs_to :room
   belongs_to :user
-  enum status: {pending: 0, in_progress: 2, canceled: 5}
+  enum status: {pending: 0, in_progress: 2, finished: 4, canceled: 6}
   
   validates :check_in_date, :check_out_date, :guests_number, presence: true
   validate :check_dates
@@ -29,6 +29,18 @@ class Booking < ApplicationRecord
     else
       return false
     end
+  end
+
+  def calculate_payment_amount
+    total_price = 0
+    current_date = self.check_in_done
+  
+    while current_date < self.check_out_done
+      daily_price = room.current_daily_price(current_date)  
+      total_price += daily_price  
+      current_date += 1.day
+    end
+    total_price
   end
 
   private

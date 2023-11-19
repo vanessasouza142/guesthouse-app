@@ -70,6 +70,18 @@ class BookingsController < ApplicationController
     end
   end
 
+  def set_finished
+    @booking = Booking.find(params[:id])
+    @booking.finished!
+    @booking.update(check_out_done: Time.current)
+    redirect_to payment_booking_path(@booking), notice: 'Check-out realizado com sucesso.'
+  end
+
+  def payment
+    @booking = Booking.find(params[:id])
+    @payment_amount = @booking.calculate_payment_amount
+  end
+
   private
 
   def booking_params

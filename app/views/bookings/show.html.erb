@@ -14,6 +14,6 @@
     <p><strong>Quantidade de hóspedes: </strong><%= @booking.guests_number %></p>
     <p><strong>Status: </strong><%= t(@booking.status) %></p>
     <p><strong>Check-in realizado em: </strong><%= l(@booking.check_in_done, format: '%d/%m/%Y, às %H:%M horas') %></p>
-    <%= button_to 'Realizar Check-out', set_in_progress_booking_path(@booking) %>    
+    <%= button_to 'Realizar Check-out', set_finished_booking_path(@booking) %>    
    <% end %> 
 </section>

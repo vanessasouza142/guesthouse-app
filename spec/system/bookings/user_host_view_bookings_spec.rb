@@ -60,12 +60,12 @@ describe 'Usuário anfitrião vê as reservas agendadas da sua pousada' do
       expect(page).to have_content 'Quarto Padrão'
       expect(page).to have_content "#{I18n.l(1.week.from_now, format: "%d/%m/%Y")}"
       expect(page).to have_content "#{I18n.l(2.weeks.from_now, format: "%d/%m/%Y")}"
-      expect(page).to have_content '1'
+      expect(page).to have_content "#{b1.guests_number}"
       expect(page).to have_content "#{b2.code}"
       expect(page).to have_content 'Quarto Premium'
       expect(page).to have_content "#{I18n.l(1.day.from_now, format: "%d/%m/%Y")}"
       expect(page).to have_content "#{I18n.l(5.days.from_now, format: "%d/%m/%Y")}"
-      expect(page).to have_content '4'
+      expect(page).to have_content "#{b2.guests_number}"
     end
   end
 
@@ -111,12 +111,12 @@ describe 'Usuário anfitrião vê as reservas agendadas da sua pousada' do
       expect(page).to have_content 'Quarto Padrão'
       expect(page).to have_content "#{I18n.l(1.week.from_now, format: "%d/%m/%Y")}"
       expect(page).to have_content "#{I18n.l(2.weeks.from_now, format: "%d/%m/%Y")}"
-      expect(page).to have_content '1'
+      expect(page).to have_content "#{b1.guests_number}"
       expect(page).not_to have_content "#{b2.code}"
       expect(page).not_to have_content 'Quarto Premium'
       expect(page).not_to have_content "#{I18n.l(1.day.from_now, format: "%d/%m/%Y")}"
       expect(page).not_to have_content "#{I18n.l(5.days.from_now, format: "%d/%m/%Y")}"
-      expect(page).not_to have_content '4'
+      expect(page).not_to have_content "#{b2.guests_number}"
     end
   end
 

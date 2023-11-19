@@ -24,5 +24,7 @@ Rails.application.routes.draw do
   get 'my-bookings', to: 'bookings#my_bookings'
   resources :bookings, only: [:show] do
     post :set_in_progress, on: :member
+    post :set_finished, on: :member
+    get 'payment', on: :member
   end
 end

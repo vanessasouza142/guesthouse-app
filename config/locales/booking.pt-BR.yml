@@ -1,6 +1,7 @@
 pt-BR:
   pending: 'Pendente'
   in_progress: 'Em andamento'
+  finished: 'Finalizada'
   canceled: 'Cancelada'
   activerecord:
     models:
@@ -10,3 +11,5 @@ pt-BR:
         check_in_date: 'Data de entrada'
         check_out_date: 'Data de saída'
         guests_number: 'Quantidade de hóspedes'
+        payment_amount: 'Valor do Pagamento'
+        payment_method: 'Método de Pagamento'

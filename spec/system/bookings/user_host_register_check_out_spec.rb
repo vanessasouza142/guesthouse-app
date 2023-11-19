@@ -60,6 +60,14 @@ describe 'Usuário anfitrião realiza check-out' do
     click_on 'Realizar Check-out'
 
     #Assert
-
+    expect(current_path).to eq payment_booking_path(b.id)
+    expect(page).to have_content 'Check-out realizado com sucesso.'
+    expect(page).to have_content "Check-out realizado em: "
+    expect(page).to have_content "Período da hospedagem:"
+    expect(page).to have_content 'Valor total a pagar: R$ '
+    expect(page).to have_field 'Valor do Pagamento'
+    expect(page).to have_field 'Método de Pagamento'
   end
 end
+
+#{I18n.l(Time.current, format: '%d/%m/%Y, às %H:%M horas')}
