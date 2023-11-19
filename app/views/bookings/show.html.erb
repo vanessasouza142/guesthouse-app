@@ -1,14 +1,19 @@
 <section>
-  <h2>Reserva <%= @booking.code %></h2>
-  <p><strong>Quarto Reservado: </strong><%= @booking.room.name %></p>
-  <p><strong>Data de entrada: </strong><%= l(@booking.check_in_date) %></p>
-  <p><strong>Data de saída: </strong><%= l(@booking.check_out_date) %></p>
-  <p><strong>Quantidade de hóspedes: </strong><%= @booking.guests_number %></p>
-  <p><strong>Status da Reserva: </strong><%= t(@booking.status) %></p>
   <% if @booking.pending? %>
+    <h2>Reserva <%= @booking.code %></h2>
+    <p><strong>Quarto: </strong><%= @booking.room.name %></p>
+    <p><strong>Data de entrada: </strong><%= l(@booking.check_in_date) %></p>
+    <p><strong>Data de saída: </strong><%= l(@booking.check_out_date) %></p>
+    <p><strong>Quantidade de hóspedes: </strong><%= @booking.guests_number %></p>
+    <p><strong>Status: </strong><%= t(@booking.status) %></p>
     <%= button_to 'Realizar Check-in', set_in_progress_booking_path(@booking) %>
-  <% elsif @booking.in_progress? %>
-    <p><strong>Check-in realizado em: </strong><%= l(@booking.check_in_done, format: '%d/%m/%Y, às %H:%M horas') %></p>
     <%= button_to 'Cancelar Reserva', set_in_progress_booking_path(@booking) if Date.today >= (@booking.check_in_date + 2) %>
+  <% elsif @booking.in_progress? %>
+    <h2>Estadia Ativa <%= @booking.code %></h2>
+    <p><strong>Quarto: </strong><%= @booking.room.name %></p>
+    <p><strong>Quantidade de hóspedes: </strong><%= @booking.guests_number %></p>
+    <p><strong>Status: </strong><%= t(@booking.status) %></p>
+    <p><strong>Check-in realizado em: </strong><%= l(@booking.check_in_done, format: '%d/%m/%Y, às %H:%M horas') %></p>
+    <%= button_to 'Realizar Check-out', set_in_progress_booking_path(@booking) %>    
    <% end %> 
 </section>

@@ -68,7 +68,7 @@ class GuesthousesController < ApplicationController
 
   def bookings
     @guesthouse = Guesthouse.find(params[:id])    
-    @bookings = Booking.joins(:room).where(rooms: { guesthouse_id: @guesthouse.id}).order(check_in_date: :asc) 
+    @bookings = Booking.pending.joins(:room).where(rooms: { guesthouse_id: @guesthouse.id}).order(check_in_date: :asc) 
   end
 
   def active_stays

@@ -54,7 +54,7 @@ describe 'Usuário hóspede confirma a reserva' do
     expect(page).to have_content 'Minhas Reservas'
     within('thead') do
       expect(page).to have_content 'Código da Reserva'
-      expect(page).to have_content 'Quarto Reservado'
+      expect(page).to have_content 'Quarto'
       expect(page).to have_content 'Data de entrada'
       expect(page).to have_content 'Data de saída'
       expect(page).to have_content 'Quantidade de hóspedes'
