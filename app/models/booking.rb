@@ -4,6 +4,7 @@ class Booking < ApplicationRecord
   enum status: {pending: 0, in_progress: 2, finished: 4, canceled: 6}
   
   validates :check_in_date, :check_out_date, :guests_number, presence: true
+  # validates :payment_amount, :payment_method, presence: true, on: :update
   validate :check_dates
   validate :check_guests_number
 

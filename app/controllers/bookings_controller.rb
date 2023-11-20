@@ -87,6 +87,17 @@ class BookingsController < ApplicationController
     end
   end
 
+  def register_payment
+    @booking = Booking.find(params[:id])
+    payment_params = params.require(:booking).permit(:payment_amount, :payment_method)  
+    if @booking.update(payment_params)
+      redirect_to my_guesthouse_path, notice: 'Pagamento registrado com sucesso.'
+    else
+      flash.now[:notice] = 'Pagamento não registrado.'
+      render 'payment'
+    end
+  end
+
   private
 
   def booking_params

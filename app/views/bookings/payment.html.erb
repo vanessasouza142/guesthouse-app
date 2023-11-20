@@ -1,12 +1,26 @@
 <section>
   <% if @booking.finished? %>
+  <div>
     <h2>Pagamento da Hospedagem <%= @booking.code %></h2>
     <p><strong>Check-out realizado em: </strong><%= l(@booking.check_out_done, format: '%d/%m/%Y, às %H:%M horas') %></p>
     <p><strong>Período da hospedagem: </strong>
       <%= l(@booking.check_in_done, format: '%d/%m/%Y') %> a <%= l(@booking.check_out_done, format: '%d/%m/%Y') %></p>
     <p><strong>Valor total a pagar: </strong><%= number_to_currency(@payment_amount, unit: "R$", separator: ",", delimiter: ".") %></p>
+  </div>
 
-    <%= form_with(model: @booking) do |f| %>
+  <div>
+    <% if @booking.errors.any? %>
+    <p>Verifique os erros abaixo:</p>
+      <ul>
+        <% @booking.errors.full_messages.each do |msg|%>
+        <li><%= msg %></li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form_with(model: @booking, url: register_payment_booking_path(@booking), method: :patch) do |f| %>
     <div>
       <%=f.label :payment_amount %>
       <%=f.number_field :payment_amount %>
@@ -16,8 +30,9 @@
       <%=f.text_field :payment_method %>
     </div>
     <div>
-      <%=f.submit 'Realizar Pagamento' %>
+      <%=f.submit 'Registrar Pagamento' %>
     </div>
     <% end %>
+  </div>
   <% end %> 
 </section>
