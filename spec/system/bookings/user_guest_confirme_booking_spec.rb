@@ -93,10 +93,8 @@ describe 'Usuário hóspede confirma a reserva' do
     click_on 'Consultar'
     click_on 'Prosseguir com a Reserva'
     guest_sign_up
-    # page.driver.browser.clear_cookies
-    session['booking_data'] = {}
     click_on 'Confirmar Reserva'
-
+    
     #Assert
     expect(current_path).to eq room_path(r.id)
     expect(page).to have_content 'Reserva não realizada.'

@@ -90,9 +90,4 @@ class GuesthousesController < ApplicationController
     end
   end
 
-  # def check_user_guest
-  #   if current_user.guest?
-  #     redirect_to root_path, alert: 'Você não tem permissão para realizar essa ação!'
-  #   end
-  # end
 end

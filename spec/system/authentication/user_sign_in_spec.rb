@@ -18,30 +18,30 @@ describe 'Usuário faz login' do
     end
   end
 
-  # it 'com sucesso sendo do tipo hóspede e é redirecionado para o homepage' do
-  #   #Arrange
-  #   maria = User.create!(name: 'Maria Barbosa', email: 'maria@gmail.com', password: 'password', role: 'guest')
+  it 'com sucesso sendo do tipo hóspede e é redirecionado para o homepage' do
+    #Arrange
+    maria = User.create!(name: 'Maria Barbosa', email: 'maria@gmail.com', password: 'password', role: 'guest')
 
-  #   #Act
-  #   visit root_path
-  #   within('nav') do
-  #     click_on 'Entrar na Conta'
-  #   end
-  #   within('main form') do
-  #     fill_in 'E-mail', with: maria.email
-  #     fill_in 'Senha', with: maria.password
-  #     click_on 'Entrar'
-  #   end
+    #Act
+    visit root_path
+    within('nav') do
+      click_on 'Entrar na Conta'
+    end
+    within('main form') do
+      fill_in 'E-mail', with: maria.email
+      fill_in 'Senha', with: maria.password
+      click_on 'Entrar'
+    end
 
-  #   #Assert
-  #   expect(page).to have_content 'Login efetuado com sucesso'
-  #   expect(current_path).to eq root_path
-  #   within('nav') do
-  #     expect(page).not_to have_link 'Entrar'
-  #     expect(page).to have_button 'Sair'
-  #     expect(page).to have_content 'Maria Barbosa'
-  #   end
-  # end
+    #Assert
+    expect(page).to have_content 'Login efetuado com sucesso'
+    expect(current_path).to eq root_path
+    within('nav') do
+      expect(page).not_to have_link 'Entrar'
+      expect(page).to have_button 'Sair'
+      expect(page).to have_content 'Maria Barbosa'
+    end
+  end
 
   it 'com sucesso sendo do tipo anfitrião e tendo cadastrado sua pousada' do
     #Arrange
@@ -98,7 +98,7 @@ describe 'Usuário faz login' do
     end
   end
 
-  it 'e não consegue ir para oura rota se não tiver cadastrado sua pousada' do
+  it 'e não consegue ir para outra rota se não tiver cadastrado sua pousada' do
     #Arrange
     julio = User.create!(name: 'Julio Almeida', email: 'julio@gmail.com', password: 'password', role: 'host')
 

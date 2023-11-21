@@ -33,7 +33,7 @@ class BookingsController < ApplicationController
 
   def create
     booking_data_session
-    @booking = Booking.create!(room_id: @room_id, user_id: current_user.id, check_in_date: @checkin_date, check_out_date: @checkout_date, 
+    @booking = Booking.new(room_id: @room_id, user_id: current_user.id, check_in_date: @checkin_date, check_out_date: @checkout_date, 
                               guests_number: @guests_number) 
     @booking.user = current_user
     if @booking.save
