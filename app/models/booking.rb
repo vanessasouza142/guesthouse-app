@@ -4,9 +4,10 @@ class Booking < ApplicationRecord
   enum status: {pending: 0, in_progress: 2, finished: 4, canceled: 6}
   
   validates :check_in_date, :check_out_date, :guests_number, presence: true
-  # validates :payment_amount, :payment_method, presence: true, on: :update
+  validates :payment_amount, :payment_method, presence: true, if: :register_payment_action?
   validate :check_dates
   validate :check_guests_number
+  attr_accessor :register_payment_context
 
   before_validation :generate_code, on: :create
 
@@ -53,7 +54,8 @@ class Booking < ApplicationRecord
   def check_dates
     if room.present? && room.bookings
                           .where.not(id: self.id)
-                          .where('(check_in_date <= ? AND check_out_date >= ?) OR (check_in_date <= ? AND check_out_date >= ?) OR (check_in_date >= ? AND check_out_date <= ?)',
+                          .where('(check_in_date <= ? AND check_out_date >= ?) OR (check_in_date <= ? AND check_out_date >= ?) OR 
+                          (check_in_date >= ? AND check_out_date <= ?)',
                                   self.check_out_date, self.check_in_date,
                                   self.check_in_date, self.check_out_date,
                                   self.check_in_date, self.check_out_date)
@@ -70,6 +72,10 @@ class Booking < ApplicationRecord
 
   def generate_code
     self.code = SecureRandom.alphanumeric(8).upcase
+  end
+
+  def register_payment_action?
+    register_payment_context.present?
   end
 
 end

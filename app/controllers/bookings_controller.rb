@@ -26,26 +26,13 @@ class BookingsController < ApplicationController
   end
 
   def confirm_booking
-    booking_data_session = session.fetch('booking_data', {})
-    @room_id = booking_data_session['room_id']
-    @room_name = booking_data_session['room_name']
-    @checkin_date = Date.parse(booking_data_session['checkin'])
-    @checkout_date = Date.parse(booking_data_session['checkout'])
-    @guests_number = booking_data_session['guests_number']
-    @total_price = booking_data_session['total_price']
+    booking_data_session
     @room = Room.find(@room_id)
     @guesthouse = @room.guesthouse
   end
 
   def create
-    booking_data_session = session.fetch('booking_data', {})
-    @room_id = booking_data_session['room_id']
-    @room_name = booking_data_session['room_name']
-    @checkin_date = Date.parse(booking_data_session['checkin'])
-    @checkout_date = Date.parse(booking_data_session['checkout'])
-    @guests_number = booking_data_session['guests_number']
-    @total_price = booking_data_session['total_price']
-
+    booking_data_session
     @booking = Booking.create!(room_id: @room_id, user_id: current_user.id, check_in_date: @checkin_date, check_out_date: @checkout_date, 
                               guests_number: @guests_number) 
     @booking.user = current_user
@@ -113,6 +100,16 @@ class BookingsController < ApplicationController
 
   def booking_params
     params.require(:booking).permit(:check_in_date, :check_out_date, :guests_number)
+  end
+
+  def booking_data_session
+    booking_data_session = session.fetch('booking_data', {})
+    @room_id = booking_data_session['room_id']
+    @room_name = booking_data_session['room_name']
+    @checkin_date = Date.parse(booking_data_session['checkin'])
+    @checkout_date = Date.parse(booking_data_session['checkout'])
+    @guests_number = booking_data_session['guests_number']
+    @total_price = booking_data_session['total_price']
   end
 
 end
