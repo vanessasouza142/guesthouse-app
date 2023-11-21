@@ -1,5 +1,5 @@
 class BookingsController < ApplicationController
-  before_action :authenticate_user!, only: [:my_bookings, :confirm_booking, :create]
+  before_action :authenticate_user!, except: [:new, :check_availability]
   before_action :redirect_host_to_new
 
   def my_bookings
@@ -89,12 +89,23 @@ class BookingsController < ApplicationController
 
   def register_payment
     @booking = Booking.find(params[:id])
+    @booking.register_payment_context = true
     payment_params = params.require(:booking).permit(:payment_amount, :payment_method)  
     if @booking.update(payment_params)
       redirect_to my_guesthouse_path, notice: 'Pagamento registrado com sucesso.'
     else
       flash.now[:notice] = 'Pagamento não registrado.'
       render 'payment'
+    end
+  end
+
+  def cancel
+    @booking = Booking.find(params[:id])
+    if Date.today >= (@booking.check_in_date + 2)
+      @booking.destroy
+      redirect_to bookings_guesthouse_path(current_user.guesthouse), notice: 'Reserva cancelada com sucesso.'
+    else
+      redirect_to booking_path(@booking), alert: 'Só é possível cancelar a reserva após 2 dias da data prevista para o check-in.'
     end
   end
 

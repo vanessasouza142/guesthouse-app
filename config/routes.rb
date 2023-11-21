@@ -27,5 +27,6 @@ Rails.application.routes.draw do
     post :set_finished, on: :member
     get 'payment', on: :member
     patch 'register_payment', on: :member
+    delete 'cancel', on: :member
   end
 end
