@@ -28,5 +28,6 @@ Rails.application.routes.draw do
     get 'payment', on: :member
     patch 'register_payment', on: :member
     delete 'cancel', on: :member
+    resources :reviews, only: [:new, :create]
   end
 end

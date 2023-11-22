@@ -1,0 +1,8 @@
+pt-BR:
+  ActiveRecord:
+    models:
+      review: 'Avaliação'
+    attributes:
+      review:
+        score: 'Nota'
+        review_text: 'Avaliação'

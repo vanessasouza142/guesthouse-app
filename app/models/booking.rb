@@ -1,6 +1,7 @@
 class Booking < ApplicationRecord
   belongs_to :room
   belongs_to :user
+  has_one :review
   enum status: {pending: 0, in_progress: 2, finished: 4, canceled: 6}
   
   validates :check_in_date, :check_out_date, :guests_number, presence: true

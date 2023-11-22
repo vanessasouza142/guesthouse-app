@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_one :guesthouse
   has_many :bookings
   has_many :rooms, through: :bookings
+  has_many :reviews, through: :bookings
 
   validates :name, :role, presence: true
 

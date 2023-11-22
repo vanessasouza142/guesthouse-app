@@ -3,7 +3,8 @@ class BookingsController < ApplicationController
   before_action :redirect_host_to_new
 
   def my_bookings
-    @my_bookings = current_user.bookings
+    @my_bookings_pending = current_user.bookings.pending
+    @my_bookings_finished = current_user.bookings.finished
   end
 
   def new

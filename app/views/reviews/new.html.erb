@@ -1,0 +1,23 @@
+<h2>Registrar Avaliação da Reserva <%= @booking.code %></h2>
+<% if @review.errors.any? %>
+  <p>Verifique os erros abaixo:</p>
+  <ul>
+    <% @review.errors.full_messages.each do |msg|%>
+    <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_with(model: [@booking, @review]) do |f| %>
+<div>
+  <%= f.label :score %>
+  <%= f.number_field :score %>
+</div>
+<div>
+  <%= f.label :review_text %>
+  <%= f.text_area :review_text %>
+</div>
+<div>
+<%= f.submit 'Salvar' %>
+</div>
+<% end %>

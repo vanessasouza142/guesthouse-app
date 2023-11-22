@@ -14,6 +14,14 @@
     <p><strong>Quantidade de hóspedes: </strong><%= @booking.guests_number %></p>
     <p><strong>Status: </strong><%= t(@booking.status) %></p>
     <p><strong>Check-in realizado em: </strong><%= l(@booking.check_in_done, format: '%d/%m/%Y, às %H:%M horas') %></p>
-    <%= button_to 'Realizar Check-out', set_finished_booking_path(@booking) %>    
+    <%= button_to 'Realizar Check-out', set_finished_booking_path(@booking) %>
+  <% elsif @booking.finished? %>
+    <h2>Hospedagem Finalizada <%= @booking.code %></h2>
+    <p><strong>Quarto: </strong><%= @booking.room.name %></p>
+    <p><strong>Quantidade de hóspedes: </strong><%= @booking.guests_number %></p>
+    <p><strong>Status: </strong><%= t(@booking.status) %></p>
+    <p><strong>Check-in realizado em: </strong><%= l(@booking.check_in_done, format: '%d/%m/%Y, às %H:%M horas') %></p>
+    <p><strong>Check-out realizado em: </strong><%= l(@booking.check_out_done, format: '%d/%m/%Y, às %H:%M horas') %></p>
+    <%= button_to 'Registrar Avaliação', new_booking_review_path(@booking), method: :get %>       
    <% end %> 
 </section>
