@@ -164,7 +164,7 @@ pt-BR:
         unit: R$
     format:
       delimiter: "."
-      precision: 3
+      precision: 1
       round_mode: default
       separator: ","
       significant: false

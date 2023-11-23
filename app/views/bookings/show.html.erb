@@ -22,6 +22,12 @@
     <p><strong>Status: </strong><%= t(@booking.status) %></p>
     <p><strong>Check-in realizado em: </strong><%= l(@booking.check_in_done, format: '%d/%m/%Y, às %H:%M horas') %></p>
     <p><strong>Check-out realizado em: </strong><%= l(@booking.check_out_done, format: '%d/%m/%Y, às %H:%M horas') %></p>
-    <%= button_to 'Registrar Avaliação', new_booking_review_path(@booking), method: :get %>       
-   <% end %> 
+    <% if @booking.review.nil? %>
+      <%= button_to 'Registrar Avaliação', new_booking_review_path(@booking), method: :get %>
+    <% else %>
+      <h3>Sua Avaliação da Hospedagem</h3>
+      <p><strong>Nota: </strong><%= number_with_precision(@booking.review.score, separator: ',') %></p></p>
+      <p><strong>Avaliação: </strong><%= @booking.review.review_text %></p>
+    <% end %>
+  <% end %> 
 </section>

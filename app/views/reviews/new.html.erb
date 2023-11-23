@@ -11,7 +11,8 @@
 <%= form_with(model: [@booking, @review]) do |f| %>
 <div>
   <%= f.label :score %>
-  <%= f.number_field :score %>
+  <%= f.text_field :score, type: 'number', step: '0.1' %>
+  <p>(Nota de 0 a 5, sendo zero considerada como pessima e cinco como ótima)</p>
 </div>
 <div>
   <%= f.label :review_text %>

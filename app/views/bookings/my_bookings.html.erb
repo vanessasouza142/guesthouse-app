@@ -1,28 +1,8 @@
 <h2>Minhas Reservas</h2>
 <section>
   <h3>Reservas Pendentes:</h3>
-  <table style="border-collapse: collapse; width: 100%;">
-    <thead>
-      <tr>
-        <th style="text-align: center; padding: 5px;">Código da Reserva</th>
-        <th style="text-align: center; padding: 5px;">Quarto</th>
-        <th style="text-align: center; padding: 5px;">Data de entrada</th>
-        <th style="text-align: center; padding: 5px;">Data de saída</th>
-        <th style="text-align: center; padding: 5px;">Quantidade de hóspedes</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @my_bookings_pending.each do |my_booking_p| %>
-        <tr>
-          <td style="text-align: center; padding: 5px;"><%= link_to my_booking_p.code, booking_path(my_booking_p.id) %></td>
-          <td style="text-align: center; padding: 5px;"><%= my_booking_p.room.name %></td>
-          <td style="text-align: center; padding: 5px;"><%= l(my_booking_p.check_in_date) %></td>
-          <td style="text-align: center; padding: 5px;"><%= l(my_booking_p.check_out_date) %></td>
-          <td style="text-align: center; padding: 5px;"><%= my_booking_p.guests_number %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+  <%= render partial: 'bookings_table', locals: { bookings: @my_bookings_pending } %>
+
   <% if @my_bookings_pending.empty? %>
     <p>Você não tem reservas pendentes no momento.</p>
   <% end %>
@@ -30,28 +10,8 @@
 
 <section>
   <h3>Reservas Finalizadas</h3>
-  <table style="border-collapse: collapse; width: 100%;">
-    <thead>
-      <tr>
-        <th style="text-align: center; padding: 5px;">Código da Reserva</th>
-        <th style="text-align: center; padding: 5px;">Quarto</th>
-        <th style="text-align: center; padding: 5px;">Data de entrada</th>
-        <th style="text-align: center; padding: 5px;">Data de saída</th>
-        <th style="text-align: center; padding: 5px;">Quantidade de hóspedes</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @my_bookings_finished.each do |my_booking_f| %>
-        <tr>
-          <td style="text-align: center; padding: 5px;"><%= link_to my_booking_f.code, booking_path(my_booking_f.id) %></td>
-          <td style="text-align: center; padding: 5px;"><%= my_booking_f.room.name %></td>
-          <td style="text-align: center; padding: 5px;"><%= l(my_booking_f.check_in_date) %></td>
-          <td style="text-align: center; padding: 5px;"><%= l(my_booking_f.check_out_date) %></td>
-          <td style="text-align: center; padding: 5px;"><%= my_booking_f.guests_number %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+  <%= render partial: 'bookings_table', locals: { bookings: @my_bookings_finished } %>
+
   <% if @my_bookings_finished.empty? %>
     <p>Você não tem reservas finalizadas no momento.</p>
   <% end %>
