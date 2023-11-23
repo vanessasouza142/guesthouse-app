@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     get 'search', on: :collection
     get 'bookings', on: :member
     get 'active_stays', on: :member
+    get 'reviews', on: :member
     resources :rooms, only: [:new, :create]
   end
   resources :rooms, only: [:show, :edit, :update] do
