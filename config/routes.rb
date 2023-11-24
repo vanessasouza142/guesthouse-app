@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     get 'bookings', on: :member
     get 'active_stays', on: :member
     get 'reviews', on: :member
+    get 'all_reviews', on: :member
     resources :rooms, only: [:new, :create]
   end
 

@@ -1,5 +1,5 @@
 class GuesthousesController < ApplicationController
-  before_action :authenticate_user!, except: [:show, :search, :by_city]
+  before_action :authenticate_user!, except: [:show, :search, :by_city, :all_reviews]
   before_action :redirect_host_to_new, except: [:new, :create]
   before_action :check_guesthouse_presence, only: [:new, :create]
   before_action only: [:edit, :update, :activate, :inactivate] do
@@ -80,6 +80,11 @@ class GuesthousesController < ApplicationController
   def reviews
     @guesthouse = Guesthouse.find(params[:id])
     @reviews = current_user.guesthouse.reviews
+  end
+
+  def all_reviews
+    @guesthouse = Guesthouse.find(params[:id])
+    @all_reviews = @guesthouse.reviews
   end
 
   private

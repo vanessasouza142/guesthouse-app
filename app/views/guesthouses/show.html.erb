@@ -55,15 +55,17 @@
 
 <section>
   <h2>Avaliações da Pousada</h2>
-  <% @last_reviews.each do |last_review| %>
+  <% @last_reviews.each do |review| %>
     <div>
-      <p><strong><%= last_review.user.name %></strong> | 
-      <strong>Nota: </strong><%= number_with_precision(last_review.score, separator: ',') %> | 
-      <strong>Avaliação: </strong><%= last_review.review_text %></p>
+      <p><strong><%= review.user.name %></strong> | 
+      <strong>Nota: </strong><%= number_with_precision(review.score, separator: ',') %> | 
+      <strong>Avaliação: </strong><%= review.review_text %></p>
     </div>
   <% end %>
 
   <% if @last_reviews.empty? %>
     <p>Não existem avaliações cadastradas.</p>
+  <% else %>
+  <p><%= link_to 'Ver mais avaliações', all_reviews_guesthouse_path(@guesthouse) %></p>
   <% end %>
 </section>

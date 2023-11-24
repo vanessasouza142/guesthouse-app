@@ -1,0 +1,10 @@
+<section>
+  <h2>Avaliações da <%= @guesthouse.brand_name %></h2>
+  <% @all_reviews.each do |review| %>
+    <div>
+      <p><strong><%= review.user.name %></strong> | 
+      <strong>Nota: </strong><%= number_with_precision(review.score, separator: ',') %> | 
+      <strong>Avaliação: </strong><%= review.review_text %></p>
+    </div>
+  <% end %>
+</section>
