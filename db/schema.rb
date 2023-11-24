@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_22_183725) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_23_195718) do
   create_table "bookings", force: :cascade do |t|
     t.integer "room_id", null: false
     t.integer "user_id", default: 0, null: false
@@ -65,10 +65,11 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_22_183725) do
 
   create_table "reviews", force: :cascade do |t|
     t.float "score"
-    t.string "review_text"
+    t.text "review_text"
     t.integer "booking_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "answer"
     t.index ["booking_id"], name: "index_reviews_on_booking_id"
   end
 

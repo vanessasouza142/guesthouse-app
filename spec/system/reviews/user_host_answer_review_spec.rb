@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Usuário hóspede registra uma avaliação' do
+describe 'Usuário anfitrião responde avaliação da sua pousada' do
   it 'e deve estar autenticado' do
     #Arrange
     luiza = User.create!(name: 'Luiza Souza', email: 'luiza@gmail.com', password: 'password', role: 'host')
@@ -17,16 +17,16 @@ describe 'Usuário hóspede registra uma avaliação' do
     hospede = User.create!(name: 'João da Silva', email: 'joao@gmail.com', password: 'password', role: 'guest')
     booking = Booking.create!(check_in_date: 2.weeks.ago, check_out_date: 1.week.ago, guests_number: '2', room: r, user: hospede,
                               check_in_done: 2.weeks.ago, check_out_done: 1.week.ago, status: 'finished')
+    review = Review.create!(score: '4,2', review_text: 'Hospedagem maravilhosa', booking: booking)
 
     #Act
-    visit new_booking_review_path(booking.id)
+    visit answer_review_path(review.id)
 
     #Assert
     expect(current_path).to eq new_user_session_path
-
   end
 
-  it 'a partir da tela Minhas Reservas' do
+  it 'a partir do menu Avaliações' do
     #Arrange
     luiza = User.create!(name: 'Luiza Souza', email: 'luiza@gmail.com', password: 'password', role: 'host')
     g = Guesthouse.create!(corporate_name: 'Pousada Ouro Branco Ltda', brand_name: 'Pousada Ouro Branco', registration_number:'45789800129', 
@@ -42,19 +42,19 @@ describe 'Usuário hóspede registra uma avaliação' do
     hospede = User.create!(name: 'João da Silva', email: 'joao@gmail.com', password: 'password', role: 'guest')
     booking = Booking.create!(check_in_date: 2.weeks.ago, check_out_date: 1.week.ago, guests_number: '2', room: r, user: hospede,
                               check_in_done: 2.weeks.ago, check_out_done: 1.week.ago, status: 'finished')
+    review = Review.create!(score: '4,2', review_text: 'Hospedagem maravilhosa', booking: booking)
 
     #Act
-    login_as(hospede)
-    visit root_path
-    click_on 'Minhas Reservas'
+    login_as(luiza)
+    visit my_guesthouse_path
+    click_on 'Avaliações'
     click_on booking.code
-    click_on 'Registrar Avaliação'
+    click_on 'Responder Avaliação'
 
     #Assert
-    expect(current_path).to eq new_booking_review_path(booking.id)
-    expect(page).to have_content "Registrar Avaliação da Hospedagem #{booking.code}"
-    expect(page).to have_field 'Nota'
-    expect(page).to have_field 'Avaliação'
+    expect(current_path).to eq answer_review_path(review.id)
+    expect(page).to have_content "Responder Avaliação da Hospedagem #{booking.code}"
+    expect(page).to have_field 'Resposta'
     expect(page).to have_button 'Salvar'
   end
 
@@ -74,25 +74,24 @@ describe 'Usuário hóspede registra uma avaliação' do
     hospede = User.create!(name: 'João da Silva', email: 'joao@gmail.com', password: 'password', role: 'guest')
     booking = Booking.create!(check_in_date: 2.weeks.ago, check_out_date: 1.week.ago, guests_number: '2', room: r, user: hospede,
                               check_in_done: 2.weeks.ago, check_out_done: 1.week.ago, status: 'finished')
+    review = Review.create!(score: '4,2', review_text: 'Hospedagem maravilhosa', booking: booking)
+
     #Act
-    login_as(hospede)
-    visit root_path
-    click_on 'Minhas Reservas'
+    login_as(luiza)
+    visit my_guesthouse_path
+    click_on 'Avaliações'
     click_on booking.code
-    click_on 'Registrar Avaliação'
-    fill_in 'Nota', with: '4'
-    fill_in 'Avaliação', with: 'Minha estadia foi muito boa.'
+    click_on 'Responder Avaliação'
+    fill_in 'Resposta', with: 'Obrigado pela avaliação.'
     click_on 'Salvar'
 
     #Assert
     expect(current_path).to eq booking_path(booking.id)
-    expect(page).to have_content 'Avaliação registrada com sucesso.'   
-    expect(page).to have_content 'Avaliação da Hospedagem'
-    expect(page).to have_content 'Nota: 4,0'
-    expect(page).to have_content 'Avaliação: Minha estadia foi muito boa.'
+    expect(page).to have_content 'Resposta registrada com sucesso.'
+    expect(page).to have_content 'Resposta: Obrigado pela avaliação.'
   end
 
-  it 'com dados incompletos' do
+  it 'com dado incompleto' do
     #Arrange
     luiza = User.create!(name: 'Luiza Souza', email: 'luiza@gmail.com', password: 'password', role: 'host')
     g = Guesthouse.create!(corporate_name: 'Pousada Ouro Branco Ltda', brand_name: 'Pousada Ouro Branco', registration_number:'45789800129', 
@@ -108,19 +107,19 @@ describe 'Usuário hóspede registra uma avaliação' do
     hospede = User.create!(name: 'João da Silva', email: 'joao@gmail.com', password: 'password', role: 'guest')
     booking = Booking.create!(check_in_date: 2.weeks.ago, check_out_date: 1.week.ago, guests_number: '2', room: r, user: hospede,
                               check_in_done: 2.weeks.ago, check_out_done: 1.week.ago, status: 'finished')
+    review = Review.create!(score: '4,2', review_text: 'Hospedagem maravilhosa', booking: booking)
+
     #Act
-    login_as(hospede)
-    visit root_path
-    click_on 'Minhas Reservas'
+    login_as(luiza)
+    visit my_guesthouse_path
+    click_on 'Avaliações'
     click_on booking.code
-    click_on 'Registrar Avaliação'
-    fill_in 'Nota', with: ''
-    fill_in 'Avaliação', with: ''
+    click_on 'Responder Avaliação'
+    fill_in 'Resposta', with: ''
     click_on 'Salvar'
 
     #Assert
-    expect(page).to have_content 'Avaliação não registrada.'   
-    expect(page).to have_content 'Nota não pode ficar em branco'
-    expect(page).to have_content 'Avaliação não pode ficar em branco'
+    expect(page).to have_content 'Resposta não registrada.'
+    expect(page).to have_content 'Resposta não pode ficar em branco'
   end
 end

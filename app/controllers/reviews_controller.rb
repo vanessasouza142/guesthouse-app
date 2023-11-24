@@ -18,6 +18,24 @@ class ReviewsController < ApplicationController
     end
   end
 
+  def answer
+    @review = Review.find(params[:id])
+    @booking = @review.booking
+  end
+
+  def register_answer
+    @review = Review.find(params[:id])
+    @booking = @review.booking
+    @review.answer = params[:review][:answer]
+
+    if @review.save
+      redirect_to @booking, notice: "Resposta registrada com sucesso."
+    else
+      flash.now[:notice] = "Resposta não registrada."
+      render 'answer'
+    end
+  end
+
   private
 
   def review_params

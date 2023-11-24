@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root to: 'home#index'
   get 'my-guesthouse', to: 'guesthouses#my_guesthouse'
   get 'guesthouses_by_city/:city', to: 'guesthouses#by_city', as: 'guesthouses_by_city'
+
   resources :guesthouses, only: [:new, :create, :show, :edit, :update] do
     post :activate, on: :member
     post :inactivate, on: :member
@@ -12,6 +13,7 @@ Rails.application.routes.draw do
     get 'reviews', on: :member
     resources :rooms, only: [:new, :create]
   end
+
   resources :rooms, only: [:show, :edit, :update] do
     post :set_available, on: :member
     post :set_unavailable, on: :member
@@ -20,9 +22,11 @@ Rails.application.routes.draw do
       post 'check_availability', on: :collection
     end
   end
+
   resources :custom_prices, only: [:edit, :update]
   get 'confirm_booking', to: 'bookings#confirm_booking'
   get 'my-bookings', to: 'bookings#my_bookings'
+
   resources :bookings, only: [:show] do
     post :set_in_progress, on: :member
     post :set_finished, on: :member
@@ -31,4 +35,10 @@ Rails.application.routes.draw do
     delete 'cancel', on: :member
     resources :reviews, only: [:new, :create]
   end
+
+  resources :reviews, only: [:show] do
+    get 'answer', on: :member
+    patch 'register_answer', on: :member
+  end
+
 end

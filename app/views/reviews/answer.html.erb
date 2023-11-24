@@ -1,0 +1,19 @@
+<h2>Responder Avaliação da Hospedagem <%= @booking.code %></h2>
+<% if @review.errors.any? %>
+  <p>Verifique os erros abaixo:</p>
+  <ul>
+    <% @review.errors.full_messages.each do |msg|%>
+    <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_with(model: @review, url: register_answer_review_path(@review), method: :patch) do |f| %>
+  <div>
+    <%= f.label :answer %>
+    <%= f.text_area :answer %>
+  </div>
+  <div>
+  <%= f.submit 'Salvar' %>
+  </div>
+<% end %>

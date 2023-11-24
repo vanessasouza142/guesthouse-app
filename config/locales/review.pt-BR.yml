@@ -6,3 +6,4 @@ pt-BR:
       review:
         score: 'Nota'
         review_text: 'Avaliação'
+        answer: 'Resposta'

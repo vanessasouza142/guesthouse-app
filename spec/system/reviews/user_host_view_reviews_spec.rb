@@ -45,12 +45,14 @@ describe 'Usuário anfitrião vê avaliações da sua pousada' do
     expect(current_path).to eq reviews_guesthouse_path(g.id)
     expect(page).to have_content "Avaliações da Pousada Ouro Branco"
     within('thead') do
-      expect(page).to have_content 'Código da Reserva'
+      expect(page).to have_content 'Código da Hospedagem'
+      expect(page).to have_content 'Avaliador'
       expect(page).to have_content 'Nota'
       expect(page).to have_content 'Avaliação'
     end
     within('tbody') do
       expect(page).to have_content "#{booking.code}"
+      expect(page).to have_content "#{hospede.name}"
       expect(page).to have_content "#{review.score}"
       expect(page).to have_content "#{review.review_text}"
     end
