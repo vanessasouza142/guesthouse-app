@@ -20,6 +20,7 @@
 
 <section>
   <h2><%= @guesthouse.brand_name %></h2>
+  <p><strong>Nota Média: </strong><%= number_with_precision(@guesthouse.average_score, separator: ',') %></p>
   <% if current_user == @guesthouse.user %>
     <p><strong>Razão Social: </strong><%= @guesthouse.corporate_name %></p>
     <p><strong>CNPJ: </strong><%= @guesthouse.registration_number %></p>

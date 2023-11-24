@@ -16,4 +16,16 @@ class Guesthouse < ApplicationRecord
     where("brand_name LIKE ? OR neighborhood LIKE ? OR city LIKE ?", "%#{query}%", "%#{query}%", "%#{query}%").active.order(:brand_name)
   end
 
+  def average_score
+    if self.reviews
+      score_sum = 0
+      score_length = 0
+      self.reviews.each do |review|
+        score_sum += review.score
+        score_length += 1
+      end
+      score_sum / score_length.to_f
+    end
+  end
+
 end
