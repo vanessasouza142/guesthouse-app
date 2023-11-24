@@ -14,13 +14,13 @@ describe 'Usuário visualiza nota média da pousada' do
                     bathroom: 'sim', balcony: 'sim', air_conditioner: 'sim', tv: 'sim', wardrobe: 'sim', safe: 'não', accessible: 'sim',
                     status: 'available', guesthouse: g)
 
-    hospede1 = User.create!(name: 'João da Silva', email: 'joao@gmail.com', password: 'password', role: 'guest')
-    booking1 = Booking.create!(check_in_date: 2.weeks.ago, check_out_date: 1.week.ago, guests_number: '2', room: r, user: hospede1,
+    guest1 = User.create!(name: 'João da Silva', email: 'joao@gmail.com', password: 'password', role: 'guest')
+    booking1 = Booking.create!(check_in_date: 2.weeks.ago, check_out_date: 1.week.ago, guests_number: '2', room: r, user: guest1,
                               check_in_done: 2.weeks.ago, check_out_done: 1.week.ago, status: 'finished')
     review1 = Review.create!(score: '4.2', review_text: 'Hospedagem maravilhosa', booking: booking1)
 
-    hospede2 = User.create!(name: 'Maria Albuquerque', email: 'maria@gmail.com', password: 'password', role: 'guest')
-    booking2 = Booking.create!(check_in_date: 5.weeks.ago, check_out_date: 3.weeks.ago, guests_number: '1', room: r, user: hospede2,
+    guest2 = User.create!(name: 'Maria Albuquerque', email: 'maria@gmail.com', password: 'password', role: 'guest')
+    booking2 = Booking.create!(check_in_date: 5.weeks.ago, check_out_date: 3.weeks.ago, guests_number: '1', room: r, user: guest2,
                               check_in_done: 5.weeks.ago, check_out_done: 3.weeks.ago, status: 'finished')
     review2 = Review.create!(score: '3.0', review_text: 'Boa hospedagem mas pode melhorar.', booking: booking2)
 
@@ -46,18 +46,18 @@ describe 'Usuário visualiza nota média da pousada' do
                     bathroom: 'sim', balcony: 'sim', air_conditioner: 'sim', tv: 'sim', wardrobe: 'sim', safe: 'não', accessible: 'sim',
                     status: 'available', guesthouse: g)
 
-    hospede1 = User.create!(name: 'João da Silva', email: 'joao@gmail.com', password: 'password', role: 'guest')
-    booking1 = Booking.create!(check_in_date: 2.weeks.ago, check_out_date: 1.week.ago, guests_number: '2', room: r, user: hospede1,
+    guest1 = User.create!(name: 'João da Silva', email: 'joao@gmail.com', password: 'password', role: 'guest')
+    booking1 = Booking.create!(check_in_date: 2.weeks.ago, check_out_date: 1.week.ago, guests_number: '2', room: r, user: guest1,
                               check_in_done: 2.weeks.ago, check_out_done: 1.week.ago, status: 'finished')
     review1 = Review.create!(score: '4.2', review_text: 'Hospedagem maravilhosa', booking: booking1)
 
-    hospede2 = User.create!(name: 'Maria Albuquerque', email: 'maria@gmail.com', password: 'password', role: 'guest')
-    booking2 = Booking.create!(check_in_date: 5.weeks.ago, check_out_date: 3.weeks.ago, guests_number: '1', room: r, user: hospede2,
+    guest2 = User.create!(name: 'Maria Albuquerque', email: 'maria@gmail.com', password: 'password', role: 'guest')
+    booking2 = Booking.create!(check_in_date: 5.weeks.ago, check_out_date: 3.weeks.ago, guests_number: '1', room: r, user: guest2,
                               check_in_done: 5.weeks.ago, check_out_done: 3.weeks.ago, status: 'finished')
     review2 = Review.create!(score: '3.0', review_text: 'Boa hospedagem mas pode melhorar.', booking: booking2)
 
     #Act
-    login_as(hospede1)
+    login_as(guest1)
     visit root_path
     click_on 'Pousada Ouro Branco'
 
@@ -79,13 +79,13 @@ describe 'Usuário visualiza nota média da pousada' do
                     bathroom: 'sim', balcony: 'sim', air_conditioner: 'sim', tv: 'sim', wardrobe: 'sim', safe: 'não', accessible: 'sim',
                     status: 'available', guesthouse: g)
 
-    hospede1 = User.create!(name: 'João da Silva', email: 'joao@gmail.com', password: 'password', role: 'guest')
-    booking1 = Booking.create!(check_in_date: 2.weeks.ago, check_out_date: 1.week.ago, guests_number: '2', room: r, user: hospede1,
+    guest1 = User.create!(name: 'João da Silva', email: 'joao@gmail.com', password: 'password', role: 'guest')
+    booking1 = Booking.create!(check_in_date: 2.weeks.ago, check_out_date: 1.week.ago, guests_number: '2', room: r, user: guest1,
                               check_in_done: 2.weeks.ago, check_out_done: 1.week.ago, status: 'finished')
     review1 = Review.create!(score: '4.2', review_text: 'Hospedagem maravilhosa', booking: booking1)
 
-    hospede2 = User.create!(name: 'Maria Albuquerque', email: 'maria@gmail.com', password: 'password', role: 'guest')
-    booking2 = Booking.create!(check_in_date: 5.weeks.ago, check_out_date: 3.weeks.ago, guests_number: '1', room: r, user: hospede2,
+    guest2 = User.create!(name: 'Maria Albuquerque', email: 'maria@gmail.com', password: 'password', role: 'guest')
+    booking2 = Booking.create!(check_in_date: 5.weeks.ago, check_out_date: 3.weeks.ago, guests_number: '1', room: r, user: guest2,
                               check_in_done: 5.weeks.ago, check_out_done: 3.weeks.ago, status: 'finished')
     review2 = Review.create!(score: '3.0', review_text: 'Boa hospedagem mas pode melhorar.', booking: booking2)
 

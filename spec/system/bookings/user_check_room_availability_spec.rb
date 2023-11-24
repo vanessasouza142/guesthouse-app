@@ -143,8 +143,8 @@ describe 'Visitante consulta disponibilidade de um quarto durante um período' d
                       bathroom: 'sim', balcony: 'sim', air_conditioner: 'sim', tv: 'sim', wardrobe: 'sim', safe: 'não', accessible: 'sim',
                       status: 'available', guesthouse: g)
 
-    hospede = User.create!(name: 'João da Silva', email: 'joao@gmail.com', password: 'password', role: 'guest')
-    booking1 = Booking.create!(check_in_date: '10/12/2023', check_out_date: '15/12/2023', guests_number: '2', room: r, user: hospede)
+    guest = User.create!(name: 'João da Silva', email: 'joao@gmail.com', password: 'password', role: 'guest')
+    booking1 = Booking.create!(check_in_date: '10/12/2023', check_out_date: '15/12/2023', guests_number: '2', room: r, user: guest)
 
     #Act
     visit root_path

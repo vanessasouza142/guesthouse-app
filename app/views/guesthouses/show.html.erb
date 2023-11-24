@@ -51,4 +51,19 @@
   <% if @rooms.empty? %>
     <p>Não existem quartos cadastrados.</p>
   <% end %>
-</section> 
+</section>
+
+<section>
+  <h2>Avaliações da Pousada</h2>
+  <% @last_reviews.each do |last_review| %>
+    <div>
+      <p><strong><%= last_review.user.name %></strong> | 
+      <strong>Nota: </strong><%= number_with_precision(last_review.score, separator: ',') %> | 
+      <strong>Avaliação: </strong><%= last_review.review_text %></p>
+    </div>
+  <% end %>
+
+  <% if @last_reviews.empty? %>
+    <p>Não existem avaliações cadastradas.</p>
+  <% end %>
+</section>

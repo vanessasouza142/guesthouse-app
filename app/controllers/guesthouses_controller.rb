@@ -33,6 +33,7 @@ class GuesthousesController < ApplicationController
     else
       @rooms = @guesthouse.rooms.available.order(:name)
     end
+    @last_reviews = @guesthouse.reviews.last(3)
   end
 
   def edit; end
