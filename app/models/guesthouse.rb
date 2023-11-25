@@ -17,7 +17,7 @@ class Guesthouse < ApplicationRecord
   end
 
   def average_score
-    if self.reviews
+    if self.reviews.present?
       score_sum = 0
       score_length = 0
       self.reviews.each do |review|
