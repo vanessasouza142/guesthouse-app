@@ -111,7 +111,7 @@ describe 'Guesthouse API' do
                                       postal_code: '54350820', description: 'Pousada a beira mar maravilhosa', 
                                       payment_method: 'Dinheiro, pix e cartão', pet_agreement: 'sim',
                                       usage_policy: 'Proibido fumar nas áreas de convivência', check_in: '13:00', check_out: '12:00',
-                                      user: paulo)
+                                      status: 'active', user: paulo)
 
       #Act
       get "/api/v1/guesthouses/#{guesthouse.id}"
@@ -152,7 +152,7 @@ describe 'Guesthouse API' do
                                       postal_code: '54350820', description: 'Pousada a beira mar maravilhosa', 
                                       payment_method: 'Dinheiro, pix e cartão', pet_agreement: 'sim',
                                       usage_policy: 'Proibido fumar nas áreas de convivência', check_in: '13:00', check_out: '12:00',
-                                      user: paulo)
+                                      status: 'active', user: paulo)
       room = Room.create!(name: 'Quarto Girassol', description: 'Quarto amplo com vista para o mar', area: '10', max_guest: '4', 
                           default_price: '210,00', bathroom: 'sim', balcony: 'sim', air_conditioner: 'sim', tv: 'sim', wardrobe: 'sim', 
                           safe: 'não', accessible: 'sim', status: 'available', guesthouse: guesthouse)
@@ -194,7 +194,7 @@ describe 'Guesthouse API' do
       expect(json_response["usage_policy"]).to eq 'Proibido fumar nas áreas de convivência'
       expect(json_response["check_in"]).to eq '13:00'
       expect(json_response["check_out"]).to eq '12:00'
-      expect(json_response["average_score"]).to eq '3.8'
+      expect(json_response["average_score"]).to eq 3.8
     end
 
     it 'falha se a pousada não existe' do
@@ -205,6 +205,25 @@ describe 'Guesthouse API' do
 
       #Assert
       expect(response.status).to eq 404
+    end
+
+    it 'falha se a pousada existe mas está inativa' do
+      #Arrange
+      paulo = User.create!(name: 'Paulo Menezes', email: 'paulomenezes@gmail.com', password: 'password', role: 'host')
+      guesthouse = Guesthouse.create!(corporate_name: 'Pousada Muro Alto Ltda', brand_name: 'Pousada Muro Alto', 
+                                      registration_number:'39165040000129', phone_number: '8134658799', email: 'pousadamuroalto@gmail.com', 
+                                      address: 'Av. Beira Mar, 45', neighborhood: 'Muro Alto', state: 'Pernambuco', city: 'Ipojuca', 
+                                      postal_code: '54350820', description: 'Pousada a beira mar maravilhosa', 
+                                      payment_method: 'Dinheiro, pix e cartão', pet_agreement: 'sim',
+                                      usage_policy: 'Proibido fumar nas áreas de convivência', check_in: '13:00', check_out: '12:00',
+                                      status: 'inactive', user: paulo)
+      #Act
+      get "/api/v1/guesthouses/#{guesthouse.id}"
+
+      #Assert
+      expect(response.status).to eq 422
+      json_response = JSON.parse(response.body)
+      expect(json_response['error']).to eq 'Pousada inativa no momento'
     end
   end
 end
