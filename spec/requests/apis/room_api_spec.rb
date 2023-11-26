@@ -62,5 +62,25 @@ describe 'Room API' do
       json_response = JSON.parse(response.body)
       expect(json_response).to eq []
     end
+
+    it 'falha se tiver um erro interno' do
+      #Arrange
+      mariana = User.create!(name: 'Mariana Silva', email: 'mariana@gmail.com', password: 'password', role: 'host')
+      guesthouse = Guesthouse.create!(corporate_name: 'Pousada Sulamericana Ltda', brand_name: 'Pousada Sulamericana', 
+                                    registration_number:'56897040000129', phone_number: '8138975644', email: 'pousadasulamericana@gmail.com',
+                                    address: 'Av. Juliana Holanda, 498', neighborhood: 'Boa Vista', state: 'Pernambuco', city: 'Recife', 
+                                    postal_code: '54560500', description: 'Pousada com ótima localização', 
+                                    payment_method: 'Dinheiro, pix e cartão', pet_agreement: 'não',
+                                    usage_policy: 'Proibido fumar nas áreas de convivência', check_in: '13:00', check_out: '12:00', 
+                                    status: 'active', user: mariana)
+                                    
+      allow(Room).to receive(:all).and_raise(ActiveRecord::ActiveRecordError) 
+  
+      #Act
+      get "/api/v1/guesthouses/#{guesthouse.id}/rooms"
+  
+      #Assert
+      expect(response.status).to eq 500
+    end
   end
 end

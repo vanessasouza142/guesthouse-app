@@ -1,4 +1,4 @@
-class Api::V1::RoomsController < ActionController::API
+class Api::V1::RoomsController < Api::V1::ApiController
 
   def index
     guesthouse = Guesthouse.find(params[:guesthouse_id])
