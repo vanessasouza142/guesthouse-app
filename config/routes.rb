@@ -37,7 +37,7 @@ Rails.application.routes.draw do
     resources :reviews, only: [:new, :create]
   end
 
-  resources :reviews, only: [:show] do
+  resources :reviews, only: [] do
     get 'answer', on: :member
     patch 'register_answer', on: :member
   end
@@ -46,6 +46,11 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :guesthouses, only: [:index, :show] do
         resources :rooms, only: [:index]
+      end
+      resources :rooms, only: [] do
+        resources :bookings, only: [] do
+          post 'check_availability', on: :collection
+        end
       end
     end
   end

@@ -99,6 +99,17 @@ describe 'Guesthouse API' do
       json_response = JSON.parse(response.body)
       expect(json_response).to eq []
     end
+
+    it 'falha se tiver um erro interno' do
+      #Arrange
+      allow(Guesthouse).to receive(:all).and_raise(ActiveRecord::ActiveRecordError) 
+  
+      #Act
+      get '/api/v1/guesthouses'
+  
+      #Assert
+      expect(response.status).to eq 500
+    end
   end
 
   context 'GET /api/v1/guesthouses/1' do
@@ -205,6 +216,8 @@ describe 'Guesthouse API' do
 
       #Assert
       expect(response.status).to eq 404
+      json_response = JSON.parse(response.body)
+      expect(json_response['error']).to eq 'Registro não encontrado'
     end
 
     it 'falha se a pousada existe mas está inativa' do
@@ -224,6 +237,26 @@ describe 'Guesthouse API' do
       expect(response.status).to eq 422
       json_response = JSON.parse(response.body)
       expect(json_response['error']).to eq 'Pousada inativa no momento'
+    end
+
+    it 'falha se tiver um erro interno' do
+      #Arrange
+      paulo = User.create!(name: 'Paulo Menezes', email: 'paulomenezes@gmail.com', password: 'password', role: 'host')
+      guesthouse = Guesthouse.create!(corporate_name: 'Pousada Muro Alto Ltda', brand_name: 'Pousada Muro Alto', 
+                                      registration_number:'39165040000129', phone_number: '8134658799', email: 'pousadamuroalto@gmail.com', 
+                                      address: 'Av. Beira Mar, 45', neighborhood: 'Muro Alto', state: 'Pernambuco', city: 'Ipojuca', 
+                                      postal_code: '54350820', description: 'Pousada a beira mar maravilhosa', 
+                                      payment_method: 'Dinheiro, pix e cartão', pet_agreement: 'sim',
+                                      usage_policy: 'Proibido fumar nas áreas de convivência', check_in: '13:00', check_out: '12:00',
+                                      status: 'inactive', user: paulo)
+
+      allow(Guesthouse).to receive(:find).and_raise(ActiveRecord::ActiveRecordError) 
+  
+      #Act
+      get "/api/v1/guesthouses/#{guesthouse.id}"
+  
+      #Assert
+      expect(response.status).to eq 500
     end
   end
 end
