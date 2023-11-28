@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Usuário registra um quarto' do
+describe 'Usuário anfitrião registra um quarto' do
   it 'e não está autenticado' do
     #Arrange
     paulo = User.create!(name: 'Paulo Menezes', email: 'paulomenezes@gmail.com', password: 'password', role: 'host')

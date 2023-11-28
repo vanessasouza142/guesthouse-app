@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Usuário registra uma pousada' do
+describe 'Usuário anfitrião registra uma pousada' do
   it 'e não está autenticado' do
     #Arrange
     
@@ -32,5 +32,23 @@ describe 'Usuário registra uma pousada' do
 
     #Assert
     expect(response).to redirect_to(my_guesthouse_path)
+  end
+
+  it 'e um usuário hóspede tenta registrar uma pousada' do
+    #Arrange
+    mariana = User.create!(name: 'Mariana Silva', email: 'mariana@gmail.com', password: 'password', role: 'guest')
+    
+    #Act
+    login_as(mariana)
+    post(guesthouses_path, params: { guesthouse: { corporate_name: 'Pousada Sulamericana Ltda', brand_name: 'Pousada Sulamericana', 
+                                                    registration_number:'56897040000129', phone_number: '8138975644', 
+                                                    email: 'pousadasulamericana@gmail.com', address: 'Av. Juliana Holanda, 498', 
+                                                    neighborhood: 'Boa Vista', state: 'Pernambuco', city: 'Recife', postal_code: '54560500', 
+                                                    description: 'Pousada com ótima localização', payment_method: 'Dinheiro, pix e cartão', 
+                                                    pet_agreement: 'não', usage_policy: 'Proibido fumar nas áreas de convivência', 
+                                                    check_in: '13:00', check_out: '12:00'}})
+
+    #Assert
+    expect(response).to redirect_to(root_path)
   end
 end

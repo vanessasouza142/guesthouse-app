@@ -33,6 +33,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def allow_only_host
+    unless current_user.host?
+      return redirect_to root_path, alert: 'Você não tem permissão para realizar essa ação!'
+    end
+  end
+
   def guesthouse_inactive
     @guesthouse = Guesthouse.find(params[:id])
     if @guesthouse.user != current_user && @guesthouse.inactive?

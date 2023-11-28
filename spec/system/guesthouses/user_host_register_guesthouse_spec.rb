@@ -72,4 +72,17 @@ describe 'Usuário anfitrião cadastra uma pousada' do
     expect(page).to have_content 'Só é possível ter uma pousada cadastrada por usuário!'
   end
 
+  it 'e não um usuário do tipo hóspede' do
+    #Arrange
+    mariana = User.create!(name: 'Mariana Silva', email: 'mariana@gmail.com', password: 'password', role: 'guest')
+
+    #Act
+    login_as(mariana)
+    visit new_guesthouse_path
+
+    #Assert
+    expect(current_path).to eq root_path
+    expect(page).to have_content 'Você não tem permissão para realizar essa ação!'
+  end
+
 end

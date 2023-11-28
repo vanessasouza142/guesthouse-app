@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Usuário atualiza status de uma pousada' do
+describe 'Usuário anfitrião atualiza status de uma pousada' do
   it 'para ativa e não é o dono' do
     #Arrange
     paulo = User.create!(name: 'Paulo Menezes', email: 'paulomenezes@gmail.com', password: 'password', role: 'host')

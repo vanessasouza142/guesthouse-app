@@ -93,7 +93,7 @@ describe 'Usuário alfitrião edita sua pousada' do
     expect(page).to have_content 'E-mail para contato não pode ficar em branco'
   end
 
-  it 'e não a pousada de outro usuário anfitrião' do
+  it 'e não um usuário anfitrião diferente' do
     #Arrange
     paulo = User.create!(name: 'Paulo Menezes', email: 'paulomenezes@gmail.com', password: 'password', role: 'host')
     g1 = Guesthouse.create!(corporate_name: 'Pousada Muro Alto Ltda', brand_name: 'Pousada Muro Alto', registration_number:'39165040000129', 

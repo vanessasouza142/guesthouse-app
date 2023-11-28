@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Usuário registra um preço personalizado' do
+describe 'Usuário anfitrião registra um preço personalizado' do
   it 'e não está autenticado' do
     #Arrange
     paulo = User.create!(name: 'Paulo Menezes', email: 'paulomenezes@gmail.com', password: 'password', role: 'host')

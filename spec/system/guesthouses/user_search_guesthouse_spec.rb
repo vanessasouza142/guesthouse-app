@@ -35,7 +35,7 @@ describe 'Usuário faz a busca de uma pousada' do
     expect(page).to have_link "#{g.brand_name}"
   end
 
-  it 'e encontra uma pousada pelo seu nome bairro' do
+  it 'e encontra uma pousada pelo seu bairro' do
     #Arrange
     paulo = User.create!(name: 'Paulo Menezes', email: 'paulomenezes@gmail.com', password: 'password', role: 'host')
     g = Guesthouse.create!(corporate_name: 'Pousada Muro Alto Ltda', brand_name: 'Pousada Muro Alto', registration_number:'39165040000129', 
