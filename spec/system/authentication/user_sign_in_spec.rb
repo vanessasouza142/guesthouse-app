@@ -20,7 +20,7 @@ describe 'Usuário faz login' do
 
   it 'com sucesso sendo do tipo hóspede e é redirecionado para o homepage' do
     #Arrange
-    maria = User.create!(name: 'Maria Barbosa', email: 'maria@gmail.com', password: 'password', role: 'guest')
+    maria = User.create!(name: 'Maria Barbosa', email: 'maria@gmail.com', cpf: '18598745698', password: 'password', role: 'guest')
 
     #Act
     visit root_path
@@ -45,7 +45,7 @@ describe 'Usuário faz login' do
 
   it 'com sucesso sendo do tipo anfitrião e tendo cadastrado sua pousada' do
     #Arrange
-    julio = User.create!(name: 'Julio Almeida', email: 'julio@gmail.com', password: 'password', role: 'host')
+    julio = User.create!(name: 'Julio Almeida', email: 'julio@gmail.com', cpf: '48798745675', password: 'password', role: 'host')
     Guesthouse.create!(corporate_name: 'Pousada Muro Alto Ltda', brand_name: 'Pousada Muro Alto', registration_number:'39165040000129', 
                         phone_number: '8134658799', email: 'pousadamuroalto@gmail.com', address: 'Av. Beira Mar, 45', 
                         neighborhood: 'Muro Alto', state: 'Pernambuco', city: 'Ipojuca', postal_code: '54350820', 
@@ -75,7 +75,7 @@ describe 'Usuário faz login' do
 
   it 'com sucesso sendo do tipo anfitrião e não tendo cadastrado sua pousada' do
     #Arrange
-    julio = User.create!(name: 'Julio Almeida', email: 'julio@gmail.com', password: 'password', role: 'host')
+    julio = User.create!(name: 'Julio Almeida', email: 'julio@gmail.com', cpf: '48798745675', password: 'password', role: 'host')
 
     #Act
     visit root_path
@@ -100,7 +100,7 @@ describe 'Usuário faz login' do
 
   it 'e não consegue ir para outra rota se não tiver cadastrado sua pousada' do
     #Arrange
-    julio = User.create!(name: 'Julio Almeida', email: 'julio@gmail.com', password: 'password', role: 'host')
+    julio = User.create!(name: 'Julio Almeida', email: 'julio@gmail.com', cpf: '48798745675', password: 'password', role: 'host')
 
     #Act
     visit root_path
@@ -126,7 +126,7 @@ describe 'Usuário faz login' do
 
   it 'sem sucesso' do
     #Arrange
-    maria = User.create!(name: 'Maria Barbosa', email: 'maria@gmail.com', password: 'password', role: 'guest')
+    maria = User.create!(name: 'Maria Barbosa', email: 'maria@gmail.com', cpf: '18598745698', password: 'password', role: 'guest')
 
     #Act
     visit root_path

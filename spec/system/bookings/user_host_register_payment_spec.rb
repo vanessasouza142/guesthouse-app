@@ -4,7 +4,7 @@ include ActiveSupport::Testing::TimeHelpers
 describe 'Usuário anfitrião registra pagamento da hospedagem' do
   it 'e deve estar autenticado' do
     #Arrange
-    luiza = User.create!(name: 'Luiza Souza', email: 'luiza@gmail.com', password: 'password', role: 'host')
+    luiza = User.create!(name: 'Luiza Souza', email: 'luiza@gmail.com', cpf: '38573169346', password: 'password', role: 'host')
     g = Guesthouse.create!(corporate_name: 'Pousada Ouro Branco Ltda', brand_name: 'Pousada Ouro Branco', registration_number:'45789800129', 
                             phone_number: '11998756542', email: 'pousadaourobranco@gmail.com', address: 'Rua Santos Dumont, 65', 
                             neighborhood: 'Centro', state: 'Rio de Janeiro', city: 'Rio de Janeiro', postal_code: '27120-100', 
@@ -14,7 +14,7 @@ describe 'Usuário anfitrião registra pagamento da hospedagem' do
     r = Room.create!(name: 'Quarto Padrão', description: 'Quarto bem ventilado', area: '10', max_guest: '2', default_price: '180,00',
                       bathroom: 'sim', balcony: 'sim', air_conditioner: 'sim', tv: 'sim', wardrobe: 'sim', safe: 'não', accessible: 'sim',
                       status: 'available', guesthouse: g)
-    mario = User.create!(name: 'Mario Barbosa', email: 'mario@gmail.com', password: 'password', role: 'guest')
+    mario = User.create!(name: 'Mario Barbosa', email: 'mario@gmail.com', cpf: '70661435660', password: 'password', role: 'guest')
     b = Booking.create!(room: r, user: mario, check_in_date: Date.today, check_out_date: 1.week.from_now, guests_number: '1',
                         status: 'in_progress', check_in_done: '14/11/2023')
     #Act
@@ -26,7 +26,7 @@ describe 'Usuário anfitrião registra pagamento da hospedagem' do
 
   it 'com sucesso' do
     #Arrange
-    luiza = User.create!(name: 'Luiza Souza', email: 'luiza@gmail.com', password: 'password', role: 'host')
+    luiza = User.create!(name: 'Luiza Souza', email: 'luiza@gmail.com', cpf: '38573169346', password: 'password', role: 'host')
     g = Guesthouse.create!(corporate_name: 'Pousada Ouro Branco Ltda', brand_name: 'Pousada Ouro Branco', registration_number:'45789800129', 
                             phone_number: '11998756542', email: 'pousadaourobranco@gmail.com', address: 'Rua Santos Dumont, 65', 
                             neighborhood: 'Centro', state: 'Rio de Janeiro', city: 'Rio de Janeiro', postal_code: '27120-100', 
@@ -36,7 +36,7 @@ describe 'Usuário anfitrião registra pagamento da hospedagem' do
     r = Room.create!(name: 'Quarto Padrão', description: 'Quarto bem ventilado', area: '10', max_guest: '2', default_price: '180,00',
                       bathroom: 'sim', balcony: 'sim', air_conditioner: 'sim', tv: 'sim', wardrobe: 'sim', safe: 'não', accessible: 'sim',
                       status: 'available', guesthouse: g)
-    mario = User.create!(name: 'Mario Barbosa', email: 'mario@gmail.com', password: 'password', role: 'guest')
+    mario = User.create!(name: 'Mario Barbosa', email: 'mario@gmail.com', cpf: '70661435660', password: 'password', role: 'guest')
     b = Booking.create!(room: r, user: mario, check_in_date: Date.today, check_out_date: 1.week.from_now, guests_number: '1',
                         status: 'in_progress', check_in_done: '14/11/2023')
 
@@ -59,7 +59,7 @@ describe 'Usuário anfitrião registra pagamento da hospedagem' do
 
   it 'com dados incompletos' do
     #Arrange
-    luiza = User.create!(name: 'Luiza Souza', email: 'luiza@gmail.com', password: 'password', role: 'host')
+    luiza = User.create!(name: 'Luiza Souza', email: 'luiza@gmail.com', cpf: '38573169346', password: 'password', role: 'host')
     g = Guesthouse.create!(corporate_name: 'Pousada Ouro Branco Ltda', brand_name: 'Pousada Ouro Branco', registration_number:'45789800129', 
                             phone_number: '11998756542', email: 'pousadaourobranco@gmail.com', address: 'Rua Santos Dumont, 65', 
                             neighborhood: 'Centro', state: 'Rio de Janeiro', city: 'Rio de Janeiro', postal_code: '27120-100', 
@@ -69,7 +69,7 @@ describe 'Usuário anfitrião registra pagamento da hospedagem' do
     r = Room.create!(name: 'Quarto Padrão', description: 'Quarto bem ventilado', area: '10', max_guest: '2', default_price: '180,00',
                       bathroom: 'sim', balcony: 'sim', air_conditioner: 'sim', tv: 'sim', wardrobe: 'sim', safe: 'não', accessible: 'sim',
                       status: 'available', guesthouse: g)
-    mario = User.create!(name: 'Mario Barbosa', email: 'mario@gmail.com', password: 'password', role: 'guest')
+    mario = User.create!(name: 'Mario Barbosa', email: 'mario@gmail.com', cpf: '70661435660', password: 'password', role: 'guest')
     b = Booking.create!(room: r, user: mario, check_in_date: Date.today, check_out_date: 1.week.from_now, guests_number: '1',
                         status: 'in_progress', check_in_done: '14/11/2023')
 

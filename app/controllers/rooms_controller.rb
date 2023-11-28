@@ -1,5 +1,5 @@
 class RoomsController < ApplicationController
-  before_action :authenticate_user!, except: [:show]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :set_available, :set_unavailable]
   before_action :redirect_host_to_new
   before_action only: [:new, :create] do
     @guesthouse = Guesthouse.find(params[:guesthouse_id])

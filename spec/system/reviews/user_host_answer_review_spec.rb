@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'Usuário anfitrião responde avaliação da sua pousada' do
   it 'e deve estar autenticado' do
     #Arrange
-    luiza = User.create!(name: 'Luiza Souza', email: 'luiza@gmail.com', password: 'password', role: 'host')
+    luiza = User.create!(name: 'Luiza Souza', email: 'luiza@gmail.com', cpf: '38573169346', password: 'password', role: 'host')
     g = Guesthouse.create!(corporate_name: 'Pousada Ouro Branco Ltda', brand_name: 'Pousada Ouro Branco', registration_number:'45789800129', 
                           phone_number: '11998756542', email: 'pousadaourobranco@gmail.com', address: 'Rua Santos Dumont, 65', 
                           neighborhood: 'Centro', state: 'Rio de Janeiro', city: 'Rio de Janeiro', postal_code: '27120-100', 
@@ -14,7 +14,7 @@ describe 'Usuário anfitrião responde avaliação da sua pousada' do
                     bathroom: 'sim', balcony: 'sim', air_conditioner: 'sim', tv: 'sim', wardrobe: 'sim', safe: 'não', accessible: 'sim',
                     status: 'available', guesthouse: g)
 
-    guest = User.create!(name: 'João da Silva', email: 'joao@gmail.com', password: 'password', role: 'guest')
+    guest = User.create!(name: 'João da Silva', email: 'joao@gmail.com', cpf: '33336543770', password: 'password', role: 'guest')
     booking = Booking.create!(check_in_date: 2.weeks.ago, check_out_date: 1.week.ago, guests_number: '2', room: r, user: guest,
                               check_in_done: 2.weeks.ago, check_out_done: 1.week.ago, status: 'finished')
     review = Review.create!(score: '4,2', review_text: 'Hospedagem maravilhosa', booking: booking)
@@ -28,7 +28,7 @@ describe 'Usuário anfitrião responde avaliação da sua pousada' do
 
   it 'a partir do menu Avaliações' do
     #Arrange
-    luiza = User.create!(name: 'Luiza Souza', email: 'luiza@gmail.com', password: 'password', role: 'host')
+    luiza = User.create!(name: 'Luiza Souza', email: 'luiza@gmail.com', cpf: '38573169346', password: 'password', role: 'host')
     g = Guesthouse.create!(corporate_name: 'Pousada Ouro Branco Ltda', brand_name: 'Pousada Ouro Branco', registration_number:'45789800129', 
                           phone_number: '11998756542', email: 'pousadaourobranco@gmail.com', address: 'Rua Santos Dumont, 65', 
                           neighborhood: 'Centro', state: 'Rio de Janeiro', city: 'Rio de Janeiro', postal_code: '27120-100', 
@@ -39,7 +39,7 @@ describe 'Usuário anfitrião responde avaliação da sua pousada' do
                     bathroom: 'sim', balcony: 'sim', air_conditioner: 'sim', tv: 'sim', wardrobe: 'sim', safe: 'não', accessible: 'sim',
                     status: 'available', guesthouse: g)
 
-    guest = User.create!(name: 'João da Silva', email: 'joao@gmail.com', password: 'password', role: 'guest')
+    guest = User.create!(name: 'João da Silva', email: 'joao@gmail.com', cpf: '33336543770', password: 'password', role: 'guest')
     booking = Booking.create!(check_in_date: 2.weeks.ago, check_out_date: 1.week.ago, guests_number: '2', room: r, user: guest,
                               check_in_done: 2.weeks.ago, check_out_done: 1.week.ago, status: 'finished')
     review = Review.create!(score: '4,2', review_text: 'Hospedagem maravilhosa', booking: booking)
@@ -60,7 +60,7 @@ describe 'Usuário anfitrião responde avaliação da sua pousada' do
 
   it 'com sucesso' do
     #Arrange
-    luiza = User.create!(name: 'Luiza Souza', email: 'luiza@gmail.com', password: 'password', role: 'host')
+    luiza = User.create!(name: 'Luiza Souza', email: 'luiza@gmail.com', cpf: '38573169346', password: 'password', role: 'host')
     g = Guesthouse.create!(corporate_name: 'Pousada Ouro Branco Ltda', brand_name: 'Pousada Ouro Branco', registration_number:'45789800129', 
                           phone_number: '11998756542', email: 'pousadaourobranco@gmail.com', address: 'Rua Santos Dumont, 65', 
                           neighborhood: 'Centro', state: 'Rio de Janeiro', city: 'Rio de Janeiro', postal_code: '27120-100', 
@@ -71,7 +71,7 @@ describe 'Usuário anfitrião responde avaliação da sua pousada' do
                     bathroom: 'sim', balcony: 'sim', air_conditioner: 'sim', tv: 'sim', wardrobe: 'sim', safe: 'não', accessible: 'sim',
                     status: 'available', guesthouse: g)
 
-    guest = User.create!(name: 'João da Silva', email: 'joao@gmail.com', password: 'password', role: 'guest')
+    guest = User.create!(name: 'João da Silva', email: 'joao@gmail.com', cpf: '33336543770', password: 'password', role: 'guest')
     booking = Booking.create!(check_in_date: 2.weeks.ago, check_out_date: 1.week.ago, guests_number: '2', room: r, user: guest,
                               check_in_done: 2.weeks.ago, check_out_done: 1.week.ago, status: 'finished')
     review = Review.create!(score: '4,2', review_text: 'Hospedagem maravilhosa', booking: booking)
@@ -93,7 +93,7 @@ describe 'Usuário anfitrião responde avaliação da sua pousada' do
 
   it 'com dado incompleto' do
     #Arrange
-    luiza = User.create!(name: 'Luiza Souza', email: 'luiza@gmail.com', password: 'password', role: 'host')
+    luiza = User.create!(name: 'Luiza Souza', email: 'luiza@gmail.com', cpf: '38573169346', password: 'password', role: 'host')
     g = Guesthouse.create!(corporate_name: 'Pousada Ouro Branco Ltda', brand_name: 'Pousada Ouro Branco', registration_number:'45789800129', 
                           phone_number: '11998756542', email: 'pousadaourobranco@gmail.com', address: 'Rua Santos Dumont, 65', 
                           neighborhood: 'Centro', state: 'Rio de Janeiro', city: 'Rio de Janeiro', postal_code: '27120-100', 
@@ -104,7 +104,7 @@ describe 'Usuário anfitrião responde avaliação da sua pousada' do
                     bathroom: 'sim', balcony: 'sim', air_conditioner: 'sim', tv: 'sim', wardrobe: 'sim', safe: 'não', accessible: 'sim',
                     status: 'available', guesthouse: g)
 
-    guest = User.create!(name: 'João da Silva', email: 'joao@gmail.com', password: 'password', role: 'guest')
+    guest = User.create!(name: 'João da Silva', email: 'joao@gmail.com', cpf: '33336543770', password: 'password', role: 'guest')
     booking = Booking.create!(check_in_date: 2.weeks.ago, check_out_date: 1.week.ago, guests_number: '2', room: r, user: guest,
                               check_in_done: 2.weeks.ago, check_out_done: 1.week.ago, status: 'finished')
     review = Review.create!(score: '4,2', review_text: 'Hospedagem maravilhosa', booking: booking)
@@ -125,7 +125,7 @@ describe 'Usuário anfitrião responde avaliação da sua pousada' do
 
   it 'e usuário hóspede visualiza resposta' do
     #Arrange
-    luiza = User.create!(name: 'Luiza Souza', email: 'luiza@gmail.com', password: 'password', role: 'host')
+    luiza = User.create!(name: 'Luiza Souza', email: 'luiza@gmail.com', cpf: '38573169346', password: 'password', role: 'host')
     g = Guesthouse.create!(corporate_name: 'Pousada Ouro Branco Ltda', brand_name: 'Pousada Ouro Branco', registration_number:'45789800129', 
                           phone_number: '11998756542', email: 'pousadaourobranco@gmail.com', address: 'Rua Santos Dumont, 65', 
                           neighborhood: 'Centro', state: 'Rio de Janeiro', city: 'Rio de Janeiro', postal_code: '27120-100', 
@@ -136,7 +136,7 @@ describe 'Usuário anfitrião responde avaliação da sua pousada' do
                     bathroom: 'sim', balcony: 'sim', air_conditioner: 'sim', tv: 'sim', wardrobe: 'sim', safe: 'não', accessible: 'sim',
                     status: 'available', guesthouse: g)
 
-    guest = User.create!(name: 'João da Silva', email: 'joao@gmail.com', password: 'password', role: 'guest')
+    guest = User.create!(name: 'João da Silva', email: 'joao@gmail.com', cpf: '33336543770', password: 'password', role: 'guest')
     booking = Booking.create!(check_in_date: 2.weeks.ago, check_out_date: 1.week.ago, guests_number: '2', room: r, user: guest,
                               check_in_done: 2.weeks.ago, check_out_done: 1.week.ago, status: 'finished')
     review = Review.create!(score: '4,2', review_text: 'Hospedagem maravilhosa', booking: booking, answer: 'Obrigado pela avaliação')

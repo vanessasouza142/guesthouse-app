@@ -4,7 +4,7 @@ describe 'Room API' do
   context 'GET /api/v1/guesthouses/1/rooms' do
     it 'lista quartos disponíveis de uma pousada' do
       #Arrange
-      mariana = User.create!(name: 'Mariana Silva', email: 'mariana@gmail.com', password: 'password', role: 'host')
+      mariana = User.create!(name: 'Mariana Silva', email: 'mariana@gmail.com', cpf: '05238660464', password: 'password', role: 'host')
       guesthouse = Guesthouse.create!(corporate_name: 'Pousada Sulamericana Ltda', brand_name: 'Pousada Sulamericana', 
                                     registration_number:'56897040000129', phone_number: '8138975644', email: 'pousadasulamericana@gmail.com',
                                     address: 'Av. Juliana Holanda, 498', neighborhood: 'Boa Vista', state: 'Pernambuco', city: 'Recife', 
@@ -46,7 +46,7 @@ describe 'Room API' do
 
     it 'retorna vazio se não tiver quartos cadastrados' do
       #Arrange
-      mariana = User.create!(name: 'Mariana Silva', email: 'mariana@gmail.com', password: 'password', role: 'host')
+      mariana = User.create!(name: 'Mariana Silva', email: 'mariana@gmail.com', cpf: '05238660464', password: 'password', role: 'host')
       guesthouse = Guesthouse.create!(corporate_name: 'Pousada Sulamericana Ltda', brand_name: 'Pousada Sulamericana', 
                                     registration_number:'56897040000129', phone_number: '8138975644', email: 'pousadasulamericana@gmail.com',
                                     address: 'Av. Juliana Holanda, 498', neighborhood: 'Boa Vista', state: 'Pernambuco', city: 'Recife', 
@@ -67,7 +67,7 @@ describe 'Room API' do
 
     it 'falha se tiver um erro interno' do
       #Arrange
-      mariana = User.create!(name: 'Mariana Silva', email: 'mariana@gmail.com', password: 'password', role: 'host')
+      mariana = User.create!(name: 'Mariana Silva', email: 'mariana@gmail.com', cpf: '05238660464', password: 'password', role: 'host')
       guesthouse = Guesthouse.create!(corporate_name: 'Pousada Sulamericana Ltda', brand_name: 'Pousada Sulamericana', 
                                     registration_number:'56897040000129', phone_number: '8138975644', email: 'pousadasulamericana@gmail.com',
                                     address: 'Av. Juliana Holanda, 498', neighborhood: 'Boa Vista', state: 'Pernambuco', city: 'Recife', 

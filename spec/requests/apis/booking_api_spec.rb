@@ -4,7 +4,7 @@ describe 'Booking API' do
   context 'POST /api/v1/rooms/1/bookings/check_availability' do
     it 'consulta disponibilidade de um quarto' do
       #Arrange
-      paulo = User.create!(name: 'Paulo Menezes', email: 'paulomenezes@gmail.com', password: 'password', role: 'host')
+      paulo = User.create!(name: 'Paulo Menezes', email: 'paulomenezes@gmail.com', cpf: '25248794021', password: 'password', role: 'host')
       guesthouse = Guesthouse.create!(corporate_name: 'Pousada Muro Alto Ltda', brand_name: 'Pousada Muro Alto', 
                                       registration_number:'39165040000129', phone_number: '8134658799', email: 'pousadamuroalto@gmail.com', 
                                       address: 'Av. Beira Mar, 45', neighborhood: 'Muro Alto', state: 'Pernambuco', city: 'Ipojuca', 
@@ -29,7 +29,7 @@ describe 'Booking API' do
 
     it 'falha se parametros não estão completos' do
       #Arrange
-      paulo = User.create!(name: 'Paulo Menezes', email: 'paulomenezes@gmail.com', password: 'password', role: 'host')
+      paulo = User.create!(name: 'Paulo Menezes', email: 'paulomenezes@gmail.com', cpf: '25248794021', password: 'password', role: 'host')
       guesthouse = Guesthouse.create!(corporate_name: 'Pousada Muro Alto Ltda', brand_name: 'Pousada Muro Alto', 
                                       registration_number:'39165040000129', phone_number: '8134658799', email: 'pousadamuroalto@gmail.com', 
                                       address: 'Av. Beira Mar, 45', neighborhood: 'Muro Alto', state: 'Pernambuco', city: 'Ipojuca', 
@@ -55,7 +55,7 @@ describe 'Booking API' do
 
     it 'falha se quarto não está disponível' do
       #Arrange
-      paulo = User.create!(name: 'Paulo Menezes', email: 'paulomenezes@gmail.com', password: 'password', role: 'host')
+      paulo = User.create!(name: 'Paulo Menezes', email: 'paulomenezes@gmail.com', cpf: '25248794021', password: 'password', role: 'host')
       guesthouse = Guesthouse.create!(corporate_name: 'Pousada Muro Alto Ltda', brand_name: 'Pousada Muro Alto', 
                                       registration_number:'39165040000129', phone_number: '8134658799', email: 'pousadamuroalto@gmail.com', 
                                       address: 'Av. Beira Mar, 45', neighborhood: 'Muro Alto', state: 'Pernambuco', city: 'Ipojuca', 
@@ -67,7 +67,7 @@ describe 'Booking API' do
                           default_price: '210,00', bathroom: 'sim', balcony: 'sim', air_conditioner: 'sim', tv: 'sim', wardrobe: 'sim', 
                           safe: 'não', accessible: 'sim', status: 'available', guesthouse: guesthouse)
 
-      guest = User.create!(name: 'João da Silva', email: 'joao@gmail.com', password: 'password', role: 'guest')
+      guest = User.create!(name: 'João da Silva', email: 'joao@gmail.com', cpf: '33336543770', password: 'password', role: 'guest')
       booking = Booking.create!(check_in_date: "#{1.week.from_now}", check_out_date: "#{2.weeks.from_now}", guests_number: '2', 
                                 room: room, user: guest)
 
@@ -84,7 +84,7 @@ describe 'Booking API' do
 
     it 'falha se tiver um erro interno' do
       #Arrange
-      paulo = User.create!(name: 'Paulo Menezes', email: 'paulomenezes@gmail.com', password: 'password', role: 'host')
+      paulo = User.create!(name: 'Paulo Menezes', email: 'paulomenezes@gmail.com', cpf: '25248794021', password: 'password', role: 'host')
       guesthouse = Guesthouse.create!(corporate_name: 'Pousada Muro Alto Ltda', brand_name: 'Pousada Muro Alto', 
                                       registration_number:'39165040000129', phone_number: '8134658799', email: 'pousadamuroalto@gmail.com', 
                                       address: 'Av. Beira Mar, 45', neighborhood: 'Muro Alto', state: 'Pernambuco', city: 'Ipojuca', 

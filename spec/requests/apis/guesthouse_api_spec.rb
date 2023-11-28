@@ -4,9 +4,9 @@ describe 'Guesthouse API' do
   context 'GET /api/v1/guesthouses' do
     it 'lista todas as pousadas cadastradas e ativas' do
       #Arrange
-      paulo = User.create!(name: 'Paulo Menezes', email: 'paulomenezes@gmail.com', password: 'password', role: 'host')
-      mariana = User.create!(name: 'Mariana Silva', email: 'mariana@gmail.com', password: 'password', role: 'host')
-      jose = User.create!(name: 'José Santana', email: 'jose@gmail.com', password: 'password', role: 'host')
+      paulo = User.create!(name: 'Paulo Menezes', email: 'paulomenezes@gmail.com', cpf: '25248794021', password: 'password', role: 'host')
+      mariana = User.create!(name: 'Mariana Silva', email: 'mariana@gmail.com', cpf: '05238660464', password: 'password', role: 'host')
+      jose = User.create!(name: 'José Santana', email: 'jose@gmail.com', cpf: '34093381445', password: 'password', role: 'host')
       Guesthouse.create!(corporate_name: 'Pousada Muro Alto Ltda', brand_name: 'Pousada Muro Alto', 
                           registration_number:'39165040000129', phone_number: '8134658799', email: 'pousadamuroalto@gmail.com', 
                           address: 'Av. Beira Mar, 45', neighborhood: 'Muro Alto', state: 'Pernambuco', city: 'Ipojuca', 
@@ -59,9 +59,9 @@ describe 'Guesthouse API' do
 
     it 'filtra pousadas pelo nome' do
       #Arrange
-      paulo = User.create!(name: 'Paulo Menezes', email: 'paulomenezes@gmail.com', password: 'password', role: 'host')
-      mariana = User.create!(name: 'Mariana Silva', email: 'mariana@gmail.com', password: 'password', role: 'host')
-      jose = User.create!(name: 'José Santana', email: 'jose@gmail.com', password: 'password', role: 'host')
+      paulo = User.create!(name: 'Paulo Menezes', email: 'paulomenezes@gmail.com', cpf: '25248794021', password: 'password', role: 'host')
+      mariana = User.create!(name: 'Mariana Silva', email: 'mariana@gmail.com', cpf: '05238660464', password: 'password', role: 'host')
+      jose = User.create!(name: 'José Santana', email: 'jose@gmail.com', cpf: '34093381445', password: 'password', role: 'host')
       Guesthouse.create!(corporate_name: 'Pousada Muro Alto Ltda', brand_name: 'Pousada Muro Alto', 
                           registration_number:'39165040000129', phone_number: '8134658799', email: 'pousadamuroalto@gmail.com', 
                           address: 'Av. Beira Mar, 45', neighborhood: 'Muro Alto', state: 'Pernambuco', city: 'Ipojuca', 
@@ -118,7 +118,7 @@ describe 'Guesthouse API' do
   context 'GET /api/v1/guesthouses/1' do
     it 'mostra os detalhes de uma pousada (sem avaliações)' do
       #Arrange
-      paulo = User.create!(name: 'Paulo Menezes', email: 'paulomenezes@gmail.com', password: 'password', role: 'host')
+      paulo = User.create!(name: 'Paulo Menezes', email: 'paulomenezes@gmail.com', cpf: '25248794021', password: 'password', role: 'host')
       guesthouse = Guesthouse.create!(corporate_name: 'Pousada Muro Alto Ltda', brand_name: 'Pousada Muro Alto', 
                                       registration_number:'39165040000129', phone_number: '8134658799', email: 'pousadamuroalto@gmail.com', 
                                       address: 'Av. Beira Mar, 45', neighborhood: 'Muro Alto', state: 'Pernambuco', city: 'Ipojuca', 
@@ -160,7 +160,7 @@ describe 'Guesthouse API' do
 
     it 'mostra os detalhes de uma pousada (com avaliações)' do
       #Arrange
-      paulo = User.create!(name: 'Paulo Menezes', email: 'paulomenezes@gmail.com', password: 'password', role: 'host')
+      paulo = User.create!(name: 'Paulo Menezes', email: 'paulomenezes@gmail.com', cpf: '25248794021', password: 'password', role: 'host')
       guesthouse = Guesthouse.create!(corporate_name: 'Pousada Muro Alto Ltda', brand_name: 'Pousada Muro Alto', 
                                       registration_number:'39165040000129', phone_number: '8134658799', email: 'pousadamuroalto@gmail.com', 
                                       address: 'Av. Beira Mar, 45', neighborhood: 'Muro Alto', state: 'Pernambuco', city: 'Ipojuca', 
@@ -172,12 +172,12 @@ describe 'Guesthouse API' do
                           default_price: '210,00', bathroom: 'sim', balcony: 'sim', air_conditioner: 'sim', tv: 'sim', wardrobe: 'sim', 
                           safe: 'não', accessible: 'sim', status: 'available', guesthouse: guesthouse)
 
-      guest1 = User.create!(name: 'Juliana Souza', email: 'juliana@gmail.com', password: 'password', role: 'guest')
+      guest1 = User.create!(name: 'Juliana Souza', email: 'juliana@gmail.com', cpf: '02163471578', password: 'password', role: 'guest')
       booking1 = Booking.create!(check_in_date: 7.weeks.ago, check_out_date: 6.weeks.ago, guests_number: '2', room: room, user: guest1,
                                   check_in_done: 7.weeks.ago, check_out_done: 6.weeks.ago, status: 'finished')
       review1 = Review.create!(score: '4.5', review_text: 'Ótima localização.', booking: booking1)
   
-      guest2 = User.create!(name: 'Maria Albuquerque', email: 'maria@gmail.com', password: 'password', role: 'guest')
+      guest2 = User.create!(name: 'Maria Albuquerque', email: 'maria@gmail.com', cpf: '37443612095', password: 'password', role: 'guest')
       booking2 = Booking.create!(check_in_date: 5.weeks.ago, check_out_date: 3.weeks.ago, guests_number: '1', room: room, user: guest2,
                                   check_in_done: 5.weeks.ago, check_out_done: 3.weeks.ago, status: 'finished')
       review2 = Review.create!(score: '3.0', review_text: 'Boa hospedagem mas pode melhorar.', booking: booking2)
@@ -227,7 +227,7 @@ describe 'Guesthouse API' do
 
     it 'falha se a pousada existe mas está inativa' do
       #Arrange
-      paulo = User.create!(name: 'Paulo Menezes', email: 'paulomenezes@gmail.com', password: 'password', role: 'host')
+      paulo = User.create!(name: 'Paulo Menezes', email: 'paulomenezes@gmail.com', cpf: '25248794021', password: 'password', role: 'host')
       guesthouse = Guesthouse.create!(corporate_name: 'Pousada Muro Alto Ltda', brand_name: 'Pousada Muro Alto', 
                                       registration_number:'39165040000129', phone_number: '8134658799', email: 'pousadamuroalto@gmail.com', 
                                       address: 'Av. Beira Mar, 45', neighborhood: 'Muro Alto', state: 'Pernambuco', city: 'Ipojuca', 
@@ -246,7 +246,7 @@ describe 'Guesthouse API' do
 
     it 'falha se tiver um erro interno' do
       #Arrange
-      paulo = User.create!(name: 'Paulo Menezes', email: 'paulomenezes@gmail.com', password: 'password', role: 'host')
+      paulo = User.create!(name: 'Paulo Menezes', email: 'paulomenezes@gmail.com', cpf: '25248794021', password: 'password', role: 'host')
       guesthouse = Guesthouse.create!(corporate_name: 'Pousada Muro Alto Ltda', brand_name: 'Pousada Muro Alto', 
                                       registration_number:'39165040000129', phone_number: '8134658799', email: 'pousadamuroalto@gmail.com', 
                                       address: 'Av. Beira Mar, 45', neighborhood: 'Muro Alto', state: 'Pernambuco', city: 'Ipojuca', 

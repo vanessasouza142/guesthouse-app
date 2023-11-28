@@ -56,7 +56,7 @@ describe 'Usuário anfitrião cadastra uma pousada' do
 
   it 'e não consegue cadastrar outra pousada' do
     #Arrange
-    mariana = User.create!(name: 'Mariana Silva', email: 'mariana@gmail.com', password: 'password', role: 'host')
+    mariana = User.create!(name: 'Mariana Silva', email: 'mariana@gmail.com', cpf: '05238660464', password: 'password', role: 'host')
     Guesthouse.create!(corporate_name: 'Pousada Muro Alto Ltda', brand_name: 'Pousada Muro Alto', registration_number:'39165040000129', 
                         phone_number: '8134658799', email: 'pousadamuroalto@gmail.com', address: 'Av. Beira Mar, 45', 
                         neighborhood: 'Muro Alto', state: 'Pernambuco', city: 'Ipojuca', postal_code: '54350820', 
@@ -74,10 +74,10 @@ describe 'Usuário anfitrião cadastra uma pousada' do
 
   it 'e não um usuário do tipo hóspede' do
     #Arrange
-    mariana = User.create!(name: 'Mariana Silva', email: 'mariana@gmail.com', password: 'password', role: 'guest')
+    carla = User.create!(name: 'Carla Oliveira', email: 'carla@gmail.com', cpf: '48682787547', password: 'password', role: 'guest')
 
     #Act
-    login_as(mariana)
+    login_as(carla)
     visit new_guesthouse_path
 
     #Assert
