@@ -30,22 +30,25 @@ Endpoint: GET /api/v1/guesthouses
 Permite listar todas as pousadas cadastradas e ativas.
 Exemplo de Resposta de Sucesso (Status 200):
 [
-  {
+  { 
+    "id": 1,
     "brand_name": "Pousada Sulamericana",
     "city": "Recife",
   },
-  {
+  { 
+    "id": 2
     "brand_name": "Pousada Aconchego",
     "city": "Paulista",
   }
 ]
 
-Endpoint: GET /api/v1/guesthouses?search='nome da pousada'
+Endpoint: GET /api/v1/guesthouses?search=nome da pousada
 Permite filtrar as pousadas cadastradas e ativas pelo nome, por meio do parâmetro 'search'
 Exemplo de Resposta de Sucesso (Status 200):
-GET /api/v1/guesthouses?search='Sulamericana'
+GET /api/v1/guesthouses?search=Sulamericana
 [
   {
+    "id": 1,
     "brand_name": "Pousada Sulamericana",
     "city": "Recife",
   }
@@ -55,6 +58,7 @@ Endpoint: GET /api/v1/guesthouses/:id
 Permite obter detalhes de uma pousada ativa, por meio do parâmetro 'id' da pousada.
 Exemplo de Resposta de Sucesso (Status 200):
 {
+  "id": 3,
   "brand_name": "Pousada Muro Alto",
   "phone_number": "8134658799",
   "email": "pousadamuroalto@gmail.com",
@@ -77,6 +81,7 @@ Permite listar os quartos disponíveis de uma pousada ativa, por meio do parâme
 Exemplo de Resposta de Sucesso (Status 200):
 [
   {
+    "id": 1,
     "name": "Quarto Padrão",
     "description": "Quarto bem ventilado",
     "area": 10,
@@ -84,6 +89,7 @@ Exemplo de Resposta de Sucesso (Status 200):
     "default_price": 180
   },
   {
+    "id": 2,
     "name": "Quarto Premium",
     "description": "Quarto maravilhoso",
     "area": 13,

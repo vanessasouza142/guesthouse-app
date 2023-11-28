@@ -36,8 +36,10 @@ describe 'Guesthouse API' do
       expect(response.content_type).to include 'application/json'
       json_response = JSON.parse(response.body)
       expect(json_response.length).to eq 2
+      expect(json_response[0]["id"]).to eq 2
       expect(json_response[0]["brand_name"]).to eq 'Pousada Sulamericana'
       expect(json_response[0]["city"]).to eq 'Recife'
+      expect(json_response[1]["id"]).to eq 3
       expect(json_response[1]["brand_name"]).to eq 'Pousada Aconchego'
       expect(json_response[1]["city"]).to eq 'Paulista'
     end
@@ -83,6 +85,7 @@ describe 'Guesthouse API' do
       expect(response.content_type).to include 'application/json'
       json_response = JSON.parse(response.body)
       expect(json_response.length).to eq 1
+      expect(json_response[0]["id"]).to eq 2
       expect(json_response[0]["brand_name"]).to eq 'Pousada Sulamericana'
       expect(json_response[0]["city"]).to eq 'Recife'
     end
@@ -137,6 +140,7 @@ describe 'Guesthouse API' do
       expect(json_response.keys).not_to include 'updated_at'
       expect(json_response.keys).not_to include 'user_id'
       expect(json_response.keys).not_to include 'status'
+      expect(json_response["id"]).to eq 1
       expect(json_response["brand_name"]).to eq 'Pousada Muro Alto'
       expect(json_response["phone_number"]).to eq '8134658799'
       expect(json_response["email"]).to eq 'pousadamuroalto@gmail.com'
@@ -191,6 +195,7 @@ describe 'Guesthouse API' do
       expect(json_response.keys).not_to include 'updated_at'
       expect(json_response.keys).not_to include 'user_id'
       expect(json_response.keys).not_to include 'status'
+      expect(json_response["id"]).to eq 1
       expect(json_response["brand_name"]).to eq 'Pousada Muro Alto'
       expect(json_response["phone_number"]).to eq '8134658799'
       expect(json_response["email"]).to eq 'pousadamuroalto@gmail.com'

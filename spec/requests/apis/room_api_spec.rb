@@ -30,11 +30,13 @@ describe 'Room API' do
       expect(response.content_type).to include 'application/json'
       json_response = JSON.parse(response.body)
       expect(json_response.length).to eq 2
+      expect(json_response[0]["id"]).to eq 1
       expect(json_response[0]["name"]).to eq 'Quarto Padrão'
       expect(json_response[0]["description"]).to eq 'Quarto bem ventilado'
       expect(json_response[0]["area"]).to eq 10
       expect(json_response[0]["max_guest"]).to eq 2
       expect(json_response[0]["default_price"]).to eq 180
+      expect(json_response[1]["id"]).to eq 2
       expect(json_response[1]["name"]).to eq 'Quarto Premium'
       expect(json_response[1]["description"]).to eq 'Quarto maravilhoso'
       expect(json_response[1]["area"]).to eq 13
