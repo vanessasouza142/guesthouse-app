@@ -12,6 +12,16 @@ class Booking < ApplicationRecord
 
   before_validation :generate_code, on: :create
 
+  def allow_check_in
+    if Date.today >= self.check_in_date
+      self.in_progress!
+      self.update(check_in_done: Time.current)
+      return true
+    else
+      return false
+    end
+  end
+
   def calculate_total_price
     total_price = 0
     current_date = self.check_in_date
@@ -22,16 +32,6 @@ class Booking < ApplicationRecord
       current_date += 1.day
     end
     total_price
-  end
-
-  def allow_check_in
-    if Date.today >= self.check_in_date
-      self.in_progress!
-      self.update(check_in_done: Time.current)
-      return true
-    else
-      return false
-    end
   end
 
   def calculate_payment_amount
@@ -53,15 +53,15 @@ class Booking < ApplicationRecord
   private
 
   def check_dates
-    if room.present? && room.bookings
-                          .where.not(id: self.id)
+    if room.present? && room.bookings.where.not(id: self.id)
                           .where('(check_in_date <= ? AND check_out_date >= ?) OR (check_in_date <= ? AND check_out_date >= ?) OR 
                           (check_in_date >= ? AND check_out_date <= ?)',
-                                  self.check_out_date, self.check_in_date,
-                                  self.check_in_date, self.check_out_date,
-                                  self.check_in_date, self.check_out_date)
-                          .exists?
+                          self.check_out_date, self.check_in_date, self.check_in_date, self.check_out_date,
+                          self.check_in_date, self.check_out_date).exists?
       errors.add(:base, 'O quarto não está disponível para o período selecionado.')
+    end
+    if self.check_in_date.present? && self.check_out_date.present?
+      errors.add(:check_in_date, ' deve ser anterior à data de saída') if self.check_in_date > self.check_out_date
     end
   end
 

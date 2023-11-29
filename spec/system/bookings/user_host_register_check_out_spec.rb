@@ -20,7 +20,7 @@ describe 'Usuário anfitrião realiza check-out' do
 
     #Act
     login_as(luiza)
-    visit root_path
+    visit my_guesthouse_path
     click_on 'Estadias Ativas'
     click_on "#{b.code}"
 
@@ -52,7 +52,7 @@ describe 'Usuário anfitrião realiza check-out' do
 
     #Act
     login_as(luiza)
-    visit root_path
+    visit my_guesthouse_path
     click_on 'Estadias Ativas'
     click_on "#{b.code}"
     travel_to Time.zone.local(2023, 11, 19, 11, 45)
@@ -88,7 +88,7 @@ describe 'Usuário anfitrião realiza check-out' do
 
     #Act
     login_as(luiza)
-    visit root_path
+    visit my_guesthouse_path
     click_on 'Estadias Ativas'
     click_on "#{b.code}"
     travel_to Time.zone.local(2023, 11, 19, 13, 15)

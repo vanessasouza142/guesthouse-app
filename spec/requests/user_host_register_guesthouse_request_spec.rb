@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Usuário anfitrião registra uma pousada' do
+describe 'Usuário anfitrião cadastra uma pousada' do
   it 'e não está autenticado' do
     #Arrange
     
@@ -13,7 +13,7 @@ describe 'Usuário anfitrião registra uma pousada' do
 
   it 'e já tem uma pousada cadastrada' do
     #Arrange
-    paulo = User.create!(name: 'Paulo Menezes', email: 'paulomenezes@gmail.com', password: 'password', role: 'host')
+    paulo = User.create!(name: 'Paulo Menezes', email: 'paulomenezes@gmail.com', cpf: '25248794021', password: 'password', role: 'host')
     Guesthouse.create!(corporate_name: 'Pousada Muro Alto Ltda', brand_name: 'Pousada Muro Alto', registration_number:'39165040000129', 
                         phone_number: '8134658799', email: 'pousadamuroalto@gmail.com', address: 'Av. Beira Mar, 45', 
                         neighborhood: 'Muro Alto', state: 'Pernambuco', city: 'Ipojuca', postal_code: '54350820', 
@@ -36,10 +36,10 @@ describe 'Usuário anfitrião registra uma pousada' do
 
   it 'e um usuário hóspede tenta registrar uma pousada' do
     #Arrange
-    mariana = User.create!(name: 'Mariana Silva', email: 'mariana@gmail.com', password: 'password', role: 'guest')
+    carla = User.create!(name: 'Carla Oliveira', email: 'carla@gmail.com', cpf: '48682787547', password: 'password', role: 'guest')
     
     #Act
-    login_as(mariana)
+    login_as(carla)
     post(guesthouses_path, params: { guesthouse: { corporate_name: 'Pousada Sulamericana Ltda', brand_name: 'Pousada Sulamericana', 
                                                     registration_number:'56897040000129', phone_number: '8138975644', 
                                                     email: 'pousadasulamericana@gmail.com', address: 'Av. Juliana Holanda, 498', 
