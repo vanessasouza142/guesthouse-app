@@ -1,11 +1,15 @@
 class BookingsController < ApplicationController
   before_action :authenticate_user!, only: [:my_bookings, :confirm_booking, :create, :show, :set_in_progress, :set_finished,
-                                            :payment, :register_payment, :cancel]
+                                            :payment, :register_payment, :host_cancel, :guest_cancel]
   before_action :redirect_host_to_new
-  before_action only: [:set_in_progress, :set_finished, :payment, :register_payment, :cancel] do
+  before_action only: [:set_in_progress, :set_finished, :payment, :register_payment, :host_cancel] do
     @booking = Booking.find(params[:id])
     @guesthouse = @booking.room.guesthouse
     check_user(@guesthouse)
+  end
+  before_action only: [:guest_cancel] do
+    @booking = Booking.find(params[:id])
+    check_user(@booking)
   end
 
   def my_bookings
@@ -89,12 +93,21 @@ class BookingsController < ApplicationController
     end
   end
 
-  def cancel
-    if Date.today >= (@booking.check_in_date + 2)
+  def host_cancel
+    if @booking.host_cancel_booking
       @booking.destroy
       redirect_to bookings_guesthouse_path(@guesthouse), notice: 'Reserva cancelada com sucesso.'
     else
       redirect_to booking_path(@booking), alert: 'Só é possível cancelar a reserva após 2 dias da data prevista para o check-in.'
+    end
+  end
+
+  def guest_cancel
+    if @booking.guest_cancel_booking
+      @booking.destroy
+      redirect_to my_bookings_path, notice: 'Reserva cancelada com sucesso.'
+    else
+      redirect_to booking_path(@booking), alert: 'Só é possível cancelar a reserva até 7 dias antes da data prevista para o check-in.'
     end
   end
 

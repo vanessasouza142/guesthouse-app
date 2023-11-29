@@ -50,6 +50,22 @@ class Booking < ApplicationRecord
     total_price
   end
 
+  def host_cancel_booking
+    if Date.today >= (self.check_in_date + 2)
+      true
+    else
+      false
+    end
+  end
+
+  def guest_cancel_booking
+    if Date.today <= (self.check_in_date - 7)
+      true
+    else
+      false
+    end
+  end
+
   private
 
   def check_dates

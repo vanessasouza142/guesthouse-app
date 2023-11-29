@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Usuário anfitrião cancela reserva' do
+describe 'Usuário hóspede cancela reserva' do
   it 'e não está autenticado' do
     #Arrange
     luiza = User.create!(name: 'Luiza Souza', email: 'luiza@gmail.com', cpf: '38573169346', password: 'password', role: 'host')
@@ -14,10 +14,10 @@ describe 'Usuário anfitrião cancela reserva' do
                       bathroom: 'sim', balcony: 'sim', air_conditioner: 'sim', tv: 'sim', wardrobe: 'sim', safe: 'não', accessible: 'sim',
                       status: 'available', guesthouse: g)
     mario = User.create!(name: 'Mario Barbosa', email: 'mario@gmail.com', cpf: '70661435660', password: 'password', role: 'guest')
-    b = Booking.create!(room: r, user: mario, check_in_date: 4.days.ago, check_out_date: 1.week.from_now, guests_number: '1')
+    b = Booking.create!(room: r, user: mario, check_in_date: 1.week.from_now, check_out_date: 2.weeks.from_now, guests_number: '1')
     
     #Act
-    delete(host_cancel_booking_path(b.id))
+    delete(guest_cancel_booking_path(b.id))
 
     #Assert
     expect(response).to redirect_to(new_user_session_path)
@@ -36,19 +36,15 @@ describe 'Usuário anfitrião cancela reserva' do
                       bathroom: 'sim', balcony: 'sim', air_conditioner: 'sim', tv: 'sim', wardrobe: 'sim', safe: 'não', accessible: 'sim',
                       status: 'available', guesthouse: g1)
     mario = User.create!(name: 'Mario Barbosa', email: 'mario@gmail.com', cpf: '70661435660', password: 'password', role: 'guest')
-    b = Booking.create!(room: r, user: mario, check_in_date: 4.days.ago, check_out_date: 1.week.from_now, guests_number: '1')
+    b1 = Booking.create!(room: r, user: mario, check_in_date: 1.week.from_now, check_out_date: 2.weeks.from_now, guests_number: '1')
 
-    mariana = User.create!(name: 'Mariana Silva', email: 'mariana@gmail.com', cpf: '05238660464', password: 'password', role: 'host')
-    g2 = Guesthouse.create!(corporate_name: 'Pousada Sulamericana Ltda', brand_name: 'Pousada Sulamericana', registration_number:'56897040000129', 
-                            phone_number: '8138975644', email: 'pousadasulamericana@gmail.com', address: 'Av. Juliana Holanda, 498', 
-                            neighborhood: 'Boa Vista', state: 'Pernambuco', city: 'Recife', postal_code: '54560500', 
-                            description: 'Pousada com ótima localização', payment_method: 'Dinheiro, pix e cartão', pet_agreement: 'não',
-                            usage_policy: 'Proibido fumar nas áreas de convivência', check_in: '13:00', check_out: '12:00', status: 'active',
-                            user: mariana)
+    carla = User.create!(name: 'Carla Oliveira', email: 'carla@gmail.com', cpf: '48682787547', password: 'password', role: 'guest')
+    b2 = Booking.create!(room: r, user: carla, check_in_date: 3.weeks.from_now, check_out_date: 4.weeks.from_now, guests_number: '2')
+
     
     #Act
-    login_as(mariana)
-    delete(host_cancel_booking_path(b.id))
+    login_as(carla)
+    delete(guest_cancel_booking_path(b1.id))
 
     #Assert
     expect(response).to redirect_to(root_path)

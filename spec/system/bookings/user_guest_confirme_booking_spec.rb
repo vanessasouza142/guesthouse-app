@@ -54,6 +54,7 @@ describe 'Usuário hóspede confirma a reserva' do
     expect(page).to have_content 'Minhas Reservas'
     within('section:contains("Reservas Pendentes") thead') do
       expect(page).to have_content 'Código da Reserva'
+      expect(page).to have_content 'Pousada'
       expect(page).to have_content 'Quarto'
       expect(page).to have_content 'Data de entrada'
       expect(page).to have_content 'Data de saída'
@@ -61,6 +62,7 @@ describe 'Usuário hóspede confirma a reserva' do
     end
     within('section:contains("Reservas Pendentes") tbody') do
       expect(page).to have_content 'ABC12345'
+      expect(page).to have_content 'Pousada Ouro Branco'
       expect(page).to have_content 'Quarto Padrão'
       expect(page).to have_content '10/12/2023'
       expect(page).to have_content '15/12/2023'

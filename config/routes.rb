@@ -33,7 +33,8 @@ Rails.application.routes.draw do
     post :set_finished, on: :member
     get 'payment', on: :member
     patch 'register_payment', on: :member
-    delete 'cancel', on: :member
+    delete 'host_cancel', on: :member
+    delete 'guest_cancel', on: :member
     resources :reviews, only: [:new, :create]
   end
 

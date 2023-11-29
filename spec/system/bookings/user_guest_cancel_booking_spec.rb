@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe 'Usuário anfitrião cancela reserva' do
-  it 'e não está autenticado' do
+describe 'Usuário hóspede cancela reserva' do
+  it 'com sucesso, 7 dias antes do dia previsto para o check-in' do
     #Arrange
     luiza = User.create!(name: 'Luiza Souza', email: 'luiza@gmail.com', cpf: '38573169346', password: 'password', role: 'host')
     g = Guesthouse.create!(corporate_name: 'Pousada Ouro Branco Ltda', brand_name: 'Pousada Ouro Branco', registration_number:'45789800129', 
@@ -14,19 +14,25 @@ describe 'Usuário anfitrião cancela reserva' do
                       bathroom: 'sim', balcony: 'sim', air_conditioner: 'sim', tv: 'sim', wardrobe: 'sim', safe: 'não', accessible: 'sim',
                       status: 'available', guesthouse: g)
     mario = User.create!(name: 'Mario Barbosa', email: 'mario@gmail.com', cpf: '70661435660', password: 'password', role: 'guest')
-    b = Booking.create!(room: r, user: mario, check_in_date: 4.days.ago, check_out_date: 1.week.from_now, guests_number: '1')
-    
+    b = Booking.create!(room: r, user: mario, check_in_date: 1.week.from_now, check_out_date: 2.weeks.from_now, guests_number: '1')
+
     #Act
-    delete(host_cancel_booking_path(b.id))
+    login_as(mario)
+    visit root_path
+    click_on 'Minhas Reservas'
+    click_on "#{b.code}"
+    click_on 'Cancelar Reserva'
 
     #Assert
-    expect(response).to redirect_to(new_user_session_path)
+    expect(current_path).to eq my_bookings_path
+    expect(page).to have_content 'Reserva cancelada com sucesso.'
+    expect(Booking.count).to eq 0
   end
 
-  it 'e não é o dono' do
+  it 'sem sucesso, 6 dias antes do dia previsto para o check-in' do
     #Arrange
     luiza = User.create!(name: 'Luiza Souza', email: 'luiza@gmail.com', cpf: '38573169346', password: 'password', role: 'host')
-    g1 = Guesthouse.create!(corporate_name: 'Pousada Ouro Branco Ltda', brand_name: 'Pousada Ouro Branco', registration_number:'45789800129', 
+    g = Guesthouse.create!(corporate_name: 'Pousada Ouro Branco Ltda', brand_name: 'Pousada Ouro Branco', registration_number:'45789800129', 
                             phone_number: '11998756542', email: 'pousadaourobranco@gmail.com', address: 'Rua Santos Dumont, 65', 
                             neighborhood: 'Centro', state: 'Rio de Janeiro', city: 'Rio de Janeiro', postal_code: '27120-100', 
                             description: 'Pousada muito bem localizada', payment_method: 'Dinheiro, pix e cartão', pet_agreement: 'sim',
@@ -34,23 +40,20 @@ describe 'Usuário anfitrião cancela reserva' do
                             user: luiza)
     r = Room.create!(name: 'Quarto Padrão', description: 'Quarto bem ventilado', area: '10', max_guest: '2', default_price: '180,00',
                       bathroom: 'sim', balcony: 'sim', air_conditioner: 'sim', tv: 'sim', wardrobe: 'sim', safe: 'não', accessible: 'sim',
-                      status: 'available', guesthouse: g1)
+                      status: 'available', guesthouse: g)
     mario = User.create!(name: 'Mario Barbosa', email: 'mario@gmail.com', cpf: '70661435660', password: 'password', role: 'guest')
-    b = Booking.create!(room: r, user: mario, check_in_date: 4.days.ago, check_out_date: 1.week.from_now, guests_number: '1')
+    b = Booking.create!(room: r, user: mario, check_in_date: 6.days.from_now, check_out_date: 2.weeks.from_now, guests_number: '1')
 
-    mariana = User.create!(name: 'Mariana Silva', email: 'mariana@gmail.com', cpf: '05238660464', password: 'password', role: 'host')
-    g2 = Guesthouse.create!(corporate_name: 'Pousada Sulamericana Ltda', brand_name: 'Pousada Sulamericana', registration_number:'56897040000129', 
-                            phone_number: '8138975644', email: 'pousadasulamericana@gmail.com', address: 'Av. Juliana Holanda, 498', 
-                            neighborhood: 'Boa Vista', state: 'Pernambuco', city: 'Recife', postal_code: '54560500', 
-                            description: 'Pousada com ótima localização', payment_method: 'Dinheiro, pix e cartão', pet_agreement: 'não',
-                            usage_policy: 'Proibido fumar nas áreas de convivência', check_in: '13:00', check_out: '12:00', status: 'active',
-                            user: mariana)
-    
     #Act
-    login_as(mariana)
-    delete(host_cancel_booking_path(b.id))
+    login_as(mario)
+    visit root_path
+    click_on 'Minhas Reservas'
+    click_on "#{b.code}"
+    click_on 'Cancelar Reserva'
 
     #Assert
-    expect(response).to redirect_to(root_path)
+    expect(current_path).to eq booking_path(b.id)
+    expect(page).to have_content 'Só é possível cancelar a reserva até 7 dias antes da data prevista para o check-in.'
+    expect(Booking.count).to eq 1
   end
 end
