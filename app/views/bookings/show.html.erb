@@ -23,6 +23,9 @@
 
   <% elsif @booking.finished? %>
     <h2>Hospedagem Finalizada <%= @booking.code %></h2>
+    <% if current_user.guest? %>
+      <p><strong>Pousada: </strong><%= @booking.room.guesthouse.brand_name %></p>
+    <% end %>
     <p><strong>Quarto: </strong><%= @booking.room.name %></p>
     <p><strong>Quantidade de hóspedes: </strong><%= @booking.guests_number %></p>
     <p><strong>Status: </strong><%= t(@booking.status) %></p>

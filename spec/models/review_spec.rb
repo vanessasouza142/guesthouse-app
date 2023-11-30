@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Review, type: :model do
   describe '#valid?' do
-    context 'presence' do
+    context 'presença obrigatória' do
       it 'falso quando Nota está vazio' do
         #Arrange
         paulo = User.create!(name: 'Paulo Menezes', email: 'paulomenezes@gmail.com', cpf: '25248794021', password: 'password', role: 'host')

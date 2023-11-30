@@ -47,8 +47,8 @@ describe 'Usuário hóspede vê as reservas agendadas e finalizadas' do
     end
     within('section:contains("Reservas Pendentes") tbody') do
       expect(page).to have_content "#{b2.code}"
-      expect(page).to have_content "#{r.name}"
       expect(page).to have_content "#{g.brand_name}"
+      expect(page).to have_content "#{r.name}"
       expect(page).to have_content "#{I18n.l(b2.check_in_date, format: "%d/%m/%Y")}"
       expect(page).to have_content "#{I18n.l(b2.check_out_date, format: "%d/%m/%Y")}"
       expect(page).to have_content "#{b2.guests_number}"
@@ -63,8 +63,8 @@ describe 'Usuário hóspede vê as reservas agendadas e finalizadas' do
     end
     within('section:contains("Reservas Finalizadas") tbody') do
       expect(page).to have_content "#{b1.code}"
-      expect(page).to have_content "#{r.name}"
       expect(page).to have_content "#{g.brand_name}"
+      expect(page).to have_content "#{r.name}"
       expect(page).to have_content "#{I18n.l(b1.check_in_date, format: "%d/%m/%Y")}"
       expect(page).to have_content "#{I18n.l(b1.check_out_date, format: "%d/%m/%Y")}"
       expect(page).to have_content "#{b1.guests_number}"
