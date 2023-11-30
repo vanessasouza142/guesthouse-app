@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    if current_user.host? && current_user.guesthouse.present?
+    if current_user.guesthouse.present?
       my_guesthouse_path
     elsif current_user.present? && current_user.host? && current_user.guesthouse.nil?
       flash[:notice] = 'Você ainda não cadastrou sua pousada.'

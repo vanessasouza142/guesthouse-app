@@ -140,4 +140,22 @@ describe 'Usuário visualiza todas as avaliações recebidas da pousada' do
     expect(page).to have_content 'João da Silva | Nota: 4,2 | Avaliação: Hospedagem maravilhosa.'
     expect(page).to have_content 'André Barbosa | Nota: 4,8 | Avaliação: Adorei a estadia.'
   end
+
+  it 'e não vê avaliações se a pousada estiver inativa' do
+    #Arrange
+    luiza = User.create!(name: 'Luiza Souza', email: 'luiza@gmail.com', cpf: '38573169346', password: 'password', role: 'host')
+    g = Guesthouse.create!(corporate_name: 'Pousada Ouro Branco Ltda', brand_name: 'Pousada Ouro Branco', registration_number:'45789800129', 
+                          phone_number: '11998756542', email: 'pousadaourobranco@gmail.com', address: 'Rua Santos Dumont, 65', 
+                          neighborhood: 'Centro', state: 'Rio de Janeiro', city: 'Rio de Janeiro', postal_code: '27120-100', 
+                          description: 'Pousada muito bem localizada', payment_method: 'Dinheiro, pix e cartão', pet_agreement: 'sim',
+                          usage_policy: 'Proibido fumar nas áreas de convivência', check_in: '14:00', check_out: '12:00', status:'inactive',
+                          user: luiza)
+
+    #Act
+    visit all_reviews_guesthouse_path(g.id)
+
+    #Assert
+    expect(current_path).to eq root_path
+    expect(page).to have_content 'Você não tem permissão para realizar essa ação!'
+  end
 end

@@ -2,6 +2,7 @@ class Booking < ApplicationRecord
   belongs_to :room
   belongs_to :user
   has_one :review
+  has_one :guesthouse, through: :room
   enum status: {pending: 0, in_progress: 2, finished: 4, canceled: 6}
   
   validates :check_in_date, :check_out_date, :guests_number, presence: true
@@ -44,7 +45,7 @@ class Booking < ApplicationRecord
       current_date += 1.day
     end
 
-    if self.check_out_done.strftime('%H:%M') > room.guesthouse.check_out.strftime('%H:%M')
+    if self.check_out_done.strftime('%H:%M') > guesthouse.check_out.strftime('%H:%M')
       total_price += room.current_daily_price(self.check_out_done)
     end
     total_price

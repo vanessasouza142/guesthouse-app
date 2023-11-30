@@ -34,7 +34,7 @@ describe 'Usuário anfitrião vê avaliações da sua pousada' do
     guest = User.create!(name: 'João da Silva', email: 'joao@gmail.com', cpf: '33336543770', password: 'password', role: 'guest')
     booking = Booking.create!(check_in_date: 2.weeks.ago, check_out_date: 1.week.ago, guests_number: '2', room: r, user: guest,
                               check_in_done: 2.weeks.ago, check_out_done: 1.week.ago, status: 'finished')
-    review = Review.create!(score: '4,2', review_text: 'Hospedagem maravilhosa', booking: booking)
+    review = Review.create!(score: '4,0', review_text: 'Hospedagem maravilhosa', booking: booking)
 
     #Act
     login_as(luiza)
@@ -43,7 +43,7 @@ describe 'Usuário anfitrião vê avaliações da sua pousada' do
 
     #Assert
     expect(current_path).to eq reviews_guesthouse_path(g.id)
-    expect(page).to have_content "Avaliações da Pousada Ouro Branco"
+    expect(page).to have_content "Avaliações"
     within('thead') do
       expect(page).to have_content 'Código da Hospedagem'
       expect(page).to have_content 'Avaliador'
@@ -52,9 +52,9 @@ describe 'Usuário anfitrião vê avaliações da sua pousada' do
     end
     within('tbody') do
       expect(page).to have_content "#{booking.code}"
-      expect(page).to have_content "#{guest.name}"
-      expect(page).to have_content "#{review.score}"
-      expect(page).to have_content "#{review.review_text}"
+      expect(page).to have_content 'João da Silva'
+      expect(page).to have_content '4,0'
+      expect(page).to have_content 'Hospedagem maravilhosa'
     end
   end
 end

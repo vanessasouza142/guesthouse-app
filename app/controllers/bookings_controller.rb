@@ -4,7 +4,7 @@ class BookingsController < ApplicationController
   before_action :redirect_host_to_new
   before_action only: [:set_in_progress, :set_finished, :payment, :register_payment, :host_cancel] do
     @booking = Booking.find(params[:id])
-    @guesthouse = @booking.room.guesthouse
+    @guesthouse = @booking.guesthouse
     check_user(@guesthouse)
   end
   before_action only: [:guest_cancel] do

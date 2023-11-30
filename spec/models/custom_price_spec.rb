@@ -71,7 +71,7 @@ RSpec.describe CustomPrice, type: :model do
                           bathroom: 'sim', balcony: 'sim', air_conditioner: 'sim', tv: 'sim', wardrobe: 'sim', safe: 'não', accessible: 'sim',
                           guesthouse: g)
         first_cp = CustomPrice.create!(begin_date: '01/12/2023', end_date: '31/12/2023', price: '250,00', room: room)
-        second_cp = CustomPrice.new(begin_date: '10/12/2023', end_date: '15/12/2023', price: '350,00', room: room)
+        second_cp = CustomPrice.new(begin_date: '20/12/2023', end_date: '05/01/2024', price: '350,00', room: room)
 
         #Act
         second_cp.valid?

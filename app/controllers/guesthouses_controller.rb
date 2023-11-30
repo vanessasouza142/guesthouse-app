@@ -9,7 +9,7 @@ class GuesthousesController < ApplicationController
     @guesthouse = Guesthouse.find(params[:id])
     check_user(@guesthouse)
   end
-  before_action :guesthouse_inactive, only: [:show]
+  before_action :guesthouse_inactive, only: [:show, :all_reviews]
 
   def my_guesthouse
     @guesthouse = current_user.guesthouse
@@ -71,22 +71,21 @@ class GuesthousesController < ApplicationController
   end
 
   def bookings
-    @guesthouse = Guesthouse.find(params[:id])
-    @bookings = current_user.guesthouse.bookings.pending.order(check_in_date: :asc)
+    @guesthouse = current_user.guesthouse
+    @bookings = @guesthouse.bookings.pending.order(check_in_date: :asc)
   end
   
   def active_stays
-    @guesthouse = Guesthouse.find(params[:id])
-    @in_progress_bookings = current_user.guesthouse.bookings.in_progress.order(check_in_date: :asc)
+    @guesthouse = current_user.guesthouse
+    @in_progress_bookings = @guesthouse.bookings.in_progress.order(check_in_date: :asc)
   end
 
   def reviews
-    @guesthouse = Guesthouse.find(params[:id])
-    @reviews = current_user.guesthouse.reviews
+    @guesthouse = current_user.guesthouse
+    @reviews = @guesthouse.reviews
   end
 
   def all_reviews
-    @guesthouse = Guesthouse.find(params[:id])
     @all_reviews = @guesthouse.reviews
   end
 

@@ -8,7 +8,7 @@ class CustomPrice < ApplicationRecord
   private
 
   def no_date_overlap
-    if room.custom_prices.where.not(id: self.id).where.not('end_date < ? OR begin_date > ?', self.end_date, self.begin_date).exists?
+    if room.custom_prices.where.not(id: self.id).where('end_date >= ? AND begin_date <= ?', self.begin_date, self.end_date).exists?
       errors.add(:base, 'Já existe um preço personalizado para o quarto nesse período')
     end
   end

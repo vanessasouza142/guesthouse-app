@@ -7,7 +7,7 @@ class ReviewsController < ApplicationController
   end
   before_action only: [:answer, :register_answer] do
     @review = Review.find(params[:id])
-    @guesthouse = @review.booking.room.guesthouse
+    @guesthouse = @review.guesthouse
     check_user(@guesthouse)
   end
 
