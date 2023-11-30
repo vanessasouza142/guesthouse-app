@@ -1,66 +1,62 @@
-<% if @room.errors.any? %>
-<p>Verifique os erros abaixo:</p>
-  <ul>
-    <% @room.errors.full_messages.each do |msg|%>
-    <li><%= msg %></li>
-    <% end %>
-  </ul>
-<% end %>
+<div>
+  <%= render partial: 'shared/error_messages', locals: { object: @room } %>
+</div>
 
 <%= form_with(model: [@guesthouse, @room]) do |f| %>
-<div>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
+<div class="field col-md-4">
+  <%= f.label :name, class: "form-label" %>
+  <%= f.text_field :name, class: "form-control" %>
 </div>
-<div>
-  <%= f.label :description %>
-  <%= f.text_area :description %>
+<div class="field col-md-4">
+  <%= f.label :description, class: "form-label" %>
+  <%= f.text_area :description, class: "form-control" %>
 </div>
-<div>
-  <%= f.label :area %>
-  <%= f.number_field :area %>
+<div class="field col-md-4">
+  <%= f.label :area, class: "form-label" %>
+  <%= f.number_field :area, class: "form-control" %>
 </div>
-<div>
-  <%= f.label :max_guest %>
-  <%= f.number_field :max_guest %>
+<div class="field col-md-4">
+  <%= f.label :max_guest, class: "form-label" %>
+  <%= f.number_field :max_guest, class: "form-control" %>
 </div>
-<div>
-  <%= f.label :default_price %>
-  <%= f.number_field :default_price %>
+<div class="field col-md-4">
+  <%= f.label :default_price, class: "form-label" %>
+  <%= f.number_field :default_price, class: "form-control" %>
 </div>
-<div>
-  <%= f.label :bathroom %>
-  <%= f.check_box :bathroom %>
+<div class="form-check">
+  <%= f.label :bathroom, class: "form-check-label" %>
+  <%= f.check_box :bathroom, class: "form-check-input" %>
 </div>
-<div>
-  <%= f.label :balcony %>
-  <%= f.check_box :balcony %>
+<div class="form-check">
+  <%= f.label :balcony, class: "form-check-label" %>
+  <%= f.check_box :balcony, class: "form-check-input" %>
 </div>
-<div>
-  <%= f.label :air_conditioner %>
-  <%= f.check_box :air_conditioner %>
+<div class="form-check">
+  <%= f.label :air_conditioner, class: "form-check-label" %>
+  <%= f.check_box :air_conditioner, class: "form-check-input" %>
 </div>
-<div>
-  <%= f.label :tv %>
-  <%= f.check_box :tv %>
+<div class="form-check">
+  <%= f.label :tv, class: "form-check-label" %>
+  <%= f.check_box :tv, class: "form-check-input" %>
 </div>
-<div>
-  <%= f.label :wardrobe %>
-  <%= f.check_box :wardrobe %>
+<div class="form-check">
+  <%= f.label :wardrobe, class: "form-check-label" %>
+  <%= f.check_box :wardrobe, class: "form-check-input" %>
 </div>
-<div>
-  <%= f.label :safe %>
-  <%= f.check_box :safe %>
+<div class="form-check">
+  <%= f.label :safe, class: "form-check-label" %>
+  <%= f.check_box :safe, class: "form-check-input" %>
 </div>
-<div>
-  <%= f.label :accessible %>
-  <%= f.check_box :accessible %>
+<div class="form-check">
+  <%= f.label :accessible, class: "form-check-label" %>
+  <%= f.check_box :accessible, class: "form-check-input" %>
 </div>
+<br>
 <div>
-  <%= f.submit 'Salvar' %>
+  <%= f.submit 'Salvar', class: "btn btn-primary" %>
 </div>
 <% end %>
-
+<br>
 <div>
   <%= link_to 'Voltar', my_guesthouse_path %>
 </div>

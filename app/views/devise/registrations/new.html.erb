@@ -3,41 +3,43 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true %>
+  <div class="field col-md-4">
+    <%= f.label :name, class: "form-label" %><br />
+    <%= f.text_field :name, autofocus: true, class: "form-control" %>
   </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autocomplete: "email" %>
+  <div class="field col-md-4">
+    <%= f.label :email, class: "form-label" %><br />
+    <%= f.email_field :email, autocomplete: "email", class: "form-control" %>
   </div>
 
-  <div class="field">
-    <%= f.label :cpf %><br />
-    <%= f.number_field :cpf %>
+  <div class="field col-md-4">
+    <%= f.label :cpf, class: "form-label" %><br />
+    <%= f.number_field :cpf, class: "form-control" %>
   </div>
 
-  <div class="field">
-    <%= f.label :password %>
+  <div class="field col-md-4">
+    <%= f.label :password, class: "form-label" %>
     <% if @minimum_password_length %>
     <em>(No mínimo <%= @minimum_password_length %> caracteres)</em>
     <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+    <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
   </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  <div class="field col-md-4">
+    <%= f.label :password_confirmation, class: "form-label" %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
   </div>
 
-  <div class="field">
+  <div class="field col-md-4">
     <%= f.label :role %><br />
-    <%= f.select :role, [[User.human_attribute_name("role.guest"), :guest], [User.human_attribute_name("role.host"), :host]] %>
+    <%= f.select :role, 
+                [[User.human_attribute_name("role.guest"), :guest], [User.human_attribute_name("role.host"), :host]], 
+                { }, class: "form-select" %>
   </div>
   
   <div class="actions">
-    <%= f.submit "Criar" %>
+    <%= f.submit "Criar", class: "btn btn-primary" %>
   </div>
 <% end %>
 

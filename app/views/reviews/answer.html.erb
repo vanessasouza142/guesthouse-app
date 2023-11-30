@@ -1,19 +1,16 @@
 <h2>Responder Avaliação da Hospedagem <%= @booking.code %></h2>
-<% if @review.errors.any? %>
-  <p>Verifique os erros abaixo:</p>
-  <ul>
-    <% @review.errors.full_messages.each do |msg|%>
-    <li><%= msg %></li>
-    <% end %>
-  </ul>
-<% end %>
+<div>
+  <%= render partial: 'shared/error_messages', locals: { object: @review } %>
+</div>
 
 <%= form_with(model: @review, url: register_answer_review_path(@review), method: :patch) do |f| %>
-  <div>
-    <%= f.label :answer %>
-    <%= f.text_area :answer %>
+  <div class="field col-md-4">
+    <%= f.label :answer, class: "form-label" %>
+    <%= f.text_area :answer, class: "form-control" %>
   </div>
+  <br>
+  
   <div>
-  <%= f.submit 'Salvar' %>
+  <%= f.submit 'Salvar', class: "btn btn-primary" %>
   </div>
 <% end %>

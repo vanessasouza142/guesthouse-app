@@ -1,5 +1,5 @@
 <section>
-  <% if @booking.finished? %>
+<% if @booking.finished? %>
   <div>
     <h2>Pagamento da Hospedagem <%= @booking.code %></h2>
     <p><strong>Check-out realizado em: </strong><%= l(@booking.check_out_done, format: '%d/%m/%Y, às %H:%M horas') %></p>
@@ -9,30 +9,28 @@
   </div>
 
   <div>
-    <% if @booking.errors.any? %>
-    <p>Verifique os erros abaixo:</p>
-      <ul>
-        <% @booking.errors.full_messages.each do |msg|%>
-        <li><%= msg %></li>
-        <% end %>
-      </ul>
-    <% end %>
+    <%= render partial: 'shared/error_messages', locals: { object: @booking } %>
   </div>
 
   <div>
     <%= form_with(model: @booking, url: register_payment_booking_path(@booking), method: :patch) do |f| %>
-    <div>
-      <%=f.label :payment_amount %>
-      <%=f.number_field :payment_amount %>
-    </div>
-    <div>
-      <%=f.label :payment_method %>
-      <%=f.text_field :payment_method %>
-    </div>
-    <div>
-      <%=f.submit 'Registrar Pagamento' %>
-    </div>
+      <div class="row">
+        <div class="field col-md-4">
+          <%=f.label :payment_amount, class: "form-label" %>
+          <%=f.number_field :payment_amount, class: "form-control" %>
+        </div>
+        <div class="field col-md-4">
+          <%=f.label :payment_method, class: "form-label" %>
+          <%=f.text_field :payment_method, class: "form-control" %>
+        </div>
+      </div>
+      <br>
+
+      <div>
+        <%=f.submit 'Registrar Pagamento', class: "btn btn-primary" %>
+      </div>      
     <% end %>
   </div>
-  <% end %> 
+
+<% end %> 
 </section>
