@@ -3,9 +3,9 @@
   <div>
     <p><strong>Status: </strong><%= I18n.t(@room.status) %></p>
     <% if @room.unavailable? %>
-      <%= button_to 'Disponibilizar Quarto', set_available_room_path(@room) %>
+      <%= button_to 'Disponibilizar Quarto', set_available_room_path(@room), class: 'btn btn-primary' %>
     <% else %>
-      <%= button_to 'Indisponibilizar Quarto', set_unavailable_room_path(@room) %>
+      <%= button_to 'Indisponibilizar Quarto', set_unavailable_room_path(@room), class: 'btn btn-primary' %>
     <% end %>
     <%= link_to 'Editar', edit_room_path(@room) %> |
     <%= link_to 'Cadastrar novo Preço Personalizado', new_room_custom_price_path(@room) %> |
@@ -25,7 +25,8 @@
   <p><strong>Quantidade max. de hóspedes: </strong><%= @room.max_guest %></p>
   <p><strong>Valor da diária: </strong><%= number_to_currency(@room.current_daily_price(Date.today), unit: "R$", separator: ",", delimiter: ".") %></p>
 
-  <h4><strong>O que esse quarto oferece:</strong></h4>
+  <p><strong>O que esse quarto oferece:</strong></p>
+  <br>
   <% @room.attributes.each do |attribute, value| %>
     <% if value == true %>
       <ul>
@@ -34,10 +35,10 @@
     <% end %>
   <% end %>
   <% if current_user.nil? || current_user.guest?  %>
-    <%= button_to 'Reservar', new_room_booking_path(@room.id), method: :get %>
+    <%= button_to 'Reservar', new_room_booking_path(@room.id), method: :get, class: 'btn btn-primary' %>
   <% end %>
 </section>
-
+<hr>
 <section>
 <% if current_user == @room.guesthouse.user  %>
   <div class="custom-prices">

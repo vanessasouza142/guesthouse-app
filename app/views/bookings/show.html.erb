@@ -9,9 +9,11 @@
     <p><strong>Data de saída: </strong><%= l(@booking.check_out_date) %></p>
     <p><strong>Quantidade de hóspedes: </strong><%= @booking.guests_number %></p>
     <p><strong>Status: </strong><%= t(@booking.status) %></p>
-    <%= button_to 'Realizar Check-in', set_in_progress_booking_path(@booking) if current_user.guesthouse %>
-    <%= button_to 'Cancelar Reserva', host_cancel_booking_path(@booking), method: :delete if current_user.guesthouse %>
-    <%= button_to 'Cancelar Reserva', guest_cancel_booking_path(@booking), method: :delete if current_user.guest? %>
+    <br>
+    <%= button_to 'Realizar Check-in', set_in_progress_booking_path(@booking), class: 'btn btn-primary' if current_user.guesthouse %>
+    <br>
+    <%= button_to 'Cancelar Reserva', host_cancel_booking_path(@booking), method: :delete, class: 'btn btn-primary' if current_user.guesthouse %>
+    <%= button_to 'Cancelar Reserva', guest_cancel_booking_path(@booking), method: :delete, class: 'btn btn-primary' if current_user.guest? %>
 
   <% elsif @booking.in_progress? %>
     <h2>Estadia Ativa <%= @booking.code %></h2>
@@ -19,7 +21,7 @@
     <p><strong>Quantidade de hóspedes: </strong><%= @booking.guests_number %></p>
     <p><strong>Status: </strong><%= t(@booking.status) %></p>
     <p><strong>Check-in realizado em: </strong><%= l(@booking.check_in_done, format: '%d/%m/%Y, às %H:%M horas') %></p>
-    <%= button_to 'Realizar Check-out', set_finished_booking_path(@booking) if current_user.guesthouse %>
+    <%= button_to 'Realizar Check-out', set_finished_booking_path(@booking), class: 'btn btn-primary' if current_user.guesthouse %>
 
   <% elsif @booking.finished? %>
     <h2>Hospedagem Finalizada <%= @booking.code %></h2>
@@ -32,13 +34,13 @@
     <p><strong>Check-in realizado em: </strong><%= l(@booking.check_in_done, format: '%d/%m/%Y, às %H:%M horas') %></p>
     <p><strong>Check-out realizado em: </strong><%= l(@booking.check_out_done, format: '%d/%m/%Y, às %H:%M horas') %></p>
     <% if @booking.review.nil? && current_user.guest? %>
-      <%= button_to 'Registrar Avaliação', new_booking_review_path(@booking), method: :get %>
+      <%= button_to 'Registrar Avaliação', new_booking_review_path(@booking), method: :get, class: 'btn btn-primary' %>
     <% else %>
       <h3>Avaliação da Hospedagem</h3>
       <p><strong>Nota: </strong><%= number_with_precision(@booking.review.score, separator: ',') %></p></p>
       <p><strong>Avaliação: </strong><%= @booking.review.review_text %></p>
       <% if @review.answer.nil? %>
-        <%= button_to 'Responder Avaliação', answer_review_path(@review), method: :get if current_user.guesthouse %>
+        <%= button_to 'Responder Avaliação', answer_review_path(@review), method: :get, class: 'btn btn-primary' if current_user.guesthouse %>
       <% else %>
         <p><strong>Resposta: </strong><%= @booking.review.answer %></p>
       <% end %>

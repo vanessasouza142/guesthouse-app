@@ -1,24 +1,64 @@
-/* button {
-  border: 0;
-  background-color: #fff;
-  font-size: 16px;
-} */
-
 body {
-  font-family: Arial, sans-serif;
+  background-color: rgb(242, 245, 245);
+  color: black;
+  font-family: 'Arial', sans-serif;
+}
+
+a {
+  color: blue;
+  text-decoration: none;
+  font-weight: 300;
+  line-height: 1.2;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+h1 {
+  font-size: 50px;
+  text-align: center;
+  margin: 20px;
 }
 
 h2 {
   font-size: 24px;
-  font-weight: bold;
   line-height: 2.0;
   margin: 0px;
+}
+
+h3 {
+  font-size: 20px;
+}
+
+h3 {
+  font-size: 18px;
 }
 
 p {
   font-size: 16px;
   line-height: 1.5;
   margin: 0px;
+}
+
+li {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.nav-link {
+  color:white;
+}
+
+nav {
+  display: flex;
+  text-align: center;
+  color:white;
+}
+
+.navbar-brand {
+  font-size: 24px;
+  margin-left: 10px;
 }
 
 .guesthouse-container {

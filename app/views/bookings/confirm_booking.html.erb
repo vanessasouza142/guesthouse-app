@@ -7,4 +7,4 @@
 <p><strong>Valor total das diárias: </strong><%= number_to_currency(@total_price, unit: "R$", separator: ",", delimiter: ".") %></p>
 <p><strong>Meios de pagamento aceitos pela pousada: </strong><%= @guesthouse.payment_method %></p>
 <p><strong>Atenção: </strong>Após a reserva ser confirmada, ela pode ser cancelada até 7 dias antes da data agendada para o check-in.</p>
-<%= button_to 'Confirmar Reserva', room_bookings_path(room_id: @room_id) %>
+<%= button_to 'Confirmar Reserva', room_bookings_path(room_id: @room_id), class: 'btn btn-primary' %>

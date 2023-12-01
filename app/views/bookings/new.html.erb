@@ -5,7 +5,7 @@
   <p><strong>Quantidade max. de hóspedes: </strong><%= @room.max_guest %></p>
   <p><strong>Valor da diária: </strong><%= number_to_currency(@room.current_daily_price(Date.today), unit: "R$", separator: ",", delimiter: ".") %></p>
 
-  <h4><strong>O que esse quarto oferece:</strong></h4>
+  <p><strong>O que esse quarto oferece:</strong></p>
   <% @room.attributes.each do |attribute, value| %>
     <% if value == true %>
       <ul>

@@ -3,9 +3,9 @@
     <div>
       <p><strong>Status: </strong><%= I18n.t(@guesthouse.status) %></p>
       <% if @guesthouse.inactive? %>
-        <%= button_to 'Ativar Pousada', activate_guesthouse_path(@guesthouse) %>
+        <%= button_to 'Ativar Pousada', activate_guesthouse_path(@guesthouse), class: 'btn btn-primary' %>
       <% else %>
-        <%= button_to 'Desativar Pousada', inactivate_guesthouse_path(@guesthouse) %>
+        <%= button_to 'Desativar Pousada', inactivate_guesthouse_path(@guesthouse), class: 'btn btn-primary' %>
       <% end %>
       <%= link_to 'Editar', edit_guesthouse_path(@guesthouse) %> | 
       <%= link_to 'Cadastrar novo Quarto', new_guesthouse_room_path(@guesthouse) %> |
@@ -35,7 +35,7 @@
   <p><strong>Check-in: </strong><%= l(@guesthouse.check_in, format: "%H:%M") %></p>
   <p><strong>Check-out: </strong><%= l(@guesthouse.check_out, format: "%H:%M") %></p>
 </section>
-
+<hr>
 <section>
   <h2>Quartos da Pousada</h2>
   <div class="room-container">
@@ -52,7 +52,7 @@
     <p>Não existem quartos cadastrados.</p>
   <% end %>
 </section>
-
+<hr>
 <section>
   <h2>Avaliações da Pousada</h2>
   <% @last_reviews.each do |review| %>
@@ -66,6 +66,6 @@
   <% if @last_reviews.empty? %>
     <p>Não existem avaliações cadastradas.</p>
   <% else %>
-    <p><%= link_to 'Ver mais avaliações', all_reviews_guesthouse_path(@guesthouse) %></p>
+  <p><%= link_to 'Ver mais avaliações', all_reviews_guesthouse_path(@guesthouse) %></p>
   <% end %>
 </section>

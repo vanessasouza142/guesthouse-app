@@ -1,3 +1,10 @@
+<section class="jumbotron text-center">
+  <div class="container">
+    <h1 class="display-4">Bem-vindo à Pousadaria</h1>
+    <p class="lead">Sua melhor escolha para estadias confortáveis e memoráveis.</p>
+  </div>
+</section>
+
 <section class="latest-guesthouses-list">
   <div class="guesthouse-container">
     <% @latest_guesthouses.each do |lg| %>
@@ -25,12 +32,12 @@
     <p>Não existem pousadas cadastradas.</p>
   <% end %>
 </section>
-
+<hr>
 <section class="menu-cities">
 <h4>Menu de Cidades<h4>
-<% @guesthouse_cities.each do |gc| %>
-  <ul>
-    <li><%= link_to gc, guesthouses_by_city_path(gc) %></li>
-  </ul>
-<% end %>
+  <% @guesthouse_cities.each do |gc| %>
+    <ul>
+      <li><%= link_to gc, guesthouses_by_city_path(gc) %></li>
+    </ul>
+  <% end %>
 </section>
